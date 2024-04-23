@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<body data-bs-theme="dark">
+    
+   <div class="container">
+       <!--------------------------SIDE-BAR------------------------------->
+       <aside>
+         <div class="top">
+            <div class="logo">
+                <img src="logo.png" alt="eservice-logo">
+            </div>
+         </div>
+         <div class="side-bar">
+            <a href="#" >
+                <span class="material-symbols-outlined">grid_view</span>
+                <h3>Dashboard</h3>
+            </a>
+            <a href="#" class="active">
+                <span class="material-symbols-outlined">menu_book</span>
+                <h3>Cours</h3>
+            </a>
+            <a href="#">
+                <span class="material-symbols-outlined">Group</span>
+                <h3>Etudiants</h3>
+            </a>
+            <a href="#">
+                <span class="material-symbols-outlined">Summarize</span>
+                <h3>Rapport</h3>
+            </a>
+            <a href="#">
+                <span class="material-symbols-outlined">Notifications</span>
+                <h3>Notifications</h3>
+            </a>
+            <a href="#">
+                <span class="material-symbols-outlined">forum</span>
+                <h3>Chat</h3>
+            </a>
+            <a href="#">
+                <span class="material-symbols-outlined">logout</span>
+                <h3>Log-out</h3>
+            </a>
+         </div>
+      </aside>
+             <!---------------------------Main------------------------------->
+             <main>
+                <div class="header">
+                    <input type="text" placeholder="Rechercrche">
+                </div>
+                <h1>Bienvenue sur la platforme Eservices</h1>
+                <div class="insights">
+    
+                    <div class="first">
+                        <span class="material-symbols-outlined">engineering </span>
+                        <h3>Gestion des Etudiants</h3>
+                    </div>
+                
+                    <div class="second">
+                        <span class="material-symbols-outlined">assignment</span>
+                        <h3>Rapports et Analyse</h3>
+                    </div>
+
+                    <div class="third">
+                        <span class="material-symbols-outlined">calendar_month </span>
+                        <h3>Calendrier Académique</h3>
+                    </div>
+
+                    <div class="last">
+                        <span class="material-symbols-outlined">two_pager</span>
+                        <h3>Cours && TD</h3>
+                    </div>
+                
+                </div>
+             <!--------------------End of insights-------------->
+
+                <div class="row2">
+                 <canvas id="myChart"></canvas>
+                </div>
+             </main>
+             <!--------------------End of main-------------->
+
+             <div class="right">
+                <div class="top">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <div class="theme">
+                        <span class="material-symbols-outlined active">light_mode</span>
+                        <span class="material-symbols-outlined">dark_mode</span>
+                    </div>
+
+                    <div class="profile">
+                        <div class="info">
+                            <p>Hey, <b>Prof</b></p>
+                        </div>
+                        <div class="photo-profile">
+                            <img src="profil.avif" alt="">
+                        </div>
+                    </div>
+                </div>
+                <!---------------- END OF TOP---------->
+                <div class="actualites">
+                    <h2>Actualités</h2>
+                    <div class="content">
+                        <p>Nouvelle anoonce concernant TDIA1 </p>
+                        <p>Nouvelle anoonce concernant TDIA1 </p>
+                        <p>Nouvelle anoonce concernant TDIA1 </p>
+                        <p>Nouvelle anoonce concernant TDIA1 </p>
+                        <p>Nouvelle anoonce concernant TDIA1 </p>
+                    </div>
+                </div> <div class="contianer">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                          <span class="month-picker" id="month-picker"> May </span>
+                          <div class="year-picker" id="year-picker">
+                            <span class="year-change" id="pre-year">
+                              <pre><</pre>
+                            </span>
+                            <span id="year"> 2020 </span>
+                            <span class="year-change" id="next-year">
+                              <pre>></pre>
+                            </span>
+                          </div>
+                        </div>
+                 
+                        <div class="calendar-body">
+                          <div class="calendar-week-days">
+                      
+                            <div>Sun</div>
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                          </div>
+                        
+                          <div class="calendar-days">
+                          </div>
+                        </div>
+                        <div class="calendar-footer">
+                        </div>
+                        <div class="date-time-formate">
+                          <div class="day-text-formate">TODAY</div>
+                          <div class="date-time-value">
+                            <div class="time-formate">02:51:20</div>
+                            <div class="date-formate">23 - july - 2022</div>
+                          </div>
+                        </div>
+                        <div class="month-list"></div>
+                      </div>
+                    </div>
+
+
+
+
+
+
+
+            </div>
+
+   </div>   
+</body>
+</html>
