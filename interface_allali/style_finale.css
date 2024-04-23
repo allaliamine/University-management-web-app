@@ -1,0 +1,59 @@
+.container{
+    display: flex;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+.sidebar{
+    border: 1px solid;
+    background: cover;
+    width: 14rem;
+    height: 100vh;
+}
+
+.content-wrapper{
+    width: 100%;
+}
+
+.topbar-divider{
+    width: 1px;
+    border-right: 1px solid #e3e6f0;
+    height: 40px;
+    margin: auto 10px;
+}
+
+
+.fa-search{
+    color: white;
+}
+
+.fa-inbox{
+    font-size: 30px;
+    vertical-align: middle;
+    margin-top: 10px;
+    color: #e3e6f0;
+}
+
+.right_side{
+    display: flex;
+}
+
+.insider_row{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .sidebar{
+        width:6.5rem;
+    }
+    .fa-right-angle{
+        display: hidden;
+        content: " ";
+    }
+}
