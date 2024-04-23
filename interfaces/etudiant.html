@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+    <script src="/interfaces/script.js"></script>
+    <title>Etud-net | Ensah</title>
+</head>
+
+<body>
+
+    <div id="container">
+
+
+        <!--sidebar hadi-->
+        <ul class="navbar-nav sidebar px-2">
+
+            <div class="mb-3">
+                <img width="50" height="50" src="/Images/eservice_logo.jpeg">
+                <span class="edu-net ms-2">Edu-net</span>
+            </div>
+    
+            <hr class="my-0">
+        
+            <li class="item-nav py-2 px-2" style="list-style: none;">
+                <a href="etudiant.html" class="btn p-0">
+                <i class="fa-solid fa-house"></i>
+                <span>Acceuil</span>
+                </a>
+            </li>
+
+
+            <hr class="my-0">
+
+            <div class="sidebar-heading py-1">
+                Etudes
+            </div>
+            
+            <li class="item-nav px-2 mt-2" style="list-style: none;">
+                <a class="btn p-0 " data-bs-toggle="collapse" data-target="collapsecours" role="button" aria-expanded="false" aria-controls="collapsecours" onclick="toggleCollapse('collapse-cours'); changeAngle('angle-cours');">
+                    <i class="fa-solid fa-book-open-reader "></i>
+                    <span>Cours</span>
+                    <i class="fa fa-angle-right" id="angle-cours"></i>
+                </a>
+            </li>
+
+            <div class="collapse" id="collapse-cours">
+                <div class="card card-body" style="background-color: white;">
+                    <li><a href="#" style="text-decoration: none; color: black;">Cours de ma classe</a></li>
+                    <li><a href="recherche_cours.html" style="text-decoration: none; color: black;">Recherche Cours</a></li>
+                    <li><a href="#" style="text-decoration: none; color: black;">Cours d'annee actuelle</a></li>
+                </div>
+            </div>
+
+
+            <li class="item-nav px-2 mt-2" style="list-style: none;">
+                <a class="btn p-0" data-bs-toggle="collapse" aria-controls="collapse-deposer" onclick="toggleCollapse('collapse-deposer'); changeAngle('angle-deposer');">
+                    <i class="fa-regular fa-folder-open"></i>
+                    <span>Deposer</span>
+                    <i class="fa fa-angle-right" id="angle-deposer"></i>
+                </a>
+            </li>
+
+
+            <div class="collapse" id="collapse-deposer">
+                <div class="card card-body" style="background-color: white;">
+                    <li><a href="#" style="text-decoration: none; color: black;">Rapport PFE</a></li>
+                    <li><a href="#" style="text-decoration: none; color: black;">Compte rendu</a></li>
+                    <li><a href="#" style="text-decoration: none; color: black;">Devoir/Recherche</a></li>
+                </div>
+            </div>
+
+
+
+
+            <li class="item-nav mt-2 px-2" style="list-style: none;">
+                <a class="btn p-0" data-bs-toggle="collapse" onclick="toggleCollapse('collapse-note'); changeAngle('angle-note');">
+                    <i class="fa-regular fa-clipboard"></i>
+                    <span >Affichage des notes</span>
+                    <i class="fa fa-angle-right" id="angle-note"></i>
+                </a>
+            </li>
+
+            <div class="collapse" id="collapse-note">
+                <div class="card card-body" style="background-color: white;">
+                    <li><a href="#" style="text-decoration: none; color: black;">Notes des Modules</a></li>
+                    <li><a href="#" style="text-decoration: none; color: black;">Note Final</a></li>
+                </div>
+            </div>
+
+
+
+            <hr class="mb-0">
+
+
+
+            <div class="sidebar-heading py-1">
+                Service en Ligne
+            </div>
+
+            <li class="item-nav px-2 mt-2" style="list-style: none;">
+                <a href="#" style="text-decoration: none;">
+                    <i class="fa-regular fa-clipboard"></i>
+                    <span>a definir</span>
+                    <i class="fa fa-angle-right" id="angle"></i>
+                </a>
+            </li>
+
+
+            <li class="item-nav px-2 mt-2" style="list-style: none;">
+                <a href="#" style="text-decoration: none;">
+                    <i class="fa-regular fa-clipboard"></i>
+                    <span>a definir</span>
+                    <i class="fa fa-angle-right" id="angle"></i>
+                </a>
+            </li>
+
+
+            <li class="item-nav px-2 mt-2" style="list-style: none;">
+                <a href="#" style="text-decoration: none;">
+                    <i class="fa-regular fa-clipboard"></i>
+                    <span>a definir</span>
+                    <i class="fa fa-angle-right" id="angle"></i>
+                </a>
+            </li>
+
+        </ul>
+
+        <div class="cadre col-lg-10">
+
+            <!--navigatio bar katbda hna-->
+            <nav class="navbar bg-white topbar shadow flex">
+
+                <form class="ms-5 navbar-search">
+                    <div class="input-group">
+
+                        <input type="text" class="form-control bg-light border-0" placeholder="Rcherche par mot clé"> 
+
+                        <button class="btn bg" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+
+                    </div>
+                </form>
+
+                <ul class="right_side text-center pe-3 mb-0">
+
+                    <li class="nav-item dropdown mx-1" style="list-style: none;" >
+
+                        <a class="nav-link" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" onclick="toggleCollapse('notif')">
+                            <i class="fa-solid fa-inbox"></i>
+                            <span class="translate-middle badge rounded-pill bg-danger">
+                                +99
+                            </span>
+                        </a>
+
+                    </li>
+
+
+                    <ul class="dropdown-menu shadow mt-5 p-0" style="border: none;" id="notif">
+                        <div class="card m-0 p-0">
+                            <div class="card-header bg-primary text-center text-light">Messagerie</div>
+                            <div class="card-body py-1">
+                            
+                                <li><a class="list-group-item dropdown-item"  href="#">notif</a></li>
+                                
+                                <li><a class="list-group-item dropdown-item" href="#">other notif</a></li>
+                            
+                                <li><a class="list-group-item dropdown-item" href="#">other notif</a></li>
+
+                                <hr class="my-1">
+
+                                <li >
+                                    <a class="dropdown-item text-center " href="#">
+                                        <span class="text-success">
+                                            Lire plus de messages >>
+                                        </span>
+                                    </a>
+                                </li>
+                            </div>
+                        </div>
+                    </ul>
+
+                    <div class="topbar-divider"></div>
+
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-expanded="false" onclick="toggleCollapse('user')">
+                        <span>username </span>
+                        <img class="img-profile rounded-circle" src="https://ensah.ma/apps/eservices/resources/img/user-1.png">
+                    </a>
+
+                    <div class="dropdown-menu shadow p-0" style="width: 80px; border: none;" id="user">
+                        <div class="card">
+                            <div class="card-header bg-primary text-center text-light">Profile</div>
+                                <div class="card-body py-1 ">
+                        
+                                    <a class="dropdown-item ps-0" href="#">
+                                        <i class="fa-solid fa-user"></i>
+                                        Compte
+                                    </a>
+                                
+                                    <a class="dropdown-item ps-0" href="#">
+                                        <i class="fa-solid fa-gears"></i>
+                                        Mot de passe
+                                    </a>
+                                
+                                    <hr class="my-1">
+                            
+                                    <a class="dropdown-item ps-0" href="#">
+                                        <i class="fa-solid fa-door-open"></i>
+                                        deconnecte
+                                    </a>
+
+                                </div>
+                        </div>
+
+                    </div>
+
+                </ul>
+
+            </nav>
+            <!--katsali hna -->
+
+            <!--hada l corp li fih actaulite o dkchi akhor-->
+            <div class="container-fluid">
+
+                <div>
+                    <h2 class="text-center py-4">Bienvenue sur la plateforme Edu-net</h2>
+                </div>
+
+                <!--hada dyal dok 4 d les options-->>
+                <div class="insider_row mx-1">
+
+                    <div class="card shadow col-xl-2.5 mb-4 p-0 border-primary">
+                        <div class="card-body">
+                            <div class="row align-items-center ">
+
+                                <div class="col m-2">
+                                    <div>
+                                        <a class="text-primary" href="#" style="text-decoration: none;">
+                                            Acceder au Cours
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <i class="fas fa-file-alt fa-2x"></i>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow col-xl-2.5 mb-4 border-success">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+
+                                <div class="col m-2">
+                                    <div>
+                                        <a class="text-success" href="#" style="text-decoration: none;">
+                                        Faire un Demande
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <i class="fas fa-file-alt fa-2x"></i>
+                                </div>
+                                
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                    <div class="card shadow col-xl-2.5 mb-4 border-warning">
+                        <div class="card-body">
+
+                            <div class="row align-items-center">
+
+                                <div class="col m-2">
+                                    <div>
+                                        <a class="text-warning" href="#" style="text-decoration: none;">
+                                        Emploi de Temps
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <i class="fa-solid fa-calendar-days fa-2x"></i>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card shadow col-xl-2.5 mb-4 border-primary">
+                        <div class="card-body">
+                            <div class="row align-items-center ">
+
+                                <div class="col m-2">
+                                    <div>
+                                        <a class="text-primary" href="#" style="text-decoration: none;">
+                                           a definir contenu
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-auto">
+                                    <i class="fas fa-file-alt fa-2x"></i>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--hna fin kaysaliw dok 4-->>
+
+
+                <div class="row">
+                <div class="flex d-flex">
+                    <div class="col-lg mb-4">
+                        <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 text-primary">Statistiques d'accès à Edu-net</h6>
+                                </div>
+            
+                                <div class="card-body">
+                                    <div class="Statistiques">
+                                        <canvas id="myAreaChart" width="1244" height="640" style="display: block; height: 320px; width: 622px;" class="chartjs-render-monitor"></canvas>
+                                        <script src="chart.js"></script>
+                                    </div>
+            
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--hadi actualite-->
+                        <div class="col-lg-3 mb-4 ms-5">
+                            <div class="card shadow">
+                                
+                                <div class="card-header py-3">
+                                    <h6 class="m-0">Actualites</h6>
+                                </div>
+
+                                <div class="card-body">
+                                        <div class="ps-0">
+                                            <p class="atualite-titre"> titre1</p>
+                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
+                                            </span>
+                                            <a href="#lien"> 
+                                                <p class="text-success text-center ms-5">lire la suite...>> </p>
+                                            </a>
+                                        </div>
+
+                                        <hr>
+                                        <div>
+                                            <p class="atualite-titre"> titre2</p>
+                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
+                                            </span>
+                                            <a href="#lien"> 
+                                                <p class="text-success text-center ms-5">lire la suite...>> </p>
+                                            </a>
+                                        </div>
+
+                                        <hr>
+                                        <div>
+                                            <p class="atualite-titre"> titre3</p>
+                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
+                                            </span>
+                                            <a href="#lien"> 
+                                                <p class="text-success text-center ms-5">lire la suite...>> </p>
+                                            </a>
+                                        </div>
+
+                                        <hr>
+                                        <div>
+                                            <p class="atualite-titre"> titre4</p>
+                                            <span class="d-inline-block text-truncate" style="max-width: 150px;">
+                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
+                                            </span>
+                                            <a href="#lien"> 
+                                                <p class="text-success text-center ms-5">lire la suite...>> </p>
+                                            </a>
+                                        </div>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+   
+</body>
+</html>
