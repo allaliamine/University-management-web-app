@@ -1,0 +1,509 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --dark-text: #f8fbff;
+    --light-body: #f3f8fe;
+    --light-main: #fdfdfd;
+    --light-second: #c3c2c8;
+    --light-hover: #f0f0f0;
+    --light-text: #151426;
+    --light-btn: #695C78;
+    --white: #fff;
+    --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    --font-family: consolas;
+  }
+* {
+margin: 0;
+padding: 0;
+outline: 0;
+appearance: 0;
+border: 0;
+text-decoration: none;
+list-style: none;
+box-sizing: border-box;
+}
+
+html{
+    font-size: 14px;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    font-family: poppins , sans-serif;
+    font-size: 0.88rem;
+    background-color: rgba(255, 252, 252, 0.687);
+}
+.container{
+    display: grid;
+    width: 96%;
+    gap: 1.9rem;
+    grid-template-columns: 14rem auto 23rem;
+}
+a{
+   color: rgb(63, 30, 141);  
+}
+img{
+display: block;
+
+}
+h1{
+    color: black;
+}
+h3{
+
+    font-size:0.87rem ;
+}
+
+.profile-photo{
+width: 2.8rem;
+height: 2.8rem;
+border-radius: 50%;
+overflow: hidden;
+}
+
+/* ====================SIDEBAR======================*/
+
+aside{
+height: 100vh;
+margin-top: -0.7cm;
+
+}
+aside .logo img {
+    width: 100%;
+    height: 50%;
+    margin-top: 1.8rem;
+}
+aside .side-bar{
+    display: flex;
+    background-color: #695C78;
+    flex-direction: column;
+    height: 74.3vh;
+    position: relative;
+  
+}
+aside h3{
+    font-weight: 500;
+
+}
+
+aside .side-bar a {
+    display: flex;
+    color: white;
+    align-items: center;
+    margin-left: 2rem;
+    gap: 1rem;
+    position: relative;
+    height:3.7rem;
+    transition: all 300ms ease;
+}
+aside .side-bar a span{
+    font-size:1.6rem ;
+    transition: all 300ms ease;
+}
+aside .side-bar a:last-child{
+   position: absolute;
+   bottom:2rem;
+   
+}
+aside .side-bar a.active{
+    background-color: rgba(221, 217, 217, 0.626);
+    margin-left: 0;
+}
+aside .side-bar a.active:before{
+    content: "";
+    width: 6px;
+    height: 100%;
+    background:  rgb(255, 255, 255);
+}
+aside .side-bar a.active span {
+ color:  rgb(111, 97, 161);
+ margin-left: calc(1rem - 3px);
+}
+aside .side-bar a:hover{
+    color: black;
+}
+aside .side-bar a:hover span{
+    margin-left: 1rem;
+}
+
+
+/* ====================MAIN======================*/
+
+main {
+margin-top: 1.8rem;
+
+}
+main h1 {
+ margin-top: 1cm;
+ margin-left: 0.1cm;
+
+
+}
+.header {
+ width:148%;
+ height: 65px;
+ background-color: #f9f9f9;
+ margin-top: -0.7cm;
+ margin-left: -0.7cm;
+ 
+
+}
+.header input{
+margin: 1rem ;
+margin-left: 2cm;
+padding-top: 0.5rem;
+padding-left: 1.5rem;
+width: 300px;
+height: 40px;
+border-radius: 20px;
+border:  0.5px solid #d9cce0;
+
+}
+
+.insights{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:1.6rem;
+    height: 20%;
+
+}
+
+main .insights .first{
+  background-image: linear-gradient(to top, #9890e3 0%, #b1f4cf 100%);
+}
+main .insights .second{
+
+  background-image: linear-gradient(to top, #9890e3 0%, #b1f4cf 100%);
+}
+main .insights .third {
+  background-image: linear-gradient(to top, #9890e3 0%, #b1f4cf 100%);
+}
+main .insights .last{
+
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+}
+
+main .insights > div {
+
+    padding: 30px 10px 10px;
+    border-radius: 10px;
+    margin-top: 1rem;
+    box-shadow: -4px 10px 12px -7px rgba(0,0,0,0.75);
+    transition: all 300ms ease;
+}
+
+main .insights span {
+    
+    color: rgb(31, 31, 31);
+    
+}
+
+ main .row2{
+  display: flex;
+  flex-direction: row;
+}
+ #myChart{
+    margin-top: 0.5cm;
+    margin-left: 1cm;
+    max-width: 850px;
+    max-height: 400px;
+    background-color: rgba(255, 255, 255, 0.76);
+    border-radius: 5px;
+  
+}
+ 
+main .chart-section .chart{
+padding-top: 4cm;
+border-radius:30px;
+
+}
+.right{
+    margin-top: 1.4rem;
+}
+.right .top {
+ display: flex;
+ justify-content: space-between;
+ gap: 2rem;
+}
+.right img{
+
+    width: 50px;
+}
+.right .theme{
+    background-color: rgb(149, 120, 158);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-left: -3cm;
+}
+.right .theme span {
+    font-size: 1.2rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.right .theme span.active{
+    background-color: rgb(16, 6, 45);
+    border-radius:10px ;
+    color: aliceblue;
+}
+.right .top .profile{
+    display: flex;
+    gap: 1rem;
+    text-align: right;
+}
+/*----------------------------calender-----------------------*/
+.contianer {
+    width: 375px;
+    position: relative;
+    display: flex;
+    margin-left: -0.2cm;
+    padding: 2% 0px 0px 0px;
+    justify-content: center;
+    top: 10%;
+    right: 0%;
+    height: 40%;
+    margin-top: -1.3cm;
+  }
+.calendar {
+    height: 300px;
+    width: 360px;
+    background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
+    border-radius: 25px;
+    overflow: hidden;
+    padding: 20px 50px 0px 50px;
+    box-shadow: -4px 10px 12px -7px rgba(0,0,0,0.75);
+  }
+  
+  .calendar-header {
+   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    color: black;
+    padding: 10px;
+    height: 10%;
+  }
+  
+  .calendar-week-days {
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-weight: 600;
+    cursor: pointer;
+    color:rgb(18, 17, 17);
+  }
+  .calendar-week-days div:hover {
+  color:rgb(47, 44, 44);
+  transform: scale(1.2);
+  transition: all .2s ease-in-out;
+  }
+  .calendar-week-days div {
+    display: grid;
+    place-items: center;
+    color:black;
+    height: 50px;
+  }
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    color: black
+    
+  }
+  .calendar-days div {
+    width: 37px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    position: relative;
+    cursor: pointer;
+    animation: to-top 1s forwards;
+    margin-left:-0.40em ;
+  }
+  .month-picker {
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .month-picker:hover {
+    background-color: rgb(209, 197, 197);
+  }
+  .month-picker:hover {
+    color: var(--color-txt);
+  }
+  .year-picker {
+    display: flex;
+    align-items: center;
+  }
+  .year-change {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin: 0px 10px;
+    cursor: pointer;
+  }
+  .year-change:hover {
+    background-color: var(--light-btn);
+    transition:all .2s ease-in-out ;
+    transform: scale(1.12);
+  }
+  .year-change:hover pre {
+    color: var(--bg-body);
+  }
+  .calendar-footer {
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  #year:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: all 0.2 ease-in-out;
+  }
+  .calendar-days div span {
+    position: absolute;
+  }
+   .calendar-days div:hover {
+    transition: width 0.2s ease-in-out, height 0.2s ease-in-out;
+    background-color: #968c8e;
+    border-radius: 20%;
+    color: var(--dark-text);
+  }
+  .calendar-days div.current-date {
+    color: var(--dark-text);
+    background-color: var(--light-btn);
+    border-radius: 20%;
+  }
+  .month-list {
+    position: relative;
+    left: 0;
+    top: -50px;
+    background-color: #ebebeb;
+    color: var(--light-text);
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 5px;
+    border-radius: 20px;
+  }
+  .month-list > div {
+    display: grid;
+    place-content: center;
+    margin: 5px 10px;
+    transition: all 0.2s ease-in-out;
+  }
+  .month-list > div > div {
+    border-radius: 15px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .month-list > div > div:hover {
+    background-color:var(--light-btn);
+    color: var(--dark-text);
+    transform: scale(0.9);
+    transition: all 0.2s ease-in-out;
+  }
+  .month-list.show {
+    visibility: visible;
+    pointer-events: visible;
+    transition: 0.6s ease-in-out;
+    animation: to-left .71s forwards;
+  }
+  .month-list.hideonce{
+    visibility: hidden;
+  }
+  .month-list.hide {
+    animation: to-right 1s forwards;
+    visibility: none;
+    pointer-events: none;
+  }
+  .date-time-formate {
+    width: max-content;
+    height: max-content;
+    font-family: Dubai Light, Century Gothic;
+    position: relative;
+    display: inline;
+    top: 20px;
+    justify-content: center;
+  }
+  .day-text-formate {
+    font-family: Microsoft JhengHei UI;
+    font-size: 1.4rem;
+    padding-right: 5%;
+    border-right: 3px solid #715880;
+    position: absolute;
+    left: -1rem;
+  }
+  .date-time-value {
+    display: block;
+    height: max-content;
+    width: max-content;
+    position: relative;
+    left: 40%;
+    top: -18px;
+    text-align: center;
+  }
+  .time-formate {
+    font-size: 1.5rem;
+  }
+  .time-formate.hideTime {
+    animation: hidetime 1.5s forwards;
+  }
+  .day-text-formate.hidetime {
+    animation: hidetime 1.5s forwards;
+  }
+  .date-formate.hideTime {
+    animation: hidetime 1.5s forwards;
+  }
+  .day-text-formate.showtime{
+    animation: showtime 1s forwards;
+  }
+  .time-formate.showtime {
+    animation: showtime 1s forwards;
+  }
+  .date-formate.showtime {
+    animation: showtime 1s forwards;
+  
+  }
+  
+  /*================actualites=====================*/
+
+.actualites h2{
+  margin:0.7cm 0 0.2cm 3cm ;
+  font-size: 1.5rem;
+
+}
+.acualites p {
+   font-size: 4rem;
+
+}
+.actualites .content {
+  height: 250px;
+  width: 360px;
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  background-color: #ffffff;
+  background-image: linear-gradient(to top, #bdc2e8 0%, #bdc2e8 1%, #e6dee9 100%);
+  justify-content: space-around;
+  border-radius: 20px;
+  box-shadow: -4px 10px 12px -7px rgba(0,0,0,0.75); ;
+  border:;
+  gap: 5px;
+}
+/*===================================END====================*/
+
+/*==================================Media QURIES=====================*/

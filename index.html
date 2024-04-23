@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <script src="script.js" defer></script>
+    <script src="chart.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Admin Interface</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenue chez e-service</h1>
+        <div class="header"> <!--For the header hna dak image.png ghir nta3 li aytconnecta-->
+           <input type="text" name="recherhe" placeholder="        Recherche par mot cle">
+           <button type="submit" class="searchButton">
+            <i class="fa fa-search "></i>
+           </button>
+           <i class="fas fa-bell fa-lg"></i>
+           <div class="vl"></div>
+           <span class="nameuser">Name of User</span>
+           <img src="image.jpg" alt="L'utilisateur de ce compte">
+        </div>
+        <div class="side-bar"><!--For the side bar w hna logo.png houwa logo li 3an3mlo-->
+          <img class="logo" src="logo.png" alt="Le logo d'e-service">
+          <div class="hrl after"></div>
+          <a href="index.html"><span>&nbsp&nbsp&nbsp<i class="fas fa-home"></i> &nbspDaschboard</span></a>
+          <div class="hrl"></div>
+          <a href="publiernote.html"><span>&nbsp&nbsp&nbsp<i class="fas fa-graduation-cap"></i> &nbspPublier Notes</span></a>
+          <a href=""><span>&nbsp&nbsp&nbsp<i class="fas fa-bullhorn"></i> &nbspPublier Annonces</span></a>
+          <div class="hrl"></div>
+          <a href=""><span>&nbsp&nbsp&nbsp<i class="fas fa-user-secret"></i> &nbspTracker les utilisateurs</span></a>
+          <a href=""><span>&nbsp&nbsp&nbsp<i class="fas fa-comments"></i> &nbspMessages</span></a>
+        </div>
+        <div class="info-head"><!--For the squares that are on top-->
+            <div class="care1 care">
+                <div class="line line1"></div>
+                <h6>Total &nbsp&nbsp&nbspStudents</h6>
+                <span>891</span>
+            </div>
+            <div class="care2 care">
+                <div class="line line2"></div>
+                <h6 id="prf">Total &nbsp&nbsp&nbspProfesseurs</h6>
+                <span>210</span>
+            </div>
+            <div class="care3 care">
+                <div class="line line3"></div>
+                <h6>Total &nbsp&nbsp&nbspCours</h6>
+                <span>346</span>
+            </div>
+            <div class="care4 care">
+                <div class="line line4"></div>
+                <h6>Total &nbsp&nbsp&nbspVisiteurs</h6>
+                <span>560</span>
+            </div>
+        </div>
+        <div class="cld"><!--For the Calendar-->
+        <div class="wrapper"> 
+          <header>
+            <p class="current-date"></p>
+            <div class="icons">
+              <span id="prev" class="material-symbols-rounded">chevron_left</span>
+              <span id="next" class="material-symbols-rounded">chevron_right</span>
+            </div>
+          </header>
+          <div class="calendar">
+            <ul class="weeks">
+              <li>L</li>
+              <li>M</li>
+              <li>M</li>
+              <li>J</li>
+              <li>V</li>
+              <li>S</li>
+              <li>D</li>
+            </ul>
+            <ul class="days"></ul>
+          </div>
+        </div>
+        </div>
+        <canvas id="myChart"></canvas><!--For the notification space-->
+        <div class="notification">
+          <h3 class="ntfbar">Notification</h3>
+        <hr/>
+        </div>
+    </div>
+</body>
+</html>
