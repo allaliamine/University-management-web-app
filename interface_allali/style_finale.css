@@ -18,6 +18,10 @@ aside{
     margin-top: -0.7cm;
 }
 
+.side-bar a{
+    text-decoration: none;
+}
+
 
 aside .logo img {
     width: 100%;
