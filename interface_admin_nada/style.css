@@ -1,0 +1,462 @@
+#wrapper{
+    display: flex;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
+
+/*====================SIDEBAR======================*/
+
+
+/*logo style */
+.logo_edu_net{
+    width: 230px;
+    height: 200px;
+    background-image: url("1.png");
+    background-size: contain;
+    transition: 0.5s ease-in-out;
+    position: absolute;
+    top: -15px;
+}
+
+/*logo hover */
+.side-bar{
+    position: absolute;
+    top: 150px;
+}
+.logo_edu_net:hover{
+    background-image: url("2.png");
+}
+
+/*sidebar-content size */
+.side-bar a h3 {
+    font-size: 16px; 
+    margin: 0;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/*sidebar-content color + height */
+.sider_principal {
+    background-color: #10504f;
+    height: 100vh;
+}
+
+/*sidebar-content links(a) style + transition */
+.side-bar a {
+    display: flex;
+    color: white;
+    align-items: center;
+    margin-left: 1rem;
+    gap: 1rem;
+    position: relative;
+    height:3.7rem;
+    transition: all 300ms ease;
+}
+
+.side-bar a h6{
+    display: none;
+}
+
+/*sidebar-content span transition */
+.side-bar a span{
+    transition: all 300ms ease;
+}
+
+ /*log-out 
+.side-bar a:last-child{
+    margin-top:100px;
+}
+*/
+
+/*for hover on links effect*/
+.sider_principal .side-bar a:hover{
+    color: black;
+}
+
+/*for hover on spans effect*/
+.sider_principal .side-bar a:hover span{
+    margin-left: 1rem;
+}
+/*====================END OF SIDEBAR======================*/
+
+
+/*====================NAVBAR======================*/
+
+
+/*navbar display form*/
+.right_side{
+    display: flex;
+}
+
+/*left of navbar : input + search button width*/
+.search-bar-div{
+    width: 40%;
+}
+
+/*left of navbar : search bar (input) */
+input.form-control{
+    background-color: #F2F2F2;
+    height: 50px;;
+}
+
+/*left of navbar : button of the search bar*/
+.btn.search{
+    background-color: #10504f;
+    width: 50px;
+    height: 50px;
+}
+
+/*left of navbar : search icon */
+.fa-search{
+    color: white;
+}
+
+
+/*right of navbar : notif icon*/
+.fa-inbox{
+    font-size: 30px;
+    vertical-align: middle;
+    margin-top: 10px;
+    color: #e3e6f0;
+}
+
+/*right section of navbar : divider between account and notif*/
+.topbar-divider{
+    width: 1px;
+    border-right: 1px solid #e3e6f0;
+    height: 40px;
+    margin: auto 10px;
+}
+
+
+/*for dropdown menu position*/
+.dropdown-menu-right {
+    right: 0 !important;
+    left: auto !important;
+}
+
+/**/
+
+.msg_menu , .user_menu{
+    background-color: #10504f;
+}
+
+/*====================END OF NAVBAR======================*/
+
+
+/*====================MAIN (UNDER NAVBAR)======================*/
+
+/*4 choices diplay*/
+.insider_row{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*all rows display*/
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+/*for media queries*/
+.search_media{
+    display: none;
+}
+
+/* smya iban lborhan */
+.scroll-to-top {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    background: rgba(90, 92, 105, .5);
+}
+
+
+
+
+@media (max-width:325px) {
+    .insider{
+        margin-left: 10px;
+    }
+
+    
+}
+
+@media (max-width: 600px) {
+
+
+
+    /*====================SIDEBAR======================*/
+
+    .logo{
+        width: 120px;
+        height: 100px;
+    }
+    /*logo*/
+    .logo_edu_net{
+        width: 120px;
+        height: 100px;
+        background-image: url("/image/1.png");
+        background-size:cover;
+        transition: 0.5s ease-in-out;
+        position: absolute;
+        left: -22px;
+    }
+    
+    /*sidebar content (links)*/
+    .sidebar a{
+        padding: 0;
+        margin: 0;
+        margin-left: 20px;
+    }
+
+    /*titre de side bar*/
+    .side-bar a h3{
+        font-size: 10px;
+        display: none;
+    }
+
+
+    /*sidebar largueur + color + index*/
+    .sidebar{
+        width: 70px;
+        z-index: 1;
+        height: 100%;
+    }
+
+
+    .insider{
+        margin-left: 5px;
+    }
+
+
+    /*for hover on links effect*/
+    .sider_principal .side-bar a:hover{
+        color: black;
+    }
+
+    /*for hover on spans effect*/
+    .sider_principal .side-bar a:hover span{
+        margin-left: 0px;
+    }
+    
+
+    .side-bar a:last-child{
+        margin-top: 100px;
+    }
+    /*====================SIDEBAR END======================*/
+
+
+    /*====================NAVBAR======================*/
+
+    .navbar{
+        justify-content: end;
+    }
+
+
+
+    /*left of navbar : search bar (input) */
+    input.form-control{
+        background-color: #F2F2F2;
+    }
+
+    /*left of navbar : button of the search bar*/
+    .btn.search{
+        background-color: #10504f;
+    }
+
+
+    /*right of navbar : notif icon*/
+    .fa-inbox{
+        font-size: 20px;
+        vertical-align: middle;
+        margin-top: 10px;
+        color: #e3e6f0;
+    }
+    
+    /*right of navbar : search icon*/
+    .fa-search{
+        font-size: 20px;
+        vertical-align: middle;
+        margin-top: 10px;
+        color: #e3e6f0;
+    }
+    
+
+    /*deleting the full search*/
+    .search-bar-div{
+        display: none;
+    }
+
+    /*username and inbox divider*/
+    .topbar-divider{
+        display: none;
+    }
+
+
+    /*username*/
+    span.username{
+        display: none;
+    }
+
+    .img-profile{
+        width: 20px;
+        height: 20px;
+    }
+
+    /*====================NAVBAR======================*/
+
+
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    /* the 4 choices */
+    .insider_row{
+        display: flex;
+        flex-direction: column;
+    }    
+
+   
+}
+
+
+@media (min-width: 700px) and (max-width: 900px)  {
+
+
+    .insider{
+        margin-left: 10px;
+    }
+
+    /*====================SIDEBAR======================*/
+    /*logo*/
+    .logo_edu_net{
+        margin-left: 28px;
+        width: 120px;
+        height: 100px;
+    }
+
+    /*sidebar content (links)*/
+    .sidebar a{
+        padding: 0;
+        margin: 0;
+        margin-left: 20px;
+    }
+
+    /*titre de side bar*/
+    .side-bar a h3{
+        font-size: 10px;
+        display: block;
+    }
+
+    .material-symbols-outlined{
+        color: white;
+        
+    }
+
+
+    /*sidebar largueur + color + index*/
+    .sidebar{
+        width: 150px;
+        z-index: 1;
+        height: 100%;
+    }
+
+    span.material-symbol-outlined{
+        color: white;
+    }
+
+    /*for hover on links effect*/
+    .sider_principal .side-bar a:hover{
+        color: black;
+    }
+
+    /*for hover on spans effect*/
+    .sider_principal .side-bar a:hover span{
+        margin-left: 0px;
+    }
+    
+
+    .side-bar a:last-child{
+        margin-top: 400px;
+    }
+    
+    /*====================SIDEBAR END======================*/
+
+
+    /*====================NAVBAR======================*/
+
+    .navbar{
+        justify-content: space-between;
+    }
+
+
+
+    /*left of navbar : search bar (input) */
+    input.form-control{
+        background-color: #F2F2F2;
+    }
+
+    /*left of navbar : button of the search bar*/
+    .btn.search{
+        background-color: #10504f;
+    }
+
+
+    /*right of navbar : notif icon*/
+    .fa-inbox{
+        font-size: 20px;
+        vertical-align: middle;
+        margin-top: 10px;
+        color: #e3e6f0;
+    }
+    
+    /*right of navbar : search icon*/
+    .media{
+        display: none;
+    }
+
+
+    /*username*/
+    .img-profile{
+        width: 20px;
+        height: 20px;
+    }
+
+    /*====================NAVBAR======================*/
+
+
+    /*container*/
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+    /*the 4 choices */
+    .insider_row{
+        display: flex;
+        flex-direction: column;
+    }    
+}
+
+
+@media (min-width : 2000px) {
+    .logo_edu_net{
+        margin-left: 110px;
+    }
+    
+}
