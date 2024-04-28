@@ -1,0 +1,112 @@
+body{
+    height: 100vh;
+    background: linear-gradient(
+        to left,
+        #D2E0DC 0%,
+        #D2E0DC 50%,
+        #10504F 50%,
+        #10504F 100%
+    );
+}
+
+.card{
+    margin-top: 110px;
+}
+
+/*titles*/
+h4{
+    font-size: 50px;
+}
+
+/*rows*/
+.row{
+    display: flex;
+    justify-content: center;
+}
+
+/*picture*/
+.bg-image{
+    background-image: url("picture.png");
+    width: 320px;
+    height: 269px;
+    background-size: cover;
+    box-sizing: border-box;
+}
+
+/*href's */
+a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+/* connecte button */
+.btn{
+    color: white;
+    height: 40px;
+    width: 100%;
+    background-color: #10504F;
+    border-radius: 20px;
+}
+
+.btn:hover{
+    background-color: #114636;
+    color: white;
+}
+
+/*username password*/
+.input-user{
+    height: 50px;
+    border-radius: 0px;
+    border: 1px solid #10504F;
+}
+
+/*input focus*/
+.form-control:focus {
+    border-color: #10504F;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(16,80,79, 0.8);
+}
+
+
+.left-side{
+    background-color: #D2E0DC;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.left-side-insider{
+    padding: 48px;
+}
+
+
+@media (max-width: 990px) {
+   body{
+    height: 100vh;
+    background: #10504F ;
+    }
+
+    .left-side{
+        border-radius: 10px;
+    }
+    .left-side-insider{
+        padding: 24px;
+    }
+
+    .right-side{
+        display: none;
+    }
+
+    .form{
+        margin-top: 100px;
+    }
+
+    .card{
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    
+}
