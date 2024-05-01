@@ -17,7 +17,7 @@ a{
 .logo_edu_net{
     width: 230px;
     height: 200px;
-    background-image: url("/image/1.png");
+    background-image: url("../image/1.png");
     background-size: contain;
     transition: 0.5s ease-in-out;
     position: absolute;
@@ -30,7 +30,7 @@ a{
     top: 150px;
 }
 .logo_edu_net:hover{
-    background-image: url("/image/2.png");
+    background-image: url("../image/2.png");
 }
 
 /*sidebar-content size */

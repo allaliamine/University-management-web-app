@@ -1,12 +1,9 @@
 <?php
 
 session_start();
-
 require_once '../securite.php';
 
 ?>
-
-
 
 <html lang="en">
 <head>

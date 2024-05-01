@@ -1,6 +1,5 @@
 <?php
 session_start();
-print_r($_SESSION['success']);
 require_once '../securite.php';
 ?>
 
