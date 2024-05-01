@@ -1,3 +1,12 @@
+<?php
+session_start();
+print_r($_SESSION['success']);
+require_once '../securite.php';
+?>
+
+
+
+
 <html lang="en">
 <head>
     <title>Admin-Interface</title>
@@ -63,7 +72,7 @@
                    <h3>Demandes</h3>
                </a>
 
-                <a href="#">
+                <a href="../logout.php">
                     <span class="material-symbols-outlined">logout</span>
                     <h3>Log-out</h3>
                 </a>

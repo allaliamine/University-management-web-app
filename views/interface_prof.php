@@ -1,15 +1,25 @@
+<?php
+
+session_start();
+
+require_once '../securite.php';
+
+?>
+
+
+
 <html lang="en">
 <head>
-    <title>Edu-Net</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-  <link rel="stylesheet" href="style_etudiant.css">
-  <script src="/js/chart.js"></script>
+    <title>Prof-Inetrface</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="style_prof.css">
+    <script src="/js/chart.js"></script>
 </head>
 
 <body id="page-top">
@@ -40,9 +50,14 @@
 
                <a href="#">
                    <span class="material-symbols-outlined">Group</span>
-                   <h3>Notes</h3>
+                   <h3>Etudiants</h3>
                </a>
 
+                <a href="#" >
+                    <span class="material-symbols-outlined">fact_check</span>
+                    <h3>Gestion des absences</h3>
+                </a>
+            
                <a href="#">
                    <span class="material-symbols-outlined">Summarize</span>
                    <h3>Rapport</h3>
@@ -53,12 +68,11 @@
                    <h3>Notifications</h3>
                </a>
 
-                <a href="#">
+                <a href="../logout.php">
                     <span class="material-symbols-outlined">logout</span>
                     <h3>Log-out</h3>
                 </a>
-                
-                
+            
             </div>
 
         </div>
@@ -206,11 +220,11 @@
                 <div class="container-fluid insider">
 
                     <div>
-                        <h2 class="text-start py-4">Bienvenue sur la plateforme Edu-net</h2>
+                        <h2 class="text-start py-4 ml-2">Bienvenue sur la plateforme Edu-net</h2>
                     </div>
     
                     <!--4 choices (cours,demandes,.....)-->
-                    <div class="insider_row mx-1">
+                    <div class="insider_row mx-1 mt-3">
 
 
                         <div class="card shadow col-xl-2.5 mb-4 border-primary">
@@ -220,7 +234,7 @@
                                     <div class="col m-2">
                                         <div>
                                             <a class="text-primary" href="#" style="text-decoration: none;">
-                                                Acceder au Cours
+                                                Acceder au Cours 
                                             </a>
                                         </div>
                                     </div>
@@ -243,13 +257,13 @@
                                     <div class="col m-2">
                                         <div>
                                             <a class="text-success" href="#" style="text-decoration: none;">
-                                                Ma Messagerie
+                                                Gestion des étudiants
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-auto">
-                                        <i class="fas fa-file-alt fa-2x"></i>
+                                        <i class="fa-solid fa-user-group fa-2xl" style="color: #000000;"></i>
                                     </div>
                                     
                                 </div>
@@ -267,7 +281,7 @@
                                     <div class="col m-2">
                                         <div>
                                             <a class="text-warning" href="#" style="text-decoration: none;">
-                                            Emploi de Temps
+                                                Emploi de Temps
                                             </a>
                                         </div>
                                     </div>
@@ -284,20 +298,20 @@
 
 
 
-                        <div class="card shadow col-xl-2.5 mb-4 border-danger">
+                        <div class="card shadow col-xl-2.5 mb-4 border-primary">
                             <div class="card-body">
                                 <div class="row align-items-center ">
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-danger" href="#" style="text-decoration: none;">
-                                                Affichage Notes
+                                            <a class="text-primary" href="#" style="text-decoration: none;">
+                                                Gestion des absences
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-auto">
-                                        <i class="fas fa-file-alt fa-2x"></i>
+                                        <i class="fa-solid fa-list-check fa-2xl" style="color: #000000;"></i>
                                     </div>
                                     
                                 </div>
@@ -319,7 +333,7 @@
                         
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="card shadow mb-4">
+                                    <div class="card shadow mb-4 mt-4">
 
                                         <div class="card-header py-3">
                                             <h6 class="m-0">Statistiques d'accès à eServices</h6>
@@ -344,7 +358,7 @@
 
                                 <div class="col-xl-12">
 
-                                    <div class="card shadow mb-4">
+                                    <div class="card shadow mb-4 mt-4">
                                         
                                         <div class="card-header py-3">
                                             <h6 class="m-0">Actualités</h6>
