@@ -21,13 +21,13 @@ class AuthController{
 
             switch ($user['Idrole']) {
                 case 1:
-                    header('Location: ../views/interface_prof.php');
+                    header('Location: ../views/prof/interface_prof.php');
                     break;
                 case 2:
-                    header('Location: ../views/interface_Etudiant.php');
+                    header('Location: ../views/etudiant/interface_Etudiant.php');
                     break;
                 default:
-                    header('Location: ../views/interface_admin.php');
+                    header('Location: ../views/admin/interface_admin.php');
             }
             exit();
         } 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../securite.php';
+require_once '../../securite.php';
 ?>
 
 
@@ -17,7 +17,7 @@ require_once '../securite.php';
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <link rel="stylesheet" href="style_admin.css">
-  <script src="../static/js/chart.js"></script>
+  <script src="../../static/js/chart.js"></script>
 </head>
 
 <body id="page-top">
@@ -71,7 +71,7 @@ require_once '../securite.php';
                    <h3>Demandes</h3>
                </a>
 
-                <a href="../logout.php">
+                <a href="../../logout.php">
                     <span class="material-symbols-outlined">logout</span>
                     <h3>Log-out</h3>
                 </a>
