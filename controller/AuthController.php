@@ -34,7 +34,7 @@ class AuthController{
 
         else {
             $_SESSION['error'] = "Votre login ou mdp est incorrect";
-            header('Location: ./public/index.php');
+            header('Location: ../public/index.php');
             exit();
         }
 
