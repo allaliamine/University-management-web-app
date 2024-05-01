@@ -17,15 +17,14 @@ a{
 .logo_edu_net{
     width: 220px;
     height: 200px;
-    background-image: url("../image/1.png");
     background-size: contain;
     transition: 0.5s ease-in-out;
-    margin-left: 0.5cm;
+    margin-left: 0.2cm;
 }
 
 /*logo hover */
 .logo_edu_net:hover{
-    background-image: url("../image/2.png");
+    background-image: url("../static/image/2.png");
 }
 
 /*sidebar-content size */
@@ -204,11 +203,11 @@ input.form-control{
     .logo_edu_net{
         width: 120px;
         height: 100px;
-        background-image: url("1.png");
+        background-image: url("../static/image/1.png");
         background-size:cover;
         transition: 0.5s ease-in-out;
         position: absolute;
-        left: -22px;
+        left: -30px;
     }
     
     /*sidebar content (links)*/
