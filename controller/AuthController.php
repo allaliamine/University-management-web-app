@@ -16,20 +16,24 @@ class AuthController{
         $user = $this->userModel->getAccountByLoginAndPassword($login, $password);
 
         if ($user){
-            session_start();
-            $_SESSION['success'] = $user;
+            if($user['Activite'] == 'A'){
+                session_start();
+                $_SESSION['success'] = $user;
 
-            switch ($user['Idrole']) {
-                case 1:
-                    header('Location: ../views/prof/interface_prof.php');
-                    break;
-                case 2:
-                    header('Location: ../views/etudiant/interface_Etudiant.php');
-                    break;
-                default:
-                    header('Location: ../views/admin/interface_admin.php');
+                switch ($user['Idrole']) {
+                    case 1:
+                        header('Location: ../views/prof/interface_prof.php');
+                        break;
+                    case 2:
+                        header('Location: ../views/etudiant/interface_Etudiant.php');
+                        break;
+                    default:
+                        header('Location: ../views/admin/interface_admin.php');
+                }
+                exit();
+            }else{
+                $_SESSION['Activite'] = "votre compte est desactiver contacter mr cherradi";
             }
-            exit();
         } 
 
         else {

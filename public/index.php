@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +22,23 @@
         <div class="row justify-content-center">
 
             <div class="col-xl-8 col-lg-9 col-md-9">
+            <?php if(isset($_SESSION['Activite'])) { ?>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['Activite'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['Activite']); ?>
+            <?php } ?>
+
+            <?php if(isset($_SESSION['error'])) { ?>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['error'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['error']); ?>
+            <?php } ?>
 
                 <div class="card border-0">
 
