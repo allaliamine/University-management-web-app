@@ -14,8 +14,9 @@ class addStudentController{
     }
 
     /*function to insert student in database */
-    public function insertStudent($nom, $prenom, $cin, $cne, $sexe, $date,$email, $tel, $idcompte, $idrole, $login, $mdp, $idAdmin, $idFiliere){
-        $this->addStudent->insertStudent($nom, $prenom, $cin, $cne, $sexe, $date ,$email, $tel, $idcompte, $idrole, $login, $mdp, $idAdmin, $idFiliere);
+    public function insertStudent($nom, $prenom, $cin, $cne, $sexe, $date,$email, $tel, $idcompte, $idrole, $login, $mdp, $idAdmin, $idNiveau,$idFiliere){
+        $activite = 'A';
+        $this->addStudent->insertStudent($nom, $prenom, $cin, $cne, $sexe, $date ,$email, $tel, $activite ,$idcompte, $idrole, $login, $mdp, $idAdmin, $idNiveau, $idFiliere);
     }
 
     /*function to check is student exist in database*/

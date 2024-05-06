@@ -20,12 +20,12 @@ class addStudent{
     }
 
     /*adding student to databse */
-    public function insertStudent($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $idcompte, $idrole, $login, $mdp, $idAdmin, $idFiliere){
+    public function insertStudent($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $activite ,$idcompte, $idrole, $login, $mdp, $idAdmin, $idNiveau, $idFiliere){
 
         global $conn;
 
-        $req = $conn->prepare('INSERT INTO Etudiant ( Nom, Prenom, CIN, CNE, Sexe, Date_naissance, Email, Tel, IdCompte, Idrole, Login, Mdp, IdAdmin, IdFiliere) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $params = array($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $idcompte, $idrole, $login, $mdp, $idAdmin, $idFiliere);
+        $req = $conn->prepare('INSERT INTO Etudiant ( Nom, Prenom, CIN, CNE, Sexe, Date_naissance, Email, Tel, Activite, IdCompte, Idrole, Login, Mdp, IdAdmin, IdNiveau, IdFiliere) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $params = array($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $activite, $idcompte, $idrole, $login, $mdp, $idAdmin, $idNiveau, $idFiliere);
         $req->execute($params);
     }
 
@@ -35,8 +35,9 @@ class addStudent{
 
         global $conn;
 
-        $req = $conn->prepare('insert into Compte (Idrole, Login, Mdp) values (?, ?, ?)');
-        $params = array($idrole, $login, $mdp);
+        $req = $conn->prepare('insert into Compte (Idrole, Login, Mdp, Activite) values (?, ?, ?, ?)');
+        $activite = 'A';
+        $params = array($idrole, $login, $mdp, $activite);
         $req->execute($params);
     }
 

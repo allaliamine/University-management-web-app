@@ -64,14 +64,7 @@ if(isset($_GET['action'])){
         $filiere = $_POST['filiere'];
         $niveau = $_POST['niveau'];
 
-        // echo $niveau;
-        // echo "<br>";
-        // echo $filiere;
-        // echo "<br>";
-        // echo $file_tmp;
-
-
-
+        
         $reader = new Xlsx;
         $spreadsheet = $reader->load($file_tmp);
         $worksheet = $spreadsheet->getActiveSheet();
@@ -100,35 +93,8 @@ if(isset($_GET['action'])){
                 $addStudent->addAccount($login,$mdp);
 
                 $idcompte = $addStudent->getAccountID($login, $mdp);
-                    //  echo $nom;
-                    //  echo "<br>";
-                    //  echo $prenom;
-                    //  echo "<br>";
-                    //  echo $cin;
-                    //  echo "<br>";
-                    //  echo $cne;
-                    //  echo "<br>";
-                    //  echo $sexe;
-                    //  echo "<br>";
-                    //  echo $date;
-                    //  echo "<br>";
-                    //  echo $email;
-                    //  echo "<br>";
-                    //  echo $tel;
-                    //  echo "<br>";
-                    //  echo $idcompte;
-                    //  echo "<br>";
-                    //  echo $idrole;
-                    //  echo "<br>";
-                    //  echo $login;
-                    //  echo "<br>";
-                    //  echo $mdp;
-                    //  echo "<br>";
-                    //  echo $idadmin;
-                    //  echo "<br>";
-                    //  echo $filiere;
                 
-                $addStudent->insertStudent($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $idcompte, $idrole ,$login, $mdp, $idadmin, $filiere);
+                $addStudent->insertStudent($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $idcompte, $idrole ,$login, $mdp, $idadmin, $niveau,$filiere);
                 $_SESSION['ajouterEtudiant'] = "les Etudiant on ete ajouter avec succes \n les comptes des etudiants on ete creer avec succes";
             }
         }
