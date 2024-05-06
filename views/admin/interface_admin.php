@@ -39,7 +39,7 @@ require_once '../../securite.php';
                </a>
                 
 
-               <a href="#" >
+               <a href="../../routing/routing.php?action=note" >
                    <span class="material-symbols-outlined">menu_book</span>
                    <h3>Publier Notes</h3>
                </a>
@@ -57,7 +57,7 @@ require_once '../../securite.php';
                <a href="../../routing/routing.php?action=add">
                    <span class="material-symbols-outlined">group_add</span>
                    <h3>Ajouter Etudiants</h3>
-               </a>
+               </a>
 
                <a href="#">
                    <span class="material-symbols-outlined">group_remove</span>

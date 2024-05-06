@@ -16,7 +16,7 @@ $levels = $_SESSION['levels'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../admin/style_admin.css">
+    <link rel="stylesheet" href="style_admin.css">
 </head>
 <body>
 
@@ -33,7 +33,7 @@ $levels = $_SESSION['levels'];
                     <select name="filiere" id="filiere" class="form-control" required>
                         <option value=""></option>
                         <?php foreach($majors as $mjr) { ?>
-                        <option value="<?= $mjr['IdFiliere']; ?>"><a href="ensah.ma"><?= $mjr['Nom'];?> </a></option>
+                        <option value="<?= $mjr['IdFiliere']; ?>"><?= $mjr['Nom'];?> </option>
                         <?php } ?>
                     </select>
                 </div>
@@ -52,7 +52,7 @@ $levels = $_SESSION['levels'];
                 </div>
 
                 
-                <input type="submit" name="ajout-etudiant" class="btn btn-primary" value="ajouter" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
+                <input type="submit" name="ajout-etudiant" id="bouton" class="btn btn-primary" value="ajouter" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
             </form>
 
             <?php if(isset($_SESSION['ajouterEtudiant'])) {?>

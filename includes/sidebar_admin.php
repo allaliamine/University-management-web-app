@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  
 </head>
 
 <body id="page-top">
@@ -32,7 +33,7 @@
                </a>
                 
 
-               <a href="#" >
+               <a href="../../routing/routing.php?action=note" >
                    <span class="material-symbols-outlined">menu_book</span>
                    <h3>Publier Notes</h3>
                </a>
@@ -47,7 +48,7 @@
                    <h3>Tracker les utilisatuers</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=add">
                    <span class="material-symbols-outlined">group_add</span>
                    <h3>Ajouter Etudiants</h3>
                </a>

@@ -28,13 +28,33 @@ if ( isset($_POST['submit']) ) {
  */
 if(isset($_GET['action'])){
 
-    require_once '../controller/MajorController.php';
-
     session_start();
 
     $action = $_GET['action'];
 
-    if ($action == "add") {
+
+    switch ($action){
+
+        case 'note':
+        require_once '../controller/noteController.php';
+
+        $majorController = new noteController();
+        $majors = $majorController->fetch_filier();
+        $levels = $majorController->fetch_niveau();
+        $modules=$majorController->fetch_module();
+
+        $_SESSION['majors'] = $majors;
+        $_SESSION['levels'] = $levels;
+        $_SESSION['modules'] = $modules;
+
+        header("location: ../views/admin/publier_note.php");
+        exit();
+        break;
+        
+    
+
+        case 'add':
+        require_once '../controller/MajorController.php';
 
         $majorController = new MajorController();
         $majors = $majorController->getAllMajors();
@@ -42,9 +62,14 @@ if(isset($_GET['action'])){
 
         $_SESSION['majors'] = $majors;
         $_SESSION['levels'] = $levels;
-        header('location: ../views/admin/ajout_etudiants.php');
-        
+        header("location: ../views/admin/ajout_etudiants.php");
+        exit();
+        break;
+
+        default:
+        break;
     } 
+    
 }
 
 
@@ -105,8 +130,54 @@ if(isset($_GET['action'])){
 
  }
 
+//Pour ajouter les notes
 
 
 
+if(isset($_POST['importSubmit'])){ 
+
+    session_start();
+
+    require '../vendor/autoload.php';
+    require_once '../controller/noteController.php';
+
+    $excelMimes = array('text/xls', 'text/xlsx', 'application/excel', 'application/vnd.msexcel', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');  
+    
+    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $excelMimes)){ 
+        
+        if(is_uploaded_file($_FILES['file']['tmp_name'])){ 
+
+            $etd=new noteController();
+
+            $reader = new Xlsx(); 
+            $spreadsheet = $reader->load($_FILES['file']['tmp_name']); 
+            $worksheet = $spreadsheet->getActiveSheet();  
+            $worksheet_arr = $worksheet->toArray(); 
+            
+            // Remove header row 
+            unset($worksheet_arr[0]); 
+            foreach($worksheet_arr as $row){ 
+                $CNE = $row[0]; 
+                $Valeur = $row[1];
+                $id=$etd->get_id_etd($CNE);
+
+                $id_module=$_POST['module'];
+
+
+                $conn->query("INSERT INTO note(Valeur, idModule, idAdmin, idEtudiant) VALUES ('".$Valeur."','".$id_module."', '1', '".$id."')"); 
+            } 
+            $_SESSION['etat_note_succes']='Les notes ont ete ajoutes avec succes';
+            
+        }else{  
+            $_SESSION['etat_note_erreur']='Un erreur est survenue contactez Mr Cherradi';
+        } 
+    }else{ 
+        $_SESSION['etat_note_fail']='Fichier unvalide, format insuportable';
+    } 
+} 
+ 
+// Redirect to the listing page 
+header("Location: ../views/admin/publier_note.php"); 
+ 
 ?>
 
