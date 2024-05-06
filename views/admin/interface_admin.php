@@ -1,10 +1,8 @@
 <?php
 session_start();
 require_once '../../securite.php';
+
 ?>
-
-
-
 
 <html lang="en">
 <head>
@@ -56,7 +54,7 @@ require_once '../../securite.php';
                    <h3>Tracker les utilisatuers</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=add">
                    <span class="material-symbols-outlined">group_add</span>
                    <h3>Ajouter Etudiants</h3>
                </a>

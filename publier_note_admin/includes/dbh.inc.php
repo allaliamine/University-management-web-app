@@ -1,5 +1,5 @@
 <?php
-$dsn="mysql:host=localhost;dbname=projetweb";
+$dsn="mysql:host=localhost;dbname=project";
 $dbusername="root";
 $dbpassword="";
 try{

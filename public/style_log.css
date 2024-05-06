@@ -26,7 +26,7 @@ h4{
 
 /*picture*/
 .bg-image{
-    background-image: url("../image/picture.png");
+    background-image: url("../static/image/picture.png");
     width: 320px;
     height: 269px;
     background-size: cover;

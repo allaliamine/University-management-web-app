@@ -18,6 +18,27 @@ class userModel{
     }
 
 
+    public function getAllMajors(){
+        global $conn;
+        
+        $req = $conn->prepare('select * from Filiere');
+        $req->execute();
+        $res = $req->fetchAll();
+
+        return $res;
+    }
+
+
+    public function getAllLevels(){
+        global $conn;
+        
+        $req = $conn->prepare('select * from Niveau');
+        $req->execute();
+        $res = $req->fetchAll();
+
+        return $res;
+    }
+
 }
 
 

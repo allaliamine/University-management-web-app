@@ -21,5 +21,5 @@ if(!empty($_GET['status'])){
             $statusType = ''; 
             $statusMsg = ''; 
     } 
-} 
+}
 ?>

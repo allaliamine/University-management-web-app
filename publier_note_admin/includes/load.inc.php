@@ -9,6 +9,7 @@ if(isset($_POST['importSubmit'])){
     $excelMimes = array('text/xls', 'text/xlsx'); 
     
     if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $excelMimes)){ 
+        
         if(is_uploaded_file($_FILES['file']['tmp_name'])){ 
             $reader = new Xlsx(); 
             $spreadsheet = $reader->load($_FILES['file']['tmp_name']); 
