@@ -19,15 +19,22 @@ class AuthController{
             if($user['Activite'] == 'A'){
                 session_start();
                 $_SESSION['success'] = $user;
+                $idcompte = $user['IdCompte'];
 
                 switch ($user['Idrole']) {
                     case 1:
+                        $prof = $this->userModel->getProfByIdCompte($idcompte);
+                        $_SESSION['prof'] = $prof;
                         header('Location: ../views/prof/interface_prof.php');
                         break;
                     case 2:
+                        $etd = $this->userModel->getStudentByIdCompte($idcompte);
+                        $_SESSION['etd'] = $etd;
                         header('Location: ../views/etudiant/interface_Etudiant.php');
                         break;
                     default:
+                        $admin = $this->userModel->getAdminByIdCompte($idcompte);
+                        $_SESSION['admin'] = $admin;
                         header('Location: ../views/admin/interface_admin.php');
                 }
                 exit();
@@ -46,21 +53,6 @@ class AuthController{
 
 
 }
-
-/*if ( isset($_POST['submit']) ) {
-
-    $login = $_POST['login'];
-    $password =  $_POST['password'];
-
-    try {
-        $authController = new AuthController();
-        $authController->login($login, $password);
-
-    } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
-    }
- 
-}*/
 
 
 

@@ -128,7 +128,7 @@ if(isset($_GET['action'])){
     }
 
 
- }
+}
 
 //Pour ajouter les notes
 
@@ -175,9 +175,7 @@ if(isset($_POST['importSubmit'])){
         $_SESSION['etat_note_fail']='Fichier unvalide, format insuportable';
     } 
 } 
- 
-// Redirect to the listing page 
-header("Location: ../views/admin/publier_note.php"); 
+
  
 ?>
 
