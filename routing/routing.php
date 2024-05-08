@@ -66,27 +66,18 @@ if(isset($_GET['action'])){
         exit();
         break;
 
-        case 'prof':
-      
-        require_once '../controller/MajorController.php';
-        require_once '../controller/absenceController.php';
 
-        $idprof = $_SESSION['prof']['IdProf'];
+        case 'rapportprof':
+        require_once '../controller/rapportController.php';
 
-        $majorController = new MajorController();
-        $absenceController = new absenceController();
+        $moduleController = new rapportController();
+        $levels=$moduleController->fetch_niveau();
+        $modules=$moduleController->fetch_module();
 
-        $majors = $majorController->getAllMajors();
-        $levels = $majorController->getAllLevels();
-        $module = $absenceController->getModulesByIdprof($idprof);
-
-
-        $_SESSION['majors'] = $majors;
         $_SESSION['levels'] = $levels;
-        $_SESSION['prf_mdls'] = $module;
-     
+        $_SESSION['modules'] = $modules;
 
-        header('location: ../views/prof/faire_absence.php');
+        header("location: ../views/prof/rapport.php");
         exit();
         break;
 
@@ -152,7 +143,7 @@ if(isset($_GET['action'])){
     }
 
 
-}
+ }
 
 //Pour ajouter les notes
 
@@ -199,7 +190,34 @@ if(isset($_POST['importSubmit'])){
         $_SESSION['etat_note_fail']='Fichier unvalide, format insuportable';
     } 
 } 
-
  
-?>
+// Redirect to the listing page 
+//header("Location: ../views/admin/publier_note.php"); 
+
+
+//Pour ajouter rapport prof
+
+if(isset($_POST['rapportsubmit'])){ 
+
+    session_start();
+    require_once '../controller/rapportController.php';
+
+    $Descriptive=$_POST['textarea'];
+    $Datelimite=$_POST['date'];
+    $idProf=$_SESSION['prof']['IdProf'];
+    $IdNiveau=$_POST['niveau'];
+    $idModule=$_POST['module'];
+
+    $rapportController = new rapportController();
+    $rapportController->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
+
+    header('location: ../views/prof/rapport.php');
+
+    $_SESSION['etat_rapport_succes']='Le rapport est publie avec succes';
+    
+}else{
+    header('location: ../views/prof/rapport.php');
+    $_SESSION['etat_rapport_fail']='Un erreur est survenue';
+} 
+ 
 

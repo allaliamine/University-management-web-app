@@ -55,7 +55,7 @@ require_once '../../securite.php';
                     <h3>Gestion des absences</h3>
                 </a>
             
-               <a href="#">
+               <a href="../../routing/routing.php?action=rapportprof">
                    <span class="material-symbols-outlined">Summarize</span>
                    <h3>Rapport</h3>
                </a>
