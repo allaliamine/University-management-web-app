@@ -284,22 +284,17 @@ if (isset($_POST['publier_annonce'])) {
         $destination = "../uploads/". basename($file_name);
 
         if (move_uploaded_file($file_tmp, $destination)){
-            
                 
-                if(!empty($_POST['check_list'])) {
-
-                    $annonce = new AnnonceController();
-                    $annonce ->insertAnnonce($file_name);
-
-                    foreach($_POST['check_list'] as $value){
-                        $value = (int) $value;
-
-                        $annonce ->insertAnnonceNiveau($file_name, $value);
-                    }
-            
+            if(!empty($_POST['check_list'])) {
+                $annonce = new AnnonceController();
+                $annonce ->insertAnnonce($file_name);
+                foreach($_POST['check_list'] as $value){
+                    $value = (int) $value;
+                    $annonce ->insertAnnonceNiveau($file_name, $value);
                 }
-
-               
+        
+            }
+   
         }
     }
     header('location: ../views/admin/publier_annonce.php');
