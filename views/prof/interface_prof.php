@@ -34,7 +34,7 @@ require_once '../../securite.php';
             <div class="side-bar flex">
 
                 
-               <a href="#" >
+               <a href="./interface_prof.php" >
                    <span class="material-symbols-outlined">grid_view</span>
                    <h3>Dashboard</h3>
                </a>
@@ -50,7 +50,7 @@ require_once '../../securite.php';
                    <h3>Etudiants</h3>
                </a>
 
-                <a href="../../routing/routing.php?action=prof">
+                <a href="../../routing/routing.php?action=absenceprof">
                     <span class="material-symbols-outlined">fact_check</span>
                     <h3>Gestion des absences</h3>
                 </a>

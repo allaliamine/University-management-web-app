@@ -27,7 +27,7 @@
             <div class="side-bar flex">
 
                 
-               <a href="#" >
+               <a href="../../views/admin/interface_admin.php" >
                    <span class="material-symbols-outlined">grid_view</span>
                    <h3>Dashboard</h3>
                </a>

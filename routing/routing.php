@@ -83,7 +83,7 @@ if(isset($_GET['action'])){
 
 
 
-        case 'prof':
+        case 'absenceprof':
       
         require_once '../controller/MajorController.php';
         require_once '../controller/absenceController.php';
