@@ -62,28 +62,75 @@ if(isset($_GET['action'])){
 
         $_SESSION['majors'] = $majors;
         $_SESSION['levels'] = $levels;
-
         header("location: ../views/admin/ajout_etudiants.php");
         exit();
         break;
 
-        
-        case 'annonce':
-        require_once '../controller/AnnonceController.php';  
 
-        $annonceController = new AnnonceController();
-        $majors = $annonceController->getAllMajors();
-        $levels = $annonceController->getAllLevels();
+        case 'rapportprof':
+        require_once '../controller/rapportController.php';
 
-        $_SESSION['majors'] = $majors;
+        $moduleController = new rapportController();
+        $levels=$moduleController->fetch_niveau();
+        $modules=$moduleController->fetch_module();
+
         $_SESSION['levels'] = $levels;
+        $_SESSION['modules'] = $modules;
 
-        header('location: ../views/admin/publier_annonce.php');
+        header("location: ../views/prof/rapport.php");
         exit();
         break;
 
+
+
+        case 'absenceprof':
+      
+        require_once '../controller/MajorController.php';
+        require_once '../controller/absenceController.php';
+
+        $idprof = $_SESSION['prof']['IdProf'];
+
+        $majorController = new MajorController();
+        $absenceController = new absenceController();
+
+        $majors = $majorController->getAllMajors();
+        $levels = $majorController->getAllLevels();
+        $module = $absenceController->getModulesByIdprof($idprof);
+
+
+        $_SESSION['majors'] = $majors;
+        $_SESSION['levels'] = $levels;
+        $_SESSION['prf_mdls'] = $module;
+        
+
+        header('location: ../views/prof/faire_absence.php');
+        exit();
+        break;
+
+
+
+        case 'annonce':
+            require_once '../controller/AnnonceController.php';  
+    
+            $annonceController = new AnnonceController();
+            $majors = $annonceController->getAllMajors();
+            $levels = $annonceController->getAllLevels();
+    
+            $_SESSION['majors'] = $majors;
+            $_SESSION['levels'] = $levels;
+    
+            header('location: ../views/admin/publier_annonce.php');
+            exit();
+            break;
+    
+
         default:
         break;
+
+
+
+
+
     } 
     
 }
@@ -196,10 +243,33 @@ if(isset($_POST['importSubmit'])){
 //header("Location: ../views/admin/publier_note.php"); 
 
 
+//Pour ajouter rapport prof
 
+if(isset($_POST['rapportsubmit'])){ 
 
+    session_start();
+    require_once '../controller/rapportController.php';
 
+    $Descriptive=$_POST['textarea'];
+    $Datelimite=$_POST['date'];
+    $idProf=$_SESSION['prof']['IdProf'];
+    $IdNiveau=$_POST['niveau'];
+    $idModule=$_POST['module'];
+
+    $rapportController = new rapportController();
+    $rapportController->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
+
+    header('location: ../views/prof/rapport.php');
+
+    $_SESSION['etat_rapport_succes']='Le rapport est publie avec succes';
+    
+}else{
+    header('location: ../views/prof/rapport.php');
+    $_SESSION['etat_rapport_fail']='Un erreur est survenue';
+} 
  
+
+
 /** FOR THE PUBLISH ANNOUNCEMENT */
 
 if (isset($_POST['publier_annonce'])) {
@@ -237,16 +307,4 @@ if (isset($_POST['publier_annonce'])) {
 }
 
 
-  
-
-
-
-
-
-
-
-
-
-
-?>
 
