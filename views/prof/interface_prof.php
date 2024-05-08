@@ -50,7 +50,7 @@ require_once '../../securite.php';
                    <h3>Etudiants</h3>
                </a>
 
-                <a href="#" >
+                <a href="../../routing/routing.php?action=prof">
                     <span class="material-symbols-outlined">fact_check</span>
                     <h3>Gestion des absences</h3>
                 </a>
