@@ -33,7 +33,7 @@ require_once '../../securite.php';
             <div class="side-bar flex">
 
                 
-               <a href="./interface_admin.php" >
+               <a href="#" >
                    <span class="material-symbols-outlined">grid_view</span>
                    <h3>Dashboard</h3>
                </a>
@@ -44,7 +44,7 @@ require_once '../../securite.php';
                    <h3>Publier Notes</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=annonce">
                    <span class="material-symbols-outlined">Summarize</span>
                    <h3>Publier Annonces</h3>
                </a>
@@ -57,7 +57,7 @@ require_once '../../securite.php';
                <a href="../../routing/routing.php?action=add">
                    <span class="material-symbols-outlined">group_add</span>
                    <h3>Ajouter Etudiants</h3>
-                </a>
+               </a>
 
                <a href="#">
                    <span class="material-symbols-outlined">group_remove</span>
@@ -174,7 +174,7 @@ require_once '../../securite.php';
                         <!--profile icon + dropdown menu-->
                         <li class="nav-item mx-1 dropdown " style="list-style: none;">
                             <a class="nav-link py-2" data-toggle="dropdown" data-bs-toggle="dropdown">
-                                <span class="username">Bonjour, <?= $_SESSION['admin']['Prenom'];?> </span>
+                                <span class="username">username </span>
                                 <img class="img-profile rounded-circle" src="https://ensah.ma/apps/eservices/resources/img/user-1.png" alt="image">
                             </a>
                         

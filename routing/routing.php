@@ -62,58 +62,28 @@ if(isset($_GET['action'])){
 
         $_SESSION['majors'] = $majors;
         $_SESSION['levels'] = $levels;
+
         header("location: ../views/admin/ajout_etudiants.php");
         exit();
         break;
 
+        
+        case 'annonce':
+        require_once '../controller/AnnonceController.php';  
 
-        case 'rapportprof':
-        require_once '../controller/rapportController.php';
-
-        $moduleController = new rapportController();
-        $levels=$moduleController->fetch_niveau();
-        $modules=$moduleController->fetch_module();
-
-        $_SESSION['levels'] = $levels;
-        $_SESSION['modules'] = $modules;
-
-        header("location: ../views/prof/rapport.php");
-        exit();
-        break;
-
-
-
-        case 'absenceprof':
-      
-        require_once '../controller/MajorController.php';
-        require_once '../controller/absenceController.php';
-
-        $idprof = $_SESSION['prof']['IdProf'];
-
-        $majorController = new MajorController();
-        $absenceController = new absenceController();
-
-        $majors = $majorController->getAllMajors();
-        $levels = $majorController->getAllLevels();
-        $module = $absenceController->getModulesByIdprof($idprof);
-
+        $annonceController = new AnnonceController();
+        $majors = $annonceController->getAllMajors();
+        $levels = $annonceController->getAllLevels();
 
         $_SESSION['majors'] = $majors;
         $_SESSION['levels'] = $levels;
-        $_SESSION['prf_mdls'] = $module;
-        
 
-        header('location: ../views/prof/faire_absence.php');
+        header('location: ../views/admin/publier_annonce.php');
         exit();
         break;
 
         default:
         break;
-
-
-
-
-
     } 
     
 }
@@ -226,29 +196,57 @@ if(isset($_POST['importSubmit'])){
 //header("Location: ../views/admin/publier_note.php"); 
 
 
-//Pour ajouter rapport prof
 
-if(isset($_POST['rapportsubmit'])){ 
 
-    session_start();
-    require_once '../controller/rapportController.php';
 
-    $Descriptive=$_POST['textarea'];
-    $Datelimite=$_POST['date'];
-    $idProf=$_SESSION['prof']['IdProf'];
-    $IdNiveau=$_POST['niveau'];
-    $idModule=$_POST['module'];
-
-    $rapportController = new rapportController();
-    $rapportController->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
-
-    header('location: ../views/prof/rapport.php');
-
-    $_SESSION['etat_rapport_succes']='Le rapport est publie avec succes';
-    
-}else{
-    header('location: ../views/prof/rapport.php');
-    $_SESSION['etat_rapport_fail']='Un erreur est survenue';
-} 
  
+/** FOR THE PUBLISH ANNOUNCEMENT */
+
+if (isset($_POST['publier_annonce'])) {
+
+    require_once '../controller/AnnonceController.php';
+    
+
+    if (isset($_FILES['annonce']) && $_FILES['annonce']['error'] == 0) {
+        
+        $file_name = $_FILES['annonce']['name'];  
+        $file_tmp = $_FILES['annonce']['tmp_name']; 
+        $destination = "../uploads/". basename($file_name);
+
+        if (move_uploaded_file($file_tmp, $destination)){
+            
+                
+                if(!empty($_POST['check_list'])) {
+
+                    $annonce = new AnnonceController();
+                    $annonce ->insertAnnonce($file_name);
+
+                    foreach($_POST['check_list'] as $value){
+                        $value = (int) $value;
+
+                        $annonce ->insertAnnonceNiveau($file_name, $value);
+                    }
+            
+                }
+
+               
+        }
+    }
+    header('location: ../views/admin/publier_annonce.php');
+   
+}
+
+
+  
+
+
+
+
+
+
+
+
+
+
+?>
 
