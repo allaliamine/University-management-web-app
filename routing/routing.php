@@ -81,8 +81,39 @@ if(isset($_GET['action'])){
         exit();
         break;
 
+
+
+        case 'prof':
+      
+        require_once '../controller/MajorController.php';
+        require_once '../controller/absenceController.php';
+
+        $idprof = $_SESSION['prof']['IdProf'];
+
+        $majorController = new MajorController();
+        $absenceController = new absenceController();
+
+        $majors = $majorController->getAllMajors();
+        $levels = $majorController->getAllLevels();
+        $module = $absenceController->getModulesByIdprof($idprof);
+
+
+        $_SESSION['majors'] = $majors;
+        $_SESSION['levels'] = $levels;
+        $_SESSION['prf_mdls'] = $module;
+        
+
+        header('location: ../views/prof/faire_absence.php');
+        exit();
+        break;
+
         default:
         break;
+
+
+
+
+
     } 
     
 }
