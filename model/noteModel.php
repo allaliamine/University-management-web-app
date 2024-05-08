@@ -76,6 +76,8 @@ class noteModel{
         $id=$result['IdModule'];
         return $id;
     }
+
+    
 }
 
 

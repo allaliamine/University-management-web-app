@@ -1,7 +1,6 @@
 <?php
 session_start();
-
-echo $_SESSION['error'];
+//echo $_SESSION['error'];
 
 
 ?>
