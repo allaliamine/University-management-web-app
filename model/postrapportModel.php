@@ -4,19 +4,6 @@ require_once '../config/conn.php';
 
 class postrapportModel {
 
-    // function fetch_rapport(){
-
-    //     global $conn; 
-    //     $currentDate = date("Y-m-d");
-    //     $niveauetd=$_SESSION['etd'];
-    //     $query="SELECT * FROM rapport WHERE IdNiveau=? AND deadline >= ?;";
-    //     $stmt=$conn->prepare($query);
-    //     $stmt->execute([$niveauetd['IdNiveau'],$currentDate]);
-    //     $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     return $result;
-    // }
-
-
     function fetch_rapport(){
         global $conn; 
         $currentDate = date("Y-m-d");
@@ -57,18 +44,16 @@ class postrapportModel {
         return $nom;
     }
 
-    function upload_rapportetd($rapport_id,$filename){
+    function upload_rapportetd($rapport_id,$filename,$path,$idEtudiant){
         
         global $conn;
-        $query="INSERT INTO rapportetd (IdEtudiant,IdRapport,pdf_nom) VALUES (?,?,?);";
-        $idEtudiant=$_SESSION['etd']['IdEtudiant'];
+        $query="INSERT INTO rapportetd (IdEtudiant,IdRapport,pdf_nom,pdf_path) VALUES (?,?,?,?);";
         $stmt=$conn->prepare($query);
-        $stmt->execute([$idEtudiant,$rapport_id,$filename]);
+        $stmt->execute([$idEtudiant,$rapport_id,$filename,$path]);
     }
 
-    function studentHasSubmittedFile($rapport_id){
+    function studentHasSubmittedFile($rapport_id,$idEtudiant){
         global $conn;
-        $idEtudiant = $_SESSION['etd']['IdEtudiant'];
         $query = "SELECT COUNT(*) AS count FROM rapportetd WHERE IdEtudiant = ? AND IdRapport = ?";
         $stmt = $conn->prepare($query);
         $stmt->execute([$idEtudiant, $rapport_id]);

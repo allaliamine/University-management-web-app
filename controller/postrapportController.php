@@ -26,11 +26,11 @@ class postrapportController{
         return $result;
     }
 
-    function upload_rapportetd($rapport_id,$filename){
-        $this->postrapport_model->upload_rapportetd($rapport_id,$filename);
+    function upload_rapportetd($rapport_id,$filename,$path,$idEtudiant){
+        $this->postrapport_model->upload_rapportetd($rapport_id,$filename,$path,$idEtudiant);
     }
-    function studentHasSubmittedFile($rapport_id){
-        $result=$this->postrapport_model->studentHasSubmittedFile($rapport_id);
+    function studentHasSubmittedFile($rapport_id,$idEtudiant){
+        $result=$this->postrapport_model->studentHasSubmittedFile($rapport_id,$idEtudiant);
         return $result;
     }
 }

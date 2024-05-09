@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once '../../securite.php';
+require_once '../../securiteetd.php';
 
 
 ?>
@@ -46,12 +46,12 @@ require_once '../../securite.php';
                    <h3>Cours</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=noteted">
                    <span class="material-symbols-outlined">Group</span>
                    <h3>Notes</h3>
                </a>
 
-               <a href="../etudiant/postuler_rapport.php">
+               <a href="../../routing/routing.php?action=rapportetd">
                    <span class="material-symbols-outlined">Summarize</span>
                    <h3>Rapport</h3>
                </a>

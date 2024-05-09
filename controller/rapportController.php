@@ -16,8 +16,8 @@ class rapportController{
         return $result;
     }
 
-    function fetch_module(){
-        $result=$this->rapport_model->fetch_module();
+    function fetch_module($prof){
+        $result=$this->rapport_model->fetch_module($prof);
         return $result;
     }
 

@@ -4,7 +4,7 @@ session_start();
 require_once '../../securite.php';
 include '../../includes/sidebar_etd.php';
 
-$rapports=$_SESSION['rapport'];
+$rapports=$_SESSION['toutrapport'];
 ?>
 
 

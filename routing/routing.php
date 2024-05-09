@@ -82,9 +82,10 @@ if(isset($_GET['action'])){
             case 'rapportprof':
             require_once '../controller/rapportController.php';
 
+            $prof=$_SESSION['prof'];
             $moduleController = new rapportController();
             $levels=$moduleController->fetch_niveau();
-            $modules=$moduleController->fetch_module();
+            $modules=$moduleController->fetch_module($prof);
 
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
@@ -142,8 +143,9 @@ if(isset($_GET['action'])){
             require_once '../controller/rapportController.php';
 
             $moduleController = new rapportController();
+            $prof=$_SESSION['prof'];
             $levels=$moduleController->fetch_niveau();
-            $modules=$moduleController->fetch_module();
+            $modules=$moduleController->fetch_module($prof);
 
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
@@ -153,6 +155,24 @@ if(isset($_GET['action'])){
             break;
 
         case 'rapportetd':
+            require_once '../controller/postrapportController.php';
+
+            $postrapportController= new postrapportController();
+            $rapport=$postrapportController->fetch_rapport();
+            $_SESSION['toutrapport']=$rapport;
+            header('location: ../views/etudiant/postuler_rapport.php');
+            exit();
+            break;
+
+
+        case 'noteetd':
+            require_once '../controller/etdnoteController.php';
+
+            
+            header('location: ../views/etudiant/consulter_note.php');
+            exit();
+            break;
+
 
 
         default:
@@ -342,21 +362,23 @@ if(isset($_POST['rapportpublier'])){
     $rapport_id = $_POST['rapport_id'];
     $filename = basename($_FILES["file"]["name"]);
     $tempfile = $_FILES["file"]["tmp_name"];
-    $folder = "../uploads/rapport/".$filename;
+    $folder = "../../uploads/rapport/".$filename;
 
   if($filename == ""){
     $_SESSION['etat_rapport_fail'] = "Une erreur est survenue";
     header('location: ../views/etudiant/postuler_rapport.php');
   }else{
     $postrapportController = new postrapportController();
-    if ($postrapportController->studentHasSubmittedFile($rapport_id)) {
+    $idEtudiant = $_SESSION['etd']['IdEtudiant'];
+    if ($postrapportController->studentHasSubmittedFile($rapport_id,$idEtudiant)) {
         $_SESSION['error'] = "Vous avez déjà soumis un fichier pour ce rapport.";
         header('location: ../views/etudiant/postuler_rapport.php');
         exit();
     }
     else{
         move_uploaded_file($tempfile,$folder);
-        $postrapportController->upload_rapportetd($rapport_id, $filename);
+        $idEtudiant=$_SESSION['etd']['IdEtudiant'];
+        $postrapportController->upload_rapportetd($rapport_id,$filename,$folder,$idEtudiant);
         $_SESSION['etat_rapport_succes'] = "Votre Rapport est publié avec succès";
         header('location: ../views/etudiant/postuler_rapport.php');
     } 

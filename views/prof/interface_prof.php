@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once '../../securite.php';
+require_once '../../securiteprof.php';
 
 
 // var_dump($_SESSION['etd_niveau']);

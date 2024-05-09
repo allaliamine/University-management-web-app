@@ -15,12 +15,11 @@ class rapportModel {
     }
     
 
-    function fetch_module(){
+    function fetch_module($prof){
 
         global $conn;
         $query="SELECT * FROM module WHERE IdProf=?;";
         $stmt=$conn->prepare($query);
-        $prof=$_SESSION['prof'];
         $stmt->execute([$prof['IdProf']]);
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;

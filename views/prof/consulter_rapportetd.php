@@ -42,10 +42,9 @@ $rapports=$_SESSION['rapports'];
                         <div class="card">
                             <div class="card-body text-center">
                             <h5>Rapport: </h5>
-                            <?php $filename=$rapport['pdf_nom'];
-                            $path="../../uploads/".$filename.".pdf";
+                            <?php $path=$rapport['pdf_path'];
                             ?>
-                            <embed src=<?php $path ?> width="800px" height="2100px" />
+                            <a href="<?= $path; ?>" download>Download Here</a>
                             </div>
                         </div>
                         </div>
