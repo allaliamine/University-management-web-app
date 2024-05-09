@@ -179,13 +179,15 @@ if(isset($_GET['action'])){
 
 
         case 'noteetd':
-            require_once '../controller/etdnoteController.php';
-
-            
+            require_once '../controller/consulternoteController.php';
+            $etdnoteController=new consulternoteController();
+            $idetudiant=$_SESSION['etd']['IdEtudiant'];
+            echo $idetudiant;
+            $notes=$etdnoteController->fetch_note($idetudiant);
+            $_SESSION['notes']=$notes;
             header('location: ../views/etudiant/consulter_note.php');
             exit();
             break;
-
 
 
         default:

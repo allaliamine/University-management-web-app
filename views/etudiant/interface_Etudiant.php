@@ -46,7 +46,7 @@ require_once '../../securiteetd.php';
                    <h3>Cours</h3>
                </a>
 
-               <a href="../../routing/routing.php?action=noteted">
+               <a href="../../routing/routing.php?action=noteetd">
                    <span class="material-symbols-outlined">Group</span>
                    <h3>Notes</h3>
                </a>
