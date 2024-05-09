@@ -249,8 +249,6 @@ if(isset($_POST['importSubmit'])){
     } 
 } 
  
-// Redirect to the listing page 
-//header("Location: ../views/admin/publier_note.php"); 
 
 
 
@@ -347,6 +345,24 @@ if(isset($_POST['rapportpublier'])){
     $_SESSION['etat_rapport_fail'] = "Une erreur est survenue";
     header('location: ../views/etudiant/postuler_rapport.php');
 }
+
+
+if(isset($_POST['get_students'])){
+    require_once '../controller/absenceController.php';
+    session_start();
+    if(!empty($_POST['niveau']) && !empty($_POST['module'])){
+
+        $niveau = $_POST['niveau'];
+        $absnc = new absenceController();
+        $etds = $absnc->getAllStudentByNiveau($niveau);
+        $_SESSION['etd_niveau'] = $etds;
+
+        // var_dump($etds);
+
+        header('location: ../views/prof/faire_absencefn.php');
+    }
+}
+
 
 
 ?>
