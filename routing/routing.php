@@ -46,89 +46,84 @@ if(isset($_GET['action'])){
     switch ($action){
 
         case 'note':
-        require_once '../controller/noteController.php';
 
-        $majorController = new noteController();
-        $majors = $majorController->fetch_filier();
-        $levels = $majorController->fetch_niveau();
-        $modules=$majorController->fetch_module();
+            require_once '../controller/noteController.php';
 
-        $_SESSION['majors'] = $majors;
-        $_SESSION['levels'] = $levels;
-        $_SESSION['modules'] = $modules;
+            $majorController = new noteController();
+            $majors = $majorController->fetch_filier();
+            $levels = $majorController->fetch_niveau();
+            $modules=$majorController->fetch_module();
 
-        header("location: ../views/admin/publier_note.php");
-        exit();
-        break;
+            $_SESSION['majors'] = $majors;
+            $_SESSION['levels'] = $levels;
+            $_SESSION['modules'] = $modules;
+
+            header("location: ../views/admin/publier_note.php");
+            exit();
+            break;
         
     
 
         case 'add':
-        require_once '../controller/MajorController.php';
 
-        $majorController = new MajorController();
-        $majors = $majorController->getAllMajors();
-        $levels = $majorController->getAllLevels();
+            require_once '../controller/MajorController.php';
 
-        $_SESSION['majors'] = $majors;
-        $_SESSION['levels'] = $levels;
-        header("location: ../views/admin/ajout_etudiants.php");
-        exit();
-        break;
+            $majorController = new MajorController();
+            $majors = $majorController->getAllMajors();
+            $levels = $majorController->getAllLevels();
+
+            $_SESSION['majors'] = $majors;
+            $_SESSION['levels'] = $levels;
+            header("location: ../views/admin/ajout_etudiants.php");
+            exit();
+            break;
 
 
-        case 'rapportprof':
-        require_once '../controller/rapportController.php';
+            case 'rapportprof':
+            require_once '../controller/rapportController.php';
 
-        $moduleController = new rapportController();
-        $levels=$moduleController->fetch_niveau();
-        $modules=$moduleController->fetch_module();
+            $moduleController = new rapportController();
+            $levels=$moduleController->fetch_niveau();
+            $modules=$moduleController->fetch_module();
 
-        $_SESSION['levels'] = $levels;
-        $_SESSION['modules'] = $modules;
+            $_SESSION['levels'] = $levels;
+            $_SESSION['modules'] = $modules;
 
-        header("location: ../views/prof/rapport.php");
-        exit();
-        break;
+            header("location: ../views/prof/rapport.php");
+            exit();
+            break;
 
 
 
         case 'absenceprof':
       
-        require_once '../controller/MajorController.php';
-        require_once '../controller/absenceController.php';
+            require_once '../controller/MajorController.php';
+            require_once '../controller/absenceController.php';
 
-        $idprof = $_SESSION['prof']['IdProf'];
-        echo $idprof;
+            $idprof = $_SESSION['prof']['IdProf'];
 
-        $majorController = new MajorController();
-        echo "1  ";
-        $absenceController = new absenceController();
-        echo "2  ";
+            $majorController = new MajorController();
+            $absenceController = new absenceController();
 
-        $majors = $majorController->getAllMajors();
-        echo "3  ";
-        $levels = $majorController->getAllLevels();
-        echo "4  ";
-        $module = $absenceController->getModulesByIdprof($idprof);
-        echo "5  ";
+            $majors = $majorController->getAllMajors();
+            $levels = $majorController->getAllLevels();
+            $module = $absenceController->getModulesByIdprof($idprof);
+            
 
 
-        $_SESSION['majors'] = $majors;
-        echo "6  ";
-        $_SESSION['levels'] = $levels;
-        echo "7  ";
-        $_SESSION['prf_mdls'] = $module;
-        echo "8  ";
-        
+            $_SESSION['majors'] = $majors;
+            $_SESSION['levels'] = $levels;
+            $_SESSION['prf_mdls'] = $module;
+            
 
-        header('location: ../views/prof/faire_absence.php');
-        exit();
-        break;
+            header('location: ../views/prof/faire_absence.php');
+            exit();
+            break;
 
 
 
         case 'annonce':
+
             require_once '../controller/AnnonceController.php';  
     
             $annonceController = new AnnonceController();
@@ -143,6 +138,7 @@ if(isset($_GET['action'])){
             break;
 
         case 'consulterrapportprof':
+            
             require_once '../controller/rapportController.php';
 
             $moduleController = new rapportController();
@@ -155,6 +151,9 @@ if(isset($_GET['action'])){
             header("location: ../views/prof/consulter_rapport.php");
             exit();
             break;
+
+        case 'rapportetd':
+
 
         default:
         break;
@@ -338,6 +337,7 @@ if ( isset($_POST['rapportsubmit']) ) {
 
 if(isset($_POST['rapportpublier'])){
     session_start();
+
     include '../controller/postrapportController.php';
     $rapport_id = $_POST['rapport_id'];
     $filename = basename($_FILES["file"]["name"]);
@@ -369,13 +369,13 @@ if(isset($_POST['chercher_rapport'])){
     session_start();
     include '../controller/rapportController.php';
 
-    $module=$_POST['module'];
-    $id_prof=$_SESSION['prof']['IdProf'];
+    $module = $_POST['module'];
+    $id_prof = $_SESSION['prof']['IdProf'];
 
     $rapportController = new rapportController();
 
-    $id_rapport=$rapportController->fetch_idrapport($module,$id_prof);
-    $rapports=$rapportController->fetch_students($id_rapport);
+    $id_rapport = $rapportController->fetch_idrapport($module,$id_prof);
+    $rapports = $rapportController->fetch_students($id_rapport);
     $_SESSION['rapports']=$rapports;
     header('location: ../views/prof/consulter_rapportetd.php');
 }

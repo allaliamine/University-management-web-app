@@ -42,7 +42,7 @@
                    <h3>Notes</h3>
                </a>
 
-               <a href="../../routing/routing.php?action=rapportetd">
+               <a href="../etudiant/postuler_rapport.php">
                    <span class="material-symbols-outlined">Summarize</span>
                    <h3>Rapport</h3>
                </a>
