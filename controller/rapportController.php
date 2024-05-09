@@ -24,4 +24,14 @@ class rapportController{
     function upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite){
         $this->rapport_model->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
     }
+
+    function fetch_idrapport($module,$id_prof){
+        $result=$this->rapport_model->fetch_idrapport($module,$id_prof);
+        return $result;
+    }
+
+    function fetch_students($id_rapport){
+        $result=$this->rapport_model->fetch_students($id_rapport);
+        return $result;
+    }
 }
