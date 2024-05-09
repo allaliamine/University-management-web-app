@@ -82,6 +82,32 @@ if(isset($_GET['action'])){
         exit();
         break;
 
+        case 'rapportprof':
+        require_once '../controller/rapportController.php';
+
+        $moduleController = new rapportController();
+        $modules=$moduleController->fetch_module();
+
+        $_SESSION['modules'] = $modules;
+
+        header("location: ../views/prof/rapport.php");
+        exit();
+        break;
+
+
+        case 'rapportetd':
+        require_once '../controller/postrapportController.php';  
+
+        $postrapportController = new postrapportController();
+        $rapport = $postrapportController->fetch_rapport();
+
+        $_SESSION['rapport'] = $rapport;
+        
+        header('location: ../views/etudiant/postuler_rapport.php');
+        exit();
+        break;
+
+
         default:
         break;
     } 
@@ -145,6 +171,7 @@ if(isset($_GET['action'])){
 
 
  }
+
 
 //Pour ajouter les notes
 
@@ -237,15 +264,63 @@ if (isset($_POST['publier_annonce'])) {
 }
 
 
-  
+//Pour la publication d'annonce de rapport 
+
+if ( isset($_POST['rapportsubmit']) ) {
+    session_start();
+
+    include '../controller/rapportController.php';
+
+    $Descriptive = $_POST['textarea'];
+    $idProf=$_SESSION['prof']['IdProf'];
+    $IdNiveau =  $_POST['niveau'];
+    $idModule=$_POST['module'];
+    $Datelimite=$_POST['date'];
+
+    $rapportController = new rapportController();
+    $rapportController->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
+    
+    header('location: ../views/prof/rapport.php');
+    $_SESSION['etat_rapport_succes']="Votre anonce de rapport est publie avec succes";
+}else{
+    header('location: ../views/admin/rapport.php');
+    $_SESSION['etat_rapport_fail']="Un erreur est survenue";
+}
 
 
 
+//Publier rapport d'etudiant
 
 
+if(isset($_POST['rapportpublier'])){
+    session_start();
+    include '../controller/postrapportController.php';
+    $rapport_id = $_POST['rapport_id'];
+    $filename = basename($_FILES["file"]["name"]);
+    $tempfile = $_FILES["file"]["tmp_name"];
+    $folder = "../uploads/rapport/".$filename;
 
-
-
+  if($filename == ""){
+    $_SESSION['etat_rapport_fail'] = "Une erreur est survenue";
+    header('location: ../views/etudiant/postuler_rapport.php');
+  }else{
+    $postrapportController = new postrapportController();
+    if ($postrapportController->studentHasSubmittedFile($rapport_id)) {
+        $_SESSION['error'] = "Vous avez déjà soumis un fichier pour ce rapport.";
+        header('location: ../views/etudiant/postuler_rapport.php');
+        exit();
+    }
+    else{
+        move_uploaded_file($tempfile,$folder);
+        $postrapportController->upload_rapportetd($rapport_id, $filename);
+        $_SESSION['etat_rapport_succes'] = "Votre Rapport est publié avec succès";
+        header('location: ../views/etudiant/postuler_rapport.php');
+    } 
+  }
+}else {
+    $_SESSION['etat_rapport_fail'] = "Une erreur est survenue";
+    header('location: ../views/etudiant/postuler_rapport.php');
+}
 
 
 ?>
