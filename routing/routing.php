@@ -244,32 +244,6 @@ if(isset($_POST['importSubmit'])){
 //header("Location: ../views/admin/publier_note.php"); 
 
 
-//Pour ajouter rapport prof
-
-if(isset($_POST['rapportsubmit'])){ 
-
-    session_start();
-    require_once '../controller/rapportController.php';
-
-    $Descriptive=$_POST['textarea'];
-    $Datelimite=$_POST['date'];
-    $idProf=$_SESSION['prof']['IdProf'];
-    $IdNiveau=$_POST['niveau'];
-    $idModule=$_POST['module'];
-
-    $rapportController = new rapportController();
-    $rapportController->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
-
-    header('location: ../views/prof/rapport.php');
-
-    $_SESSION['etat_rapport_succes']='Le rapport est publie avec succes';
-    
-}else{
-    header('location: ../views/prof/rapport.php');
-    $_SESSION['etat_rapport_fail']='Un erreur est survenue';
-} 
- 
-
 
 /** FOR THE PUBLISH ANNOUNCEMENT */
 
@@ -303,7 +277,7 @@ if (isset($_POST['publier_annonce'])) {
 }
 
 
-//Pour la publication d'annonce de rapport 
+//Pour la publication d'annonce de rapport de prof
 
 if ( isset($_POST['rapportsubmit']) ) {
     session_start();
