@@ -131,13 +131,23 @@ if(isset($_GET['action'])){
             header('location: ../views/admin/publier_annonce.php');
             exit();
             break;
-    
+
+        case 'consulterrapportprof':
+            require_once '../controller/rapportController.php';
+
+            $moduleController = new rapportController();
+            $levels=$moduleController->fetch_niveau();
+            $modules=$moduleController->fetch_module();
+
+            $_SESSION['levels'] = $levels;
+            $_SESSION['modules'] = $modules;
+
+            header("location: ../views/prof/consulter_rapport.php");
+            exit();
+            break;
 
         default:
         break;
-
-
-
 
 
     } 
@@ -306,9 +316,6 @@ if ( isset($_POST['rapportsubmit']) ) {
     
     header('location: ../views/prof/rapport.php');
     $_SESSION['etat_rapport_succes']="Votre anonce de rapport est publie avec succes";
-}else{
-    header('location: ../views/admin/rapport.php');
-    $_SESSION['etat_rapport_fail']="Un erreur est survenue";
 }
 
 
@@ -341,11 +348,9 @@ if(isset($_POST['rapportpublier'])){
         header('location: ../views/etudiant/postuler_rapport.php');
     } 
   }
-}else {
-    $_SESSION['etat_rapport_fail'] = "Une erreur est survenue";
-    header('location: ../views/etudiant/postuler_rapport.php');
 }
 
+//afficher la liste des etudiants pour l'abscence 
 
 if(isset($_POST['get_students'])){
     require_once '../controller/absenceController.php';
@@ -363,7 +368,22 @@ if(isset($_POST['get_students'])){
     }
 }
 
+//Consulter les rapports prof
 
+if(isset($_POST['chercher_rapport'])){
+    session_start();
+    include '../controller/rapportController.php';
+
+    $module=$_POST['module'];
+    $id_prof=$_SESSION['prof']['IdProf'];
+
+    $rapportController = new rapportController();
+
+    $id_rapport=$rapportController->fetch_idrapport($module,$id_prof);
+    $rapports=$rapportController->fetch_students($id_rapport);
+    $_SESSION['rapports']=$rapports;
+    header('location: ../views/prof/consulter_rapportetd.php');
+}
 
 ?>
 
