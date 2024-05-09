@@ -38,7 +38,7 @@
                    <h3>Publier Notes</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=annonce">
                    <span class="material-symbols-outlined">Summarize</span>
                    <h3>Publier Annonces</h3>
                </a>
