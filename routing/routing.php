@@ -380,6 +380,75 @@ if(isset($_POST['chercher_rapport'])){
     header('location: ../views/prof/consulter_rapportetd.php');
 }
 
+//afficher la liste des etudiants pour l'abscence 
+
+if(isset($_POST['get_students'])){
+    require_once '../controller/absenceController.php';
+    session_start();
+    if(!empty($_POST['niveau']) && !empty($_POST['module'])){
+
+        $niveau = $_POST['niveau'];
+        $module = $_POST['module'];
+        $idprof = $_SESSION['prof']['IdProf'];
+
+        $absnc = new absenceController();
+        $isDone = $absnc->isAbsenceAlreadyDone($idprof,$module);
+
+        if(!$isDone){
+
+            $_SESSION['abs_nv'] = $niveau;
+            $_SESSION['abs_mdl'] = $module;
+
+            $etds = $absnc->getAllStudentByNiveau($niveau);
+            $_SESSION['etd_niveau'] = $etds;
+
+            // var_dump($etds);
+
+            header('location: ../views/prof/faire_absencefn.php');
+        }else{
+            $_SESSION['abs_done_already'] = "l'absence est deja fait pour ce module aujourdui! a Demain";
+            header('location: ../views/prof/faire_absence.php');
+        }
+    }
+}
+
+
+
+/*pour faire l'absence*/
+if(isset($_POST['faire_absence'])){
+    session_start();
+
+    require_once '../controller/absenceController.php';
+
+
+    $absence = new absenceController();
+
+    $absLevel = $_SESSION['abs_nv'];
+    $absModule =  $_SESSION['abs_mdl'];
+    $idprof = $_SESSION['prof']['IdProf'];
+
+    $etd_absente = $_POST['etd_absc'];
+    echo $absLevel;
+
+    foreach($etd_absente as $etd){
+        $etd = (int)$etd;
+
+        try{
+            $absence->insertAbsence($idprof,$etd,$absModule);
+            $_SESSION['abs_success'] = "les absence on ete bien ajouter";
+        }
+        catch(PDOException $e){
+            $_SESSION['abs_error'] = "une erreur est survenu!! re-faire l'absence stp";
+        }
+        
+    }
+
+    header('location: ../views/prof/faire_absence.php');
+
+
+
+    
+}
 
 
 

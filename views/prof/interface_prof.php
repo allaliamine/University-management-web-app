@@ -234,7 +234,7 @@ require_once '../../securite.php';
                                     <div class="col m-2">
                                         <div>
                                             <a class="text-primary" href="../../routing/routing.php?action=consulterrapportprof" style="text-decoration: none;">
-                                                Acceder au Cours 
+                                                Consulter Rapport 
                                             </a>
                                         </div>
                                     </div>
