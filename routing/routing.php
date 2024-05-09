@@ -466,10 +466,7 @@ if ( isset($_POST['rapportsubmit']) ) {
     header('location: ../views/prof/rapport.php');
     $_SESSION['etat_rapport_succes']="Votre anonce de rapport est publie avec succes";
 }
-// else{
-//     header('location: ../views/prof/rapport.php');
-//     $_SESSION['etat_rapport_fail']="Un erreur est survenue";
-// }
+
 
 
 
