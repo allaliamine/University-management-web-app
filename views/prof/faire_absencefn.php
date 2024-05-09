@@ -19,7 +19,7 @@ $etudiants = $_SESSION['etd_niveau'];
 <body>
 
     <div class="card col-xl-8 offset-3 mt-5 overflow-scroll">
-        <div class="card-header">Formulaire d'absence</div>
+        <div class="card-header">Formulaire d'absence (<?=date("Y-m-d");?>)</div>
         <div class="card-body">
             <form action="../../routing/routing.php" method="post" class="form">
                 

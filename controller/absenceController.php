@@ -1,6 +1,6 @@
 <?php
 
-require_once '../model/ProfModel.php';
+require_once '../model/ProfAbsenceModel.php';
 
 class absenceController{
 
@@ -27,10 +27,26 @@ class absenceController{
     }
 
 
-    // public function
+    public function insertAbsence($prof,$etudiant,$module){
+        $duree = 2;
+        $date = date("Y-m-d");
+
+        $this->profModel->insertAbsence($duree, $date,$prof,$etudiant,$module);
+    }
 
 
 
+    public function isAbsenceAlreadyDone($prof,$module){
+        $date = date("Y-m-d");
+        $res = $this->profModel->isAbsenceAlreadyDone($date,$prof,$module);
+
+        if($res){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
 }
 

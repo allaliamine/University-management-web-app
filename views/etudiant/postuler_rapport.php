@@ -17,7 +17,7 @@ $rapports=$_SESSION['rapport'];
     <link rel="stylesheet" href="style_Etudiant.css">
 </head>
 <body>
-    <div class="card col-xl-8 offset-3" style="height: 10px;">
+    <div class="card col-xl-8 offset-3 mt-5" style="height: 10px;">
         <?php if(isset($_SESSION['etat_rapport_succes'])) {?>
             <div class="alert alert-success d-flex align-items-center" role="alert">
                 <div>
@@ -47,7 +47,7 @@ $rapports=$_SESSION['rapport'];
     <div class="container mt-5" >
         <div class="row">
             <div class="col-xl-10 offset-2">
-                <div class="card">
+                <div class="card mt-5">
                     <div class="card-header">Les Annonces de Rapport : </div>
                     <div class="card-body">
                         <?php

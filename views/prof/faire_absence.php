@@ -49,6 +49,38 @@ $module = $_SESSION['prf_mdls'] ;
 
             </form>
             
+            <!-- si absence est deja fait -->
+            <?php if(isset($_SESSION['abs_done_already'])) {?>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['abs_done_already'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['abs_done_already']); ?>
+            <?php } ?>
+
+
+            <!-- si absence est bien traite -->
+            <?php if(isset($_SESSION['abs_success'])) {?>
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['abs_success'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['abs_success']); ?>
+            <?php } ?>
+
+
+            <!-- si absence n'est pas traiter -->
+            <?php if(isset($_SESSION['abs_error'])) {?>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['abs_error'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['abs_error']); ?>
+            <?php } ?>
+            
         </div>
     </div>
 

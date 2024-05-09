@@ -3,6 +3,8 @@
 session_start();
 require_once '../../securite.php';
 
+
+// var_dump($_SESSION['etd_niveau']);
 ?>
 
 <html lang="en">

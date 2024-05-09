@@ -6,10 +6,6 @@ require_once '../../securite.php';
 
 ?>
 
-
-
-
-
 <html lang="en">
 <head>
     <title>Edu-Net</title>
