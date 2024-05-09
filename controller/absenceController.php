@@ -18,6 +18,17 @@ class absenceController{
         return $modules;
     }
 
+    public function getAllStudentByNiveau($idniveau){
+
+        $students = $this->profModel->getAllStudentByNiveau($idniveau);
+
+        return $students;
+
+    }
+
+
+    // public function
+
 
 
 

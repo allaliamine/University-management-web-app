@@ -6,6 +6,8 @@ include '../../includes/sidebar_prof.php';
 
 $levels = $_SESSION['levels'] ;
 $module = $_SESSION['prf_mdls'] ;
+
+// var_dump($module);
 ?>
 
 
@@ -36,14 +38,12 @@ $module = $_SESSION['prf_mdls'] ;
                 </div>
 
                 <div class="form-group mb-4">
-                    <label>module</label>
+                    <label>Module</label>
                     <select name="module" id="module" class="form-control" required>
                         <option value=""></option>
-                        <?php foreach($module as $mdl) { ?>
-                        <option value="<?= $mdl['IdModule']; ?>"><?= $mdl['Intitule'];?> </option>
-                        <?php } ?>
                     </select>
                 </div>
+
 
                 <input type="submit" name="get_students" id="bouton" class="btn btn-primary" value="acceder">
 
@@ -51,6 +51,32 @@ $module = $_SESSION['prf_mdls'] ;
             
         </div>
     </div>
+
+    <script>
+    //Javascript show modules based on niveau
+    document.addEventListener("DOMContentLoaded", function() {
+        var niveauSelect = document.getElementById('niveau');
+        var moduleSelect = document.getElementById('module');
+        
+        niveauSelect.addEventListener('change', function() {
+            var niveauId = niveauSelect.value;
+            
+            // Clear previous options
+            moduleSelect.innerHTML = '<option value=""></option>';
+            
+            // Add new options based on the selected niveau
+            <?php foreach($module as $mdl) { ?>
+                if (<?= $mdl['IdNiveau']; ?> == niveauId) {
+                    var option = document.createElement('option');
+                    option.value = <?= $mdl['IdModule']; ?>;
+                    option.textContent = '<?= $mdl['Intitule']; ?>';
+                    moduleSelect.appendChild(option);
+                }
+            <?php } ?>
+        });
+    });
+
+    </script>
 
         
 </body>

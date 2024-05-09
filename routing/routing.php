@@ -89,18 +89,27 @@ if(isset($_GET['action'])){
         require_once '../controller/absenceController.php';
 
         $idprof = $_SESSION['prof']['IdProf'];
+        echo $idprof;
 
         $majorController = new MajorController();
+        echo "1  ";
         $absenceController = new absenceController();
+        echo "2  ";
 
         $majors = $majorController->getAllMajors();
+        echo "3  ";
         $levels = $majorController->getAllLevels();
+        echo "4  ";
         $module = $absenceController->getModulesByIdprof($idprof);
+        echo "5  ";
 
 
         $_SESSION['majors'] = $majors;
+        echo "6  ";
         $_SESSION['levels'] = $levels;
+        echo "7  ";
         $_SESSION['prf_mdls'] = $module;
+        echo "8  ";
         
 
         header('location: ../views/prof/faire_absence.php');
@@ -239,8 +248,6 @@ if(isset($_POST['importSubmit'])){
     } 
 } 
  
-// Redirect to the listing page 
-//header("Location: ../views/admin/publier_note.php"); 
 
 
 //Pour ajouter rapport prof
@@ -264,7 +271,7 @@ if(isset($_POST['rapportsubmit'])){
     $_SESSION['etat_rapport_succes']='Le rapport est publie avec succes';
     
 }else{
-    header('location: ../views/prof/rapport.php');
+    // header('location: ../views/prof/rapport.php');
     $_SESSION['etat_rapport_fail']='Un erreur est survenue';
 } 
  
@@ -306,4 +313,24 @@ if (isset($_POST['publier_annonce'])) {
 }
 
 
+if(isset($_POST['get_students'])){
+    require_once '../controller/absenceController.php';
+    session_start();
+    if(!empty($_POST['niveau']) && !empty($_POST['module'])){
 
+        $niveau = $_POST['niveau'];
+        $absnc = new absenceController();
+        $etds = $absnc->getAllStudentByNiveau($niveau);
+        $_SESSION['etd_niveau'] = $etds;
+
+        // var_dump($etds);
+
+        header('location: ../views/prof/faire_absencefn.php');
+    }
+}
+
+
+
+if(isset($_POST['faire_absence'])){
+    
+}
