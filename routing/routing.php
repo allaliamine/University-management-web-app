@@ -78,8 +78,21 @@ if(isset($_GET['action'])){
             exit();
             break;
 
+        case 'remove':
+            require_once "../controller/deleteStudentController.php";
 
-            case 'rapportprof':
+            $deleteStudentController = new deleteStudentController();
+
+            $fieldLevel = $deleteStudentController->FieldLevel();
+
+            $_SESSION['FieldLevel'] = $fieldLevel;
+
+            header('location: ../views/admin/deleteStudent.php');
+            exit();
+            break;
+
+
+        case 'rapportprof':
             require_once '../controller/rapportController.php';
 
             $prof=$_SESSION['prof'];
@@ -326,6 +339,113 @@ if (isset($_POST['publier_annonce'])) {
    
 }
 
+/**
+ * pour avoir les etudiants de niveau:
+ */
+
+if (isset($_GET['niveau']) && isset($_GET['filiere']) && isset($_GET['idniveau'])) {
+    session_start();
+
+    $filiere = $_GET['filiere'];
+    $niveau = $_GET['niveau'];
+    $idniveau = $_GET['idniveau'];
+
+    $_SESSION['rt_fil'] = $filiere;
+    $_SESSION['rt_nv'] = $niveau;
+    $_SESSION['rt_idnv'] = $idniveau;
+
+    require_once "../controller/deleteStudentController.php";
+
+    $deleteStudentController = new deleteStudentController();
+
+    $studentByLevel = $deleteStudentController->StudentByLevel($idniveau);
+
+    $_SESSION['studentByLevel'] = $studentByLevel;
+
+    header('location: ../views/admin/affichListEtud.php');
+}
+
+
+/**
+ * la barre de recherche:
+ */
+if(isset($_POST['search'])){
+    session_start();
+
+    $cin = $_POST['cin'];
+
+    unset($_SESSION['studentByLevel']);
+
+    require_once "../controller/deleteStudentController.php";
+
+    $deleteStudentController = new deleteStudentController();
+
+    $studentByCin = $deleteStudentController->getStudentByCin($cin);
+
+    $_SESSION['studentByCin'] = $studentByCin;
+
+    header('location: ../views/admin/affichListEtud.php');
+
+}
+
+/**
+ * activer le compte:
+ */
+if(isset($_POST["activer"])){
+
+    if(isset($_POST['idEtudiant'])) {
+
+        session_start();
+
+        $idetud = $_POST['idEtudiant'];
+
+        require_once "../controller/deleteStudentController.php";
+
+        $deleteStudentController = new deleteStudentController();
+
+        try{
+        $res = $deleteStudentController->activateAccount($idetud);
+            $_SESSION['success-actif']='Ce compte est desactive/active avec success';
+        }catch(PDOException){
+            $_SESSION['error-actif']='un erreur se produit , veuillez repeter l\'operation lterieuremnt';
+        }
+
+        $studentByLevel = $deleteStudentController->StudentByLevel($_SESSION['rt_idnv']);
+
+        $_SESSION['studentByLevel'] = $studentByLevel;
+
+        header('location: ../views/admin/affichListEtud.php');
+    }
+}
+
+if(isset($_POST["desactiver"])){
+
+    if(isset($_POST['idEtudiant'])){
+
+        session_start();
+
+        $idetud = $_POST['idEtudiant'];
+
+        require_once "../controller/deleteStudentController.php";
+
+        $deleteStudentController = new deleteStudentController();
+
+        try{
+            $deleteStudentController->desactivateAccount($idetud);
+            $_SESSION['success-actif']='Ce compte est desactive/active  avec success';
+        }catch(PDOException){
+            $_SESSION['error-actif']='un erreur se produit , veuillez repeter l\'operation lterieuremnt';
+        }
+
+        $studentByLevel = $deleteStudentController->StudentByLevel($_SESSION['rt_idnv']);
+
+        $_SESSION['studentByLevel'] = $studentByLevel;
+
+        header('location: ../views/admin/affichListEtud.php');
+    }
+}
+
+
 
 //Pour la publication d'annonce de rapport de prof
 
@@ -345,10 +465,11 @@ if ( isset($_POST['rapportsubmit']) ) {
     
     header('location: ../views/prof/rapport.php');
     $_SESSION['etat_rapport_succes']="Votre anonce de rapport est publie avec succes";
-}else{
-    header('location: ../views/prof/rapport.php');
-    $_SESSION['etat_rapport_fail']="Un erreur est survenue";
 }
+// else{
+//     header('location: ../views/prof/rapport.php');
+//     $_SESSION['etat_rapport_fail']="Un erreur est survenue";
+// }
 
 
 

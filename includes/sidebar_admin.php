@@ -53,7 +53,7 @@
                    <h3>Ajouter Etudiants</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=remove">
                    <span class="material-symbols-outlined">group_remove</span>
                    <h3>Retrancher Etudiants</h3>
                </a>
