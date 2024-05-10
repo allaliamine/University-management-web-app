@@ -188,7 +188,25 @@ if(isset($_GET['action'])){
             header('location: ../views/etudiant/consulter_note.php');
             exit();
             break;
+        
+        case 'cours':
+            require_once '../controller/CoursController.php';
+            require_once '../controller/rapportController.php';
 
+            $coursController = new CoursController();
+            $moduleController = new rapportController();
+
+            $prof=$_SESSION['prof'];
+            $levels=$moduleController->fetch_niveau();
+            $modules=$moduleController->fetch_module($prof);
+
+            $_SESSION['levels'] = $levels;
+            $_SESSION['modules'] = $modules;
+
+            header('location: ../views/prof/publier_cours.php');
+            exit();
+            break;
+        
 
         default:
         break;
@@ -578,6 +596,7 @@ if(isset($_POST['faire_absence'])){
         try{
             $absence->insertAbsence($idprof,$etd,$absModule);
             $_SESSION['abs_success'] = "les absence on ete bien ajouter";
+
         }
         catch(PDOException $e){
             $_SESSION['abs_error'] = "une erreur est survenu!! re-faire l'absence stp";
@@ -588,12 +607,39 @@ if(isset($_POST['faire_absence'])){
     header('location: ../views/prof/faire_absence.php');
 
 
-
-    
 }
 
+/**
+ *  Publier cours pour Prof 
+ */
+
+ if(isset($_POST["publierCours"])){
+    session_start();
+    require_once '../controller/CoursController.php';
+    
+    $file_name = $_FILES['cours']['name'];  
+    $file_tmp = $_FILES['cours']['tmp_name']; 
+    $destination = "../uploads/CoursProf/". basename($file_name);
+
+    if (move_uploaded_file($file_tmp, $destination)){
 
 
+    $IdNiveau =  $_POST['niveau'];
+    $idModule=$_POST['module'];
+    $type=$_POST['type'];
+    $idprof = $_SESSION['prof']['IdProf'];
+    
+    $coursController = new CoursController();
+    $inser=$coursController -> insertcours($file_name ,$type , $idprof, $IdNiveau);
+
+    $_SESSION['etat_cours_success'] = "Votre Cours est publié avec succès";
+    header('location: ../views/prof/publier_cours.php');
+ }
+    
+        }
+
+     
+ 
 
 
 ?>
