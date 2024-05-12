@@ -48,6 +48,21 @@ class absenceController{
 
     }
 
+    public function getStudentWithAbsence($niveau){
+        $res = $this->profModel->getStudentWithAbsence($niveau);
+
+        return $res;
+    }
+
+
+
+    public function getAbsenceOfStudent($module , $etudiant){
+       
+        $res = $this->profModel->getAbsenceOfStudent($module , $etudiant);
+
+        return $res;
+    }
+
 }
 
 

@@ -52,7 +52,7 @@ $levels = $_SESSION['levels'];
                     <hr>
                    <div class="form-check">
                                 
-                            <input class="form-check-input" type="checkbox" value="0" name="check_list">
+                            <input class="form-check-input" type="checkbox" value="0" name="check_list" id="toutes_filieres">
                                 
                             <label class="form-check-label">
                                 Toutes les Filieres 
@@ -61,6 +61,16 @@ $levels = $_SESSION['levels'];
                         </div>
 
               </div>
+
+                <script>
+                    document.getElementById('toutes_filieres').addEventListener('change', function() {
+                        var checkboxes = document.querySelectorAll('input[name="check_list[]"]');
+                        checkboxes.forEach(function(checkbox) {
+                            checkbox.disabled = this.checked;
+                            checkbox.checked = !this.checked;
+                        }, this);
+                    });
+                </script>
                      
                     <!----  importerfile---> 
                     <div class="form-group mb-4">

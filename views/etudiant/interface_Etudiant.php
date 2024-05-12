@@ -41,7 +41,7 @@ require_once '../../securiteetd.php';
                </a>
                 
 
-               <a href="#" >
+               <a href="../../routing/routing.php?action=getAllCours&etape=1" >
                    <span class="material-symbols-outlined">menu_book</span>
                    <h3>Cours</h3>
                </a>

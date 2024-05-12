@@ -24,7 +24,7 @@ if ( isset($_POST['submit']) ) {
 
 
 /**
- * pour avoir les filieres et les niveaux
+ * redirection est recuperation des donnees pour les champs de sidebar(etd, prf, admin)
  */
 if(isset($_GET['action'])){
 
@@ -32,20 +32,9 @@ if(isset($_GET['action'])){
 
     $action = $_GET['action'];
 
-    // foreach($_SESSION as $key => $val){
-
-    //     if ($key != 'prof' || $key != 'etd' || $key != 'admin' || $key != 'success'){
-
-    //         unset($_SESSION[$key]);
-
-    //     }
-
-    // }
-
-
     switch ($action){
 
-        case 'note':
+        case 'note': /* publier note pour prof */
 
             require_once '../controller/noteController.php';
 
@@ -64,7 +53,7 @@ if(isset($_GET['action'])){
         
     
 
-        case 'add':
+        case 'add': /* ajouter etd admin */
 
             require_once '../controller/MajorController.php';
 
@@ -78,7 +67,7 @@ if(isset($_GET['action'])){
             exit();
             break;
 
-        case 'remove':
+        case 'remove':/* desactive compte des etds */
             require_once "../controller/deleteStudentController.php";
 
             $deleteStudentController = new deleteStudentController();
@@ -92,7 +81,7 @@ if(isset($_GET['action'])){
             break;
 
 
-        case 'rapportprof':
+        case 'rapportprof': /* publier un nv rapport pour prof */
             require_once '../controller/rapportController.php';
 
             $prof=$_SESSION['prof'];
@@ -109,7 +98,7 @@ if(isset($_GET['action'])){
 
 
 
-        case 'absenceprof':
+        case 'absenceprof': /* faire et consulter l'absence */
       
             require_once '../controller/MajorController.php';
             require_once '../controller/absenceController.php';
@@ -128,15 +117,20 @@ if(isset($_GET['action'])){
             $_SESSION['majors'] = $majors;
             $_SESSION['levels'] = $levels;
             $_SESSION['prf_mdls'] = $module;
-            
 
-            header('location: ../views/prof/faire_absence.php');
-            exit();
-            break;
+            if($_GET['id'] == 'faire'){
+                header('location: ../views/prof/faire_absence.php');
+                exit();
+                break;
+            }elseif($_GET['id'] == 'voir'){ 
+                header('location: ../views/prof/get_students.php');
+                exit();
+                break;
+            }
 
 
 
-        case 'annonce':
+        case 'annonce': /* publier annonce pour admin */
 
             require_once '../controller/AnnonceController.php';  
     
@@ -151,7 +145,7 @@ if(isset($_GET['action'])){
             exit();
             break;
 
-        case 'consulterrapportprof':
+        case 'consulterrapportprof': /* consulter les rapport prof*/
             
             require_once '../controller/rapportController.php';
 
@@ -167,7 +161,7 @@ if(isset($_GET['action'])){
             exit();
             break;
 
-        case 'rapportetd':
+        case 'rapportetd': /* etd : consulter les rapport et les postuler */
             require_once '../controller/postrapportController.php';
 
             $postrapportController= new postrapportController();
@@ -178,7 +172,7 @@ if(isset($_GET['action'])){
             break;
 
 
-        case 'noteetd':
+        case 'noteetd': /* etd : consulter les notes */
             require_once '../controller/consulternoteController.php';
             $etdnoteController=new consulternoteController();
             $idetudiant=$_SESSION['etd']['IdEtudiant'];
@@ -189,7 +183,7 @@ if(isset($_GET['action'])){
             exit();
             break;
         
-        case 'cours':
+        case 'cours': /* publier les couurs prof*/
             require_once '../controller/CoursController.php';
             require_once '../controller/rapportController.php';
 
@@ -206,7 +200,77 @@ if(isset($_GET['action'])){
             header('location: ../views/prof/publier_cours.php');
             exit();
             break;
+
+        case 'details': /* avoir les details des absence prof */
+
+            require_once '../controller/absenceController.php';
+
+            $id = $_GET['id'];
+            var_dump($_SESSION['abs_mdl']);
+            $module =  $_SESSION['abs_mdl'];
+
+            echo $module;
+
+            $etd = new absenceController();
+
+            $details = $etd->getAbsenceOfStudent($module, $id);
+            if(!empty($details)){
+                $_SESSION['details'] = $details;
+            }else{
+                $_SESSION['details_message_shown']= "pas de d'absence donc pas de details !";
+            }
+
+            header('location: ../views/prof/get_studentsfn.php');
+
+            exit();
+            break;
+
+
+        case 'archiverCours': 
+            require_once '../controller/CoursController.php';
+            require_once '../controller/rapportController.php';
+
+            $coursController = new CoursController();
+            $moduleController = new rapportController();
+
+            $prof=$_SESSION['prof'];
+            $levels=$moduleController->fetch_niveau();
+            $modules=$moduleController->fetch_module($prof);
+
+            $_SESSION['levels'] = $levels;
+            $_SESSION['modules'] = $modules;
+
+            header('location: ../views/prof/get_cours.php');
+            exit();
+            break;
+
+
+
+        case 'getAllCours':
         
+            require_once '../controller/CoursController.php';
+            $coursController = new CoursController();
+
+            $idniveau = $_SESSION['etd']['IdNiveau'];
+
+            if($_GET['etape'] == 1){
+                $moduleOfniveau = $coursController->getModulesByniveau($idniveau);
+
+                $_SESSION['lvl_mdls']= $moduleOfniveau;
+                header('location: ../views/etudiant/consulter_cours.php');
+
+            }elseif($_GET['etape'] == 2){
+
+                $idmodule = $_GET['id'];
+                echo $idmodule;
+                $etu_cours = $coursController->getCoursForStudent($idmodule);
+                $_SESSION['etu_cours'] = $etu_cours;
+
+                header('location: ../views/etudiant/consulter_coursfn.php');
+
+            }            
+           
+            
 
         default:
         break;
@@ -360,7 +424,7 @@ if (isset($_POST['publier_annonce'])) {
 }
 
 /**
- * pour avoir les etudiants de niveau:
+ * pour avoir les etudiants de niveau (retrancher etd ):
  */
 
 if (isset($_GET['niveau']) && isset($_GET['filiere']) && isset($_GET['idniveau'])) {
@@ -387,7 +451,7 @@ if (isset($_GET['niveau']) && isset($_GET['filiere']) && isset($_GET['idniveau']
 
 
 /**
- * la barre de recherche:
+ * la barre de recherche (dans retrancher etd ):
  */
 if(isset($_POST['search'])){
     session_start();
@@ -409,7 +473,7 @@ if(isset($_POST['search'])){
 }
 
 /**
- * activer le compte:
+ * activer/desactiver le compte:
  */
 if(isset($_POST["activer"])){
 
@@ -467,7 +531,7 @@ if(isset($_POST["desactiver"])){
 
 
 
-//Pour la publication d'annonce de rapport de prof
+//Pour la publication de rapport de prof
 
 if ( isset($_POST['rapportsubmit']) ) {
     session_start();
@@ -490,7 +554,7 @@ if ( isset($_POST['rapportsubmit']) ) {
 
 
 
-//Publier rapport d'etudiant
+//Publier soumettre le rapport d'etudiant
 
 
 if(isset($_POST['rapportpublier'])){
@@ -500,7 +564,7 @@ if(isset($_POST['rapportpublier'])){
     $rapport_id = $_POST['rapport_id'];
     $filename = basename($_FILES["file"]["name"]);
     $tempfile = $_FILES["file"]["tmp_name"];
-    $folder = "../../uploads/rapport/".$filename;
+    $folder = "../uploads/rapport/".$filename;
 
   if($filename == ""){
     $_SESSION['etat_rapport_fail'] = "Une erreur est survenue";
@@ -523,7 +587,7 @@ if(isset($_POST['rapportpublier'])){
   }
 }
 
-//Consulter les rapports prof
+//Consulter les rapports des etudiants par le prof
 
 if(isset($_POST['chercher_rapport'])){
     session_start();
@@ -540,7 +604,7 @@ if(isset($_POST['chercher_rapport'])){
     header('location: ../views/prof/consulter_rapportetd.php');
 }
 
-//afficher la liste des etudiants pour l'abscence 
+//afficher la liste des etudiants pour faire l'abscence 
 
 if(isset($_POST['get_students'])){
     require_once '../controller/absenceController.php';
@@ -570,6 +634,33 @@ if(isset($_POST['get_students'])){
             header('location: ../views/prof/faire_absence.php');
         }
     }
+}
+
+
+//afficher la liste des etudiants pour la consultation (prof)
+
+if(isset($_POST['consulteStudent'])){
+    require_once '../controller/absenceController.php';
+    session_start();
+
+    if(!empty($_POST['niveau']) && !empty($_POST['module'])){
+
+        $niveau = $_POST['niveau'];
+        $module = $_POST['module'];
+
+
+        $consulte = new absenceController();
+       
+
+        $_SESSION['abs_nv'] = $niveau;
+        $_SESSION['abs_mdl'] = $module;
+        $etds = $consulte->getStudentWithAbsence($niveau);
+        $_SESSION['etd_niveau'] = $etds;
+        // var_dump($etds);
+
+        header('location: ../views/prof/get_studentsfn.php');
+    }
+
 }
 
 
@@ -623,21 +714,102 @@ if(isset($_POST['faire_absence'])){
 
     if (move_uploaded_file($file_tmp, $destination)){
 
+        $IdNiveau =  $_POST['niveau'];
+        $idModule = $_POST['module'];
+        $type=$_POST['type'];
+        $idprof = $_SESSION['prof']['IdProf'];
+        $coursController = new CoursController();
+        $inser=$coursController->insertcours($file_name ,$type, $idprof, $IdNiveau, $idModule);
 
-    $IdNiveau =  $_POST['niveau'];
-    $idModule=$_POST['module'];
-    $type=$_POST['type'];
-    $idprof = $_SESSION['prof']['IdProf'];
+        $_SESSION['etat_cours_success'] = "Votre Cours est publié avec succès";
+        header('location: ../views/prof/publier_cours.php');
+    }
     
-    $coursController = new CoursController();
-    $inser=$coursController -> insertcours($file_name ,$type , $idprof, $IdNiveau);
+}
 
-    $_SESSION['etat_cours_success'] = "Votre Cours est publié avec succès";
-    header('location: ../views/prof/publier_cours.php');
- }
-    
-        }
 
+
+/* avoir tous les cours pour les archiver/desarchiver */
+if(isset($_POST['getCours'])){
+
+    if(!empty($_POST['niveau']) && !empty($_POST['module'])){
+        session_start();
+
+        require_once '../controller/CoursController.php';
+
+
+        $IdNiveau =  $_POST['niveau'];
+        $idModule = $_POST['module'];
+        $idprof = $_SESSION['prof']['IdProf'];
+
+        $_SESSION['archive_niveau'] = $IdNiveau;
+        $_SESSION['archive_module'] = $idModule;
+        $_SESSION['archive_prof'] = $idprof;
+
+        $coursController = new CoursController();
+        $cours = $coursController->getAllCours($idprof,$IdNiveau,$idModule);
+
+        $_SESSION['cours']= $cours;
+
+        header('location: ../views/prof/archiver_cours.php');
+
+
+
+
+    }
+}
+
+
+
+/* pour archiver / desarchiver un cours */
+if(isset($_GET['operation'])){
+    session_start();
+
+    $operation = $_GET['operation'];
+    $idcour = $_GET['id'];
+
+    require_once '../controller/CoursController.php';
+    $archive = new CoursController();
+
+    switch($operation){
+
+        case 'archiver':
+
+            try{
+                $archive->archiverCours($idcour);
+                $_SESSION['archive_success'] = "l'element a ete archiver/desarchiver avec succes";
+            }catch(PDOException){
+                $_SESSION['archive_error'] = "Ops erreur lors de l'operation";
+            }
+
+            $cours = $archive->getAllCours($_SESSION['archive_prof'],$_SESSION['archive_niveau'],$_SESSION['archive_module']);
+            $_SESSION['cours']= $cours;
+
+            header('location: ../views/prof/archiver_cours.php');
+
+
+            exit();
+            break;
+
+        case 'desarchiver':
+
+            echo "desar";
+            try{
+                $archive->desarchiverCours($idcour);
+                $_SESSION['archive_success'] = "l'element a ete archiver/desarchiver avec succes";
+            }catch(PDOException){
+                $_SESSION['archive_error'] = "Ops erreur lors de l'operation";
+            }
+
+            $cours = $archive->getAllCours($_SESSION['archive_prof'],$_SESSION['archive_niveau'],$_SESSION['archive_module']);
+            $_SESSION['cours']= $cours;
+
+            header('location: ../views/prof/archiver_cours.php');
+
+            exit();
+            break;
+    }
+}
      
  
 

@@ -52,6 +52,32 @@ class ProfModel{
     }
 
 
+    public function getStudentWithAbsence($niveau){
+
+        global $conn;
+
+        $req = $conn->prepare('SELECT e.IdEtudiant, e.Nom, e.Prenom, e.CNE, COUNT(a.IdAbscence) AS NombreAbsences FROM Etudiant e LEFT JOIN Abscence a ON e.IdEtudiant = a.IdEtudiant WHERE e.IdNiveau = ? GROUP BY e.IdEtudiant');
+        $req->execute([$niveau]);
+        $res = $req->fetchAll();
+
+        return $res;
+        
+    }
+
+
+    public function getAbsenceOfStudent($module , $etudiant){
+        global $conn;
+
+        $req = $conn->prepare('select e.Nom, e.Prenom, e.CNE, a.Date_abscence, a.Duree from Abscence a inner join Etudiant e on a.idEtudiant = e.IdEtudiant where a.idModule =? and a.idEtudiant = ? ');
+        $params = array($module , $etudiant);
+        $req->execute($params);
+
+        $res = $req->fetchAll();
+
+        return $res;
+    }
+
+
 
 
 

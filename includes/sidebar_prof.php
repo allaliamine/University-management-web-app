@@ -36,12 +36,12 @@
                    <h3>Cours</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=absenceprof&id=voir">
                    <span class="material-symbols-outlined">Group</span>
                    <h3>Etudiants</h3>
                </a>
 
-                <a href="../../routing/routing.php?action=absenceprof" >
+                <a href="../../routing/routing.php?action=absenceprof&id=faire" >
                     <span class="material-symbols-outlined">fact_check</span>
                     <h3>Gestion des absences</h3>
                 </a>

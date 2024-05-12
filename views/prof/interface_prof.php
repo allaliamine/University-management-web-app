@@ -47,12 +47,12 @@ require_once '../../securiteprof.php';
                    <h3>Cours</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=absenceprof&id=voir">
                    <span class="material-symbols-outlined">Group</span>
                    <h3>Etudiants</h3>
                </a>
 
-                <a href="../../routing/routing.php?action=absenceprof">
+                <a href="../../routing/routing.php?action=absenceprof&id=faire">
                     <span class="material-symbols-outlined">fact_check</span>
                     <h3>Gestion des absences</h3>
                 </a>
@@ -256,8 +256,8 @@ require_once '../../securiteprof.php';
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-success" href="#" style="text-decoration: none;">
-                                                Gestion des étudiants
+                                            <a class="text-success" href="../../routing/routing.php?action=archiverCours" style="text-decoration: none;">
+                                                Gestion des Cours
                                             </a>
                                         </div>
                                     </div>
