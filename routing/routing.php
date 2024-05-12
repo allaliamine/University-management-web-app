@@ -395,6 +395,7 @@ if(isset($_POST['importSubmit'])){
 if (isset($_POST['publier_annonce'])) {
 
     require_once '../controller/AnnonceController.php';
+    session_start();
     
 
     if (isset($_FILES['annonce']) && $_FILES['annonce']['error'] == 0) {
@@ -414,11 +415,16 @@ if (isset($_POST['publier_annonce'])) {
 
                     $value = (int) $value;
                     $annonce ->insertAnnonceNiveau($file_name, $value);
+
+                    $_SESSION['annonce_valide']="annonce a ete publier ";
                     
                 }
         
             }
    
+        }else{
+            $_SESSION['annonce_invalide']="Erreur!! l'Annonce n'a pas ete publier ";
+
         }
     }
     header('location: ../views/admin/publier_annonce.php');

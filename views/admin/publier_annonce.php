@@ -73,6 +73,24 @@ $levels = $_SESSION['levels'];
                     <input type="submit" name="publier_annonce" class="btn btn-primary" value="Publier" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
                                 
             </form>
+
+            <?php if(isset($_SESSION['annonce_valide'])) {?>
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['annonce_valide'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['annonce_valide']); ?>
+            <?php } ?>
+
+            <?php if(isset($_SESSION['annonce_invalide'])) {?>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['annonce_invalide'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['annonce_invalide']); ?>
+            <?php } ?>
             
 
 
