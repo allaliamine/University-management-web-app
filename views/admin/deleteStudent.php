@@ -2,6 +2,7 @@
 
 session_start();
 require_once "../../includes/sidebar_admin.php";
+require_once '../../securiteadmin.php';
 if(isset($_SESSION['FieldLevel'])){
     $res= $_SESSION['FieldLevel'];
 }

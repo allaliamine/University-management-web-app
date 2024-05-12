@@ -4,6 +4,7 @@ session_start();
 
 // Inclure la barre latérale administrateur
 require_once "../../includes/sidebar_admin.php";
+require_once '../../securiteadmin.php';
 
 if(isset($_SESSION['studentByLevel'])){
     $resLevel = $_SESSION['studentByLevel'];

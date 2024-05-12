@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../securite.php';
+require_once '../../securiteadmin.php';
 include '../../includes/sidebar_admin.php';
 
 $majors = $_SESSION['majors'];
