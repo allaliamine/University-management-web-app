@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require_once '../../securiteprof.php';
 require_once '../../includes/sidebar_prof.php';
 
 $etudiants = $_SESSION['etd_niveau'];
