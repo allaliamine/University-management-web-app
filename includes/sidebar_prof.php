@@ -31,7 +31,7 @@
                </a>
                 
 
-               <a href="#" >
+               <a href="../../routing/routing.php?action=cours" >
                    <span class="material-symbols-outlined">menu_book</span>
                    <h3>Cours</h3>
                </a>
@@ -160,7 +160,7 @@
                         <!--profile icon + dropdown menu-->
                         <li class="nav-item mx-1 dropdown " style="list-style: none;">
                             <a class="nav-link py-2" data-toggle="dropdown" data-bs-toggle="dropdown">
-                                <span class="username">username </span>
+                                <span class="username">Bonjour MR. <?php echo " ".strtoupper($_SESSION['prof']['Nom']);?></span>
                                 <img class="img-profile rounded-circle" src="https://ensah.ma/apps/eservices/resources/img/user-1.png" alt="image">
                             </a>
                         

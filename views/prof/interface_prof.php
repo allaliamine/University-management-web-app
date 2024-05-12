@@ -36,7 +36,7 @@ require_once '../../securiteprof.php';
             <div class="side-bar flex">
 
                 
-               <a href="./interface_prof.php" >
+               <a href="../../views/prof/interface_prof.php" >
                    <span class="material-symbols-outlined">grid_view</span>
                    <h3>Dashboard</h3>
                </a>
@@ -172,7 +172,7 @@ require_once '../../securiteprof.php';
                         <!--profile icon + dropdown menu-->
                         <li class="nav-item mx-1 dropdown " style="list-style: none;">
                             <a class="nav-link py-2" data-toggle="dropdown" data-bs-toggle="dropdown">
-                                <span class="username">username </span>
+                                <span class="username">Bonjour MR. <?php echo " ".strtoupper($_SESSION['prof']['Nom']);?> </span>
                                 <img class="img-profile rounded-circle" src="https://ensah.ma/apps/eservices/resources/img/user-1.png" alt="image">
                             </a>
                         
@@ -304,7 +304,7 @@ require_once '../../securiteprof.php';
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-primary" href="#" style="text-decoration: none;">
+                                            <a class="text-primary" href="../../routing/routing.php?action=absenceprof&id=faire" style="text-decoration: none;">
                                                 Gestion des absences
                                             </a>
                                         </div>
