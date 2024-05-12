@@ -6,7 +6,7 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
  * pour Authentification
  */
 if ( isset($_POST['submit']) ) {
-
+    session_start();
     include '../controller/AuthController.php';
 
     $login = $_POST['login'];

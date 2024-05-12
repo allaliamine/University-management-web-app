@@ -23,6 +23,7 @@ session_start();
         <div class="row justify-content-center">
 
             <div class="col-xl-8 col-lg-9 col-md-9">
+                
             <?php if(isset($_SESSION['Activite'])) { ?>
                 <div class="alert alert-danger d-flex align-items-center" role="alert">
                     <div>

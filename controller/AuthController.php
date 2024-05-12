@@ -14,9 +14,10 @@ class AuthController{
     public function login($login, $password){
 
         $user = $this->userModel->getAccountByLoginAndPassword($login, $password);
+
         if ($user){
             if($user['Activite'] == 'A'){
-                session_start();
+                
                 $_SESSION['success'] = $user;
                 $idcompte = $user['IdCompte'];
 
@@ -39,6 +40,7 @@ class AuthController{
                 exit();
             }else{
                 $_SESSION['Activite'] = "votre compte est desactiver contacter mr cherradi";
+                header('Location: ../public/index.php');
             }
         } 
 
