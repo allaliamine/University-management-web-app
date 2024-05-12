@@ -2,6 +2,21 @@
 
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
 
+require_once '../controller/logController.php';
+
+$log = new loginController();
+
+
+$excelMimes = array(
+    'text/xls', 
+    'text/xlsx',
+    'application/excel',
+    'application/vnd.msexcel', 
+    'application/vnd.ms-excel', 
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+);  
+
+
 /**
  * pour Authentification
  */
@@ -31,6 +46,9 @@ if(isset($_GET['action'])){
     session_start();
 
     $action = $_GET['action'];
+    require_once '../controller/logController.php';
+
+    $log = new loginController();
 
     switch ($action){
 
@@ -47,6 +65,8 @@ if(isset($_GET['action'])){
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
 
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: est allé à "publier note" ', $_SESSION['admin']['IdCompte']);
+            
             header("location: ../views/admin/publier_note.php");
             exit();
             break;
@@ -63,6 +83,9 @@ if(isset($_GET['action'])){
 
             $_SESSION['majors'] = $majors;
             $_SESSION['levels'] = $levels;
+
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: est allé à "ajouter etudiant" ', $_SESSION['admin']['IdCompte']);
+
             header("location: ../views/admin/ajout_etudiants.php");
             exit();
             break;
@@ -75,6 +98,8 @@ if(isset($_GET['action'])){
             $fieldLevel = $deleteStudentController->FieldLevel();
 
             $_SESSION['FieldLevel'] = $fieldLevel;
+
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: est allé à "retrancher etudiant" ', $_SESSION['admin']['IdCompte']);
 
             header('location: ../views/admin/deleteStudent.php');
             exit();
@@ -91,6 +116,7 @@ if(isset($_GET['action'])){
 
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "Rapport" ', $_SESSION['prof']['IdCompte']);
 
             header("location: ../views/prof/rapport.php");
             exit();
@@ -119,10 +145,12 @@ if(isset($_GET['action'])){
             $_SESSION['prf_mdls'] = $module;
 
             if($_GET['id'] == 'faire'){
+                $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "Gestion des Absences" ', $_SESSION['prof']['IdCompte']);
                 header('location: ../views/prof/faire_absence.php');
                 exit();
                 break;
             }elseif($_GET['id'] == 'voir'){ 
+                $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "Etudiants pour consulter les absences" ', $_SESSION['prof']['IdCompte']);
                 header('location: ../views/prof/get_students.php');
                 exit();
                 break;
@@ -140,6 +168,8 @@ if(isset($_GET['action'])){
     
             $_SESSION['majors'] = $majors;
             $_SESSION['levels'] = $levels;
+
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: est allé à "publier annonce" ', $_SESSION['admin']['IdCompte']);
     
             header('location: ../views/admin/publier_annonce.php');
             exit();
@@ -156,6 +186,7 @@ if(isset($_GET['action'])){
 
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "Consulter Rapport" ', $_SESSION['prof']['IdCompte']);
 
             header("location: ../views/prof/consulter_rapport.php");
             exit();
@@ -167,6 +198,7 @@ if(isset($_GET['action'])){
             $postrapportController= new postrapportController();
             $rapport=$postrapportController->fetch_rapport();
             $_SESSION['toutrapport']=$rapport;
+            $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé à "Rapport" ', $_SESSION['etd']['IdCompte']);
             header('location: ../views/etudiant/postuler_rapport.php');
             exit();
             break;
@@ -179,6 +211,7 @@ if(isset($_GET['action'])){
             echo $idetudiant;
             $notes=$etdnoteController->fetch_note($idetudiant);
             $_SESSION['notes']=$notes;
+            $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé à "Note" ', $_SESSION['etd']['IdCompte']);
             header('location: ../views/etudiant/consulter_note.php');
             exit();
             break;
@@ -196,6 +229,7 @@ if(isset($_GET['action'])){
 
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
+            $log->createAction($_SESSION['prof']['CIN'],'info',"prof: est allé à 'Cours' ", $_SESSION['prof']['IdCompte']);
 
             header('location: ../views/prof/publier_cours.php');
             exit();
@@ -220,13 +254,14 @@ if(isset($_GET['action'])){
                 $_SESSION['details_message_shown']= "pas de d'absence donc pas de details !";
             }
 
+            $log->createAction($_SESSION['prof']['CIN'],'info',"prof: a vu les details d'absence d'un etudiant", $_SESSION['prof']['IdCompte']);
             header('location: ../views/prof/get_studentsfn.php');
 
             exit();
             break;
 
 
-        case 'archiverCours': 
+        case 'archiverCours': /* archiver cours pour prof */
             require_once '../controller/CoursController.php';
             require_once '../controller/rapportController.php';
 
@@ -239,6 +274,7 @@ if(isset($_GET['action'])){
 
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "gestion des cours" ', $_SESSION['prof']['IdCompte']);
 
             header('location: ../views/prof/get_cours.php');
             exit();
@@ -246,7 +282,7 @@ if(isset($_GET['action'])){
 
 
 
-        case 'getAllCours':
+        case 'getAllCours': 
         
             require_once '../controller/CoursController.php';
             $coursController = new CoursController();
@@ -257,6 +293,7 @@ if(isset($_GET['action'])){
                 $moduleOfniveau = $coursController->getModulesByniveau($idniveau);
 
                 $_SESSION['lvl_mdls']= $moduleOfniveau;
+                $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé à "Cours" ', $_SESSION['etd']['IdCompte']);
                 header('location: ../views/etudiant/consulter_cours.php');
 
             }elseif($_GET['etape'] == 2){
@@ -265,6 +302,7 @@ if(isset($_GET['action'])){
                 echo $idmodule;
                 $etu_cours = $coursController->getCoursForStudent($idmodule);
                 $_SESSION['etu_cours'] = $etu_cours;
+                $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé consulter les cours de module ', $_SESSION['etd']['IdCompte']);
 
                 header('location: ../views/etudiant/consulter_coursfn.php');
 
@@ -273,6 +311,8 @@ if(isset($_GET['action'])){
             
 
         default:
+        
+        exit();
         break;
 
 
@@ -291,7 +331,7 @@ if(isset($_GET['action'])){
     require_once '../controller/addStudentController.php';
     session_start();
 
-    if(!empty($_FILES['file_etudiant']['name'])){
+    if(!empty($_FILES['file_etudiant']['name']) && in_array($_FILES['file']['type'], $excelMimes)){
 
         $file_tmp = $_FILES['file_etudiant']['tmp_name'];
         $filiere = $_POST['filiere'];
@@ -329,11 +369,14 @@ if(isset($_GET['action'])){
                 
                 $addStudent->insertStudent($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $idcompte, $idrole ,$login, $mdp, $idadmin, $niveau,$filiere);
                 $_SESSION['ajouterEtudiant'] = "les Etudiant on ete ajouter avec succes \n les comptes des etudiants on ete creer avec succes";
+                $log->createAction($_SESSION['admin']['CIN'],'info','admin: a ajouter des etudiant ', $_SESSION['admin']['IdCompte']);
             }
         }
-
-        header('location: ../views/admin/ajout_etudiants.php');
+    }else{
+        $log->createAction($_SESSION['admin']['CIN'],'error','admin: a tenter ajouter etudiant avec un fichier non excel ', $_SESSION['admin']['IdCompte']);
     }
+
+    header('location: ../views/admin/ajout_etudiants.php');
 
 
  }
@@ -376,12 +419,15 @@ if(isset($_POST['importSubmit'])){
                 $conn->query("INSERT INTO note(Valeur, idModule, idAdmin, idEtudiant) VALUES ('".$Valeur."','".$id_module."', '1', '".$id."')"); 
             } 
             $_SESSION['etat_note_succes']='Les notes ont ete ajoutes avec succes';
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: a publier des notes ', $_SESSION['admin']['IdCompte']);
             
         }else{  
+            $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors de publication des notes ', $_SESSION['admin']['IdCompte']);
             $_SESSION['etat_note_erreur']='Un erreur est survenue contactez Mr Cherradi';
         } 
     }else{ 
         $_SESSION['etat_note_fail']='Fichier unvalide, format insuportable';
+        $log->createAction($_SESSION['admin']['CIN'],'error','admin: tenter de mettre un fichier non excel', $_SESSION['admin']['IdCompte']);
     } 
 
     header('location: ../views/admin/publier_note.php');
@@ -399,36 +445,42 @@ if (isset($_POST['publier_annonce'])) {
     
 
     if (isset($_FILES['annonce']) && $_FILES['annonce']['error'] == 0) {
-        
-        $file_name = $_FILES['annonce']['name'];  
-        $file_tmp = $_FILES['annonce']['tmp_name']; 
-        $destination = "../uploads/". basename($file_name);
 
-        if (move_uploaded_file($file_tmp, $destination)){
-                
-            if(!empty($_POST['check_list'])){
+        if($_FILES["file"]["type"] == 'application/pdf'){
 
-                $annonce = new AnnonceController();
-                $annonce->insertAnnonce($file_name);
+            $file_name = $_FILES['annonce']['name'];  
+            $file_tmp = $_FILES['annonce']['tmp_name']; 
+            $destination = "../uploads/". basename($file_name);
 
-                foreach($_POST['check_list'] as $value){
-
-                    $value = (int) $value;
-                    $annonce ->insertAnnonceNiveau($file_name, $value);
-
-                    $_SESSION['annonce_valide']="annonce a ete publier ";
+            if (move_uploaded_file($file_tmp, $destination)){
                     
-                }
-        
-            }
-   
-        }else{
-            $_SESSION['annonce_invalide']="Erreur!! l'Annonce n'a pas ete publier ";
+                if(!empty($_POST['check_list'])){
 
+                    $annonce = new AnnonceController();
+                    $annonce->insertAnnonce($file_name);
+
+                    foreach($_POST['check_list'] as $value){
+
+                        $value = (int) $value;
+                        $annonce ->insertAnnonceNiveau($file_name, $value);
+
+                        $_SESSION['annonce_valide']="annonce a ete publier ";
+                        
+                    }
+                    $log->createAction($_SESSION['admin']['CIN'],'info','admin: a publier une annonce ', $_SESSION['admin']['IdCompte']);
+            
+                }
+    
+            }else{
+                $_SESSION['annonce_invalide']="Erreur!! l'Annonce n'a pas ete publier ";
+                $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors de publication d annonce ', $_SESSION['admin']['IdCompte']);
+
+            }
+        }else{
+            $log->createAction($_SESSION['admin']['CIN'],'error','etd: a tenter ajouter un rapport avec un fichier non pdf ',$_SESSION['admin']['IdCompte'] );
         }
     }
     header('location: ../views/admin/publier_annonce.php');
-   
 }
 
 /**
@@ -454,7 +506,10 @@ if (isset($_GET['niveau']) && isset($_GET['filiere']) && isset($_GET['idniveau']
 
     $_SESSION['studentByLevel'] = $studentByLevel;
 
+    $log->createAction($_SESSION['admin']['CIN'],'info','admin: a chercher des etudiant pour retrancher etudiant ', $_SESSION['admin']['IdCompte']);
+
     header('location: ../views/admin/affichListEtud.php');
+    
 }
 
 
@@ -476,7 +531,9 @@ if(isset($_POST['search'])){
 
     $_SESSION['studentByCin'] = $studentByCin;
 
+    $log->createAction($_SESSION['admin']['CIN'],'info','admin: a chercher des etudiant dans retrancher etudiant  ', $_SESSION['admin']['IdCompte']);
     header('location: ../views/admin/affichListEtud.php');
+
 
 }
 
@@ -498,8 +555,10 @@ if(isset($_POST["activer"])){
         try{
         $res = $deleteStudentController->activateAccount($idetud);
             $_SESSION['success-actif']='Ce compte est desactive/active avec success';
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: a activer un compte', $_SESSION['admin']['IdCompte']);
         }catch(PDOException){
             $_SESSION['error-actif']='un erreur se produit , veuillez repeter l\'operation lterieuremnt';
+            $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors activation un compte', $_SESSION['admin']['IdCompte']);
         }
 
         $studentByLevel = $deleteStudentController->StudentByLevel($_SESSION['rt_idnv']);
@@ -525,8 +584,10 @@ if(isset($_POST["desactiver"])){
         try{
             $deleteStudentController->desactivateAccount($idetud);
             $_SESSION['success-actif']='Ce compte est desactive/active  avec success';
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: a desactiver un compte', $_SESSION['admin']['IdCompte']);
         }catch(PDOException){
             $_SESSION['error-actif']='un erreur se produit , veuillez repeter l\'operation lterieuremnt';
+            $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors de desactivation un compte', $_SESSION['admin']['IdCompte']);
         }
 
         $studentByLevel = $deleteStudentController->StudentByLevel($_SESSION['rt_idnv']);
@@ -545,18 +606,26 @@ if ( isset($_POST['rapportsubmit']) ) {
     session_start();
 
     include '../controller/rapportController.php';
+    if(!empty($_POST['textarea']) && !empty($_POST['niveau'] && !empty($_POST['module']) && !empty($_POST['date']))){
 
-    $Descriptive = $_POST['textarea'];
-    $idProf=$_SESSION['prof']['IdProf'];
-    $IdNiveau =  $_POST['niveau'];
-    $idModule=$_POST['module'];
-    $Datelimite=$_POST['date'];
+        $Descriptive = $_POST['textarea'];
+        $idProf=$_SESSION['prof']['IdProf'];
+        $IdNiveau =  $_POST['niveau'];
+        $idModule=$_POST['module'];
+        $Datelimite=$_POST['date'];
 
-    $rapportController = new rapportController();
-    $rapportController->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
-    
+        $rapportController = new rapportController();
+        $rapportController->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
+
+        $log->createAction($_SESSION['prof']['CIN'],'info','prof: a publier un Rapport ', $_SESSION['prof']['IdCompte']);
+        $_SESSION['etat_rapport_succes']="Votre anonce de rapport est publie avec succes";
+       
+        
+    }else{
+        $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut publier un rapport sans specifier les criteres', $_SESSION['prof']['IdCompte']);
+    } 
+
     header('location: ../views/prof/rapport.php');
-    $_SESSION['etat_rapport_succes']="Votre anonce de rapport est publie avec succes";
 }
 
 
@@ -574,25 +643,39 @@ if(isset($_POST['rapportpublier'])){
     $tempfile = $_FILES["file"]["tmp_name"];
     $folder = "../uploads/rapport/".$filename;
 
-  if($filename == ""){
-    $_SESSION['etat_rapport_fail'] = "Une erreur est survenue";
-    header('location: ../views/etudiant/postuler_rapport.php');
-  }else{
-    $postrapportController = new postrapportController();
-    $idEtudiant = $_SESSION['etd']['IdEtudiant'];
-    if ($postrapportController->studentHasSubmittedFile($rapport_id,$idEtudiant)) {
-        $_SESSION['error'] = "Vous avez déjà soumis un fichier pour ce rapport.";
-        header('location: ../views/etudiant/postuler_rapport.php');
-        exit();
+    if($_FILES["file"]["type"] == 'application/pdf'){
+
+        if($filename == ""){
+            $_SESSION['etat_rapport_fail'] = "Une erreur est survenue";
+            $log->createAction($_SESSION['etd']['CNE'],'error','etd: a submiter un fichier vide dans rapport ', $_SESSION['etd']['IdCompte']);
+            header('location: ../views/etudiant/postuler_rapport.php');
+        }else{
+            $postrapportController = new postrapportController();
+            $idEtudiant = $_SESSION['etd']['IdEtudiant'];
+            if ($postrapportController->studentHasSubmittedFile($rapport_id,$idEtudiant)) {
+
+                $_SESSION['error'] = "Vous avez déjà soumis un fichier pour ce rapport.";
+
+                $log->createAction($_SESSION['etd']['CNE'],'error','etd: tenter de submiter un rapport deux fois ', $_SESSION['etd']['IdCompte']);
+                header('location: ../views/etudiant/postuler_rapport.php');
+                exit();
+            }
+            else{
+                move_uploaded_file($tempfile,$folder);
+
+                $idEtudiant=$_SESSION['etd']['IdEtudiant'];
+
+                $postrapportController->upload_rapportetd($rapport_id,$filename,$folder,$idEtudiant);
+
+                $_SESSION['etat_rapport_succes'] = "Votre Rapport est publié avec succès";
+
+                $log->createAction($_SESSION['etd']['CNE'],'info','etd: a submiter un rapport ', $_SESSION['etd']['IdCompte']);
+                header('location: ../views/etudiant/postuler_rapport.php');
+            } 
+        }
+    }else{
+        $log->createAction($_SESSION['etd']['CNE'],'error','etd: a tenter ajouter un rapport avec un fichier non pdf ',$_SESSION['etd']['IdCompte'] );
     }
-    else{
-        move_uploaded_file($tempfile,$folder);
-        $idEtudiant=$_SESSION['etd']['IdEtudiant'];
-        $postrapportController->upload_rapportetd($rapport_id,$filename,$folder,$idEtudiant);
-        $_SESSION['etat_rapport_succes'] = "Votre Rapport est publié avec succès";
-        header('location: ../views/etudiant/postuler_rapport.php');
-    } 
-  }
 }
 
 //Consulter les rapports des etudiants par le prof
@@ -601,14 +684,20 @@ if(isset($_POST['chercher_rapport'])){
     session_start();
     include '../controller/rapportController.php';
 
-    $module = $_POST['module'];
-    $id_prof = $_SESSION['prof']['IdProf'];
+    if(!empty($_POST['module'])){
+        $module = $_POST['module'];
+        $id_prof = $_SESSION['prof']['IdProf'];
 
-    $rapportController = new rapportController();
+        $rapportController = new rapportController();
 
-    $id_rapport = $rapportController->fetch_idrapport($module,$id_prof);
-    $rapports = $rapportController->fetch_students($id_rapport);
-    $_SESSION['rapports']=$rapports;
+        $id_rapport = $rapportController->fetch_idrapport($module,$id_prof);
+        $rapports = $rapportController->fetch_students($id_rapport);
+        $_SESSION['rapports']=$rapports;
+        $log->createAction($_SESSION['prof']['CIN'],'info','prof: a consulter les Rapports des etudiants ', $_SESSION['prof']['IdCompte']);
+
+    }else{
+        $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut consulter les rapports sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
+    }
     header('location: ../views/prof/consulter_rapportetd.php');
 }
 
@@ -636,12 +725,17 @@ if(isset($_POST['get_students'])){
 
             // var_dump($etds);
 
-            header('location: ../views/prof/faire_absencefn.php');
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: a acceder pour faire l absence ', $_SESSION['prof']['IdCompte']);
+            
         }else{
+            $log->createAction($_SESSION['prof']['CIN'],'error','prof: exceder l absence de jour  ', $_SESSION['prof']['IdCompte']);
             $_SESSION['abs_done_already'] = "l'absence est deja fait pour ce module aujourdui! a Demain";
-            header('location: ../views/prof/faire_absence.php');
+        
         }
+    }else{
+        $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut afficher les etudiants sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
     }
+    header('location: ../views/prof/faire_absencefn.php');
 }
 
 
@@ -666,9 +760,12 @@ if(isset($_POST['consulteStudent'])){
         $_SESSION['etd_niveau'] = $etds;
         // var_dump($etds);
 
+        $log->createAction($_SESSION['prof']['CIN'],'info','prof: a acceder pour consulter l absence ', $_SESSION['prof']['IdCompte']);
         header('location: ../views/prof/get_studentsfn.php');
+    }else{
+        $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut afficher les etudiants sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
     }
-
+    header('location: ../views/prof/get_studentsfn.php');
 }
 
 
@@ -694,10 +791,12 @@ if(isset($_POST['faire_absence'])){
 
         try{
             $absence->insertAbsence($idprof,$etd,$absModule);
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: a fait l absence ', $_SESSION['prof']['IdCompte']);
             $_SESSION['abs_success'] = "les absence on ete bien ajouter";
 
         }
         catch(PDOException $e){
+            $log->createAction($_SESSION['prof']['CIN'],'error','prof: error lors de l absence" ', $_SESSION['prof']['IdCompte']);
             $_SESSION['abs_error'] = "une erreur est survenu!! re-faire l'absence stp";
         }
         
@@ -720,19 +819,32 @@ if(isset($_POST['faire_absence'])){
     $file_tmp = $_FILES['cours']['tmp_name']; 
     $destination = "../uploads/CoursProf/". basename($file_name);
 
-    if (move_uploaded_file($file_tmp, $destination)){
+    if($_FILES["file"]["type"] == 'application/pdf'){
 
-        $IdNiveau =  $_POST['niveau'];
-        $idModule = $_POST['module'];
-        $type=$_POST['type'];
-        $idprof = $_SESSION['prof']['IdProf'];
-        $coursController = new CoursController();
-        $inser=$coursController->insertcours($file_name ,$type, $idprof, $IdNiveau, $idModule);
+        if (move_uploaded_file($file_tmp, $destination)){
 
-        $_SESSION['etat_cours_success'] = "Votre Cours est publié avec succès";
-        header('location: ../views/prof/publier_cours.php');
+            if(!empty($_POST['niveau']) && !empty($_POST['module']) && !empty($_POST['type'])){
+
+                $IdNiveau =  $_POST['niveau'];
+                $idModule = $_POST['module'];
+                $type=$_POST['type'];
+                $idprof = $_SESSION['prof']['IdProf'];
+                $coursController = new CoursController();
+                $inser=$coursController->insertcours($file_name ,$type, $idprof, $IdNiveau, $idModule);
+
+                $log->createAction($_SESSION['prof']['CIN'],'info','prof: a publier un cour ', $_SESSION['prof']['IdCompte']);
+                $_SESSION['etat_cours_success'] = "Votre Cours est publié avec succès";
+                
+            }else{
+                $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut publier les cours sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
+            }
+        }else{
+            $log->createAction($_SESSION['prof']['CIN'],'error','prof: error lors de publication de cours ', $_SESSION['prof']['IdCompte']);
+        }
+    }else{
+        $log->createAction($_SESSION['prof']['CIN'],'error','prof: a tenter ajouter un rapport avec un fichier non pdf ', $_SESSION['prof']['IdCompte'] );
     }
-    
+    header('location: ../views/prof/publier_cours.php');
 }
 
 
@@ -758,13 +870,14 @@ if(isset($_POST['getCours'])){
         $cours = $coursController->getAllCours($idprof,$IdNiveau,$idModule);
 
         $_SESSION['cours']= $cours;
+        $log->createAction($_SESSION['prof']['CIN'],'info','prof: a afficher la liste des cours pour la gestion ', $_SESSION['prof']['IdCompte']);
 
-        header('location: ../views/prof/archiver_cours.php');
-
-
-
-
+        
+    }else{
+        $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut gerer les cours sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
+    
     }
+    header('location: ../views/prof/archiver_cours.php');
 }
 
 
@@ -786,7 +899,9 @@ if(isset($_GET['operation'])){
             try{
                 $archive->archiverCours($idcour);
                 $_SESSION['archive_success'] = "l'element a ete archiver/desarchiver avec succes";
+                $log->createAction($_SESSION['prof']['CIN'],'info','prof: a archiver un cour ', $_SESSION['prof']['IdCompte']);
             }catch(PDOException){
+                $log->createAction($_SESSION['prof']['CIN'],'error','prof: error lors de l archivage', $_SESSION['prof']['IdCompte']);
                 $_SESSION['archive_error'] = "Ops erreur lors de l'operation";
             }
 
@@ -805,7 +920,9 @@ if(isset($_GET['operation'])){
             try{
                 $archive->desarchiverCours($idcour);
                 $_SESSION['archive_success'] = "l'element a ete archiver/desarchiver avec succes";
+                $log->createAction($_SESSION['prof']['CIN'],'info','prof: a desarchiver un cour ', $_SESSION['prof']['IdCompte']);
             }catch(PDOException){
+                $log->createAction($_SESSION['prof']['CIN'],'error','prof: error lors de desarchivage ', $_SESSION['prof']['IdCompte']);
                 $_SESSION['archive_error'] = "Ops erreur lors de l'operation";
             }
 
