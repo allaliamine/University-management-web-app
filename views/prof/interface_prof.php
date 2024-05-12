@@ -263,7 +263,7 @@ require_once '../../securiteprof.php';
                                     </div>
 
                                     <div class="col-auto">
-                                        <i class="fa-solid fa-user-group fa-2xl" style="color: #000000;"></i>
+                                        <i class="fa-solid fa-person-chalkboard fa-2xl" style="color: #000000;"></i>
                                     </div>
                                     
                                 </div>

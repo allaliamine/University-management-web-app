@@ -20,7 +20,7 @@ $modules = $_SESSION['modules'];
     <div class="card col-xl-8 offset-3 mt-5">
         <div class="card-header">Consulter les rapports : </div>
         <div class="card-body">
-            <p class="text-primary">Veuillez saisir toutes les critères de la consultation</p>
+            <p class="text-primary">Veuillez saisir toutes les critères pour consulter les rapports</p>
             <form action="../../routing/routing.php" method="post" class="form" enctype="multipart/form-data">
                 
                 <div class="form-group mb-4">

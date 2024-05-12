@@ -23,10 +23,10 @@ $modules = $_SESSION['modules'];
     
     <div class="card col-xl-8 offset-3 mt-5">
 
-        <div class="card-header"> Publier Cours :</div>
+        <div class="card-header"> Modificaton des Cours :</div>
 
         <div class="card-body">
-            <p class="text-primary text-success">Veuillez saisir toutes les critères de la consultation</p>
+            <p class="text-primary text-success">Veuillez saisir toutes les critères pour la modifcation</p>
 
             <form action="../../routing/routing.php" method="post" class="form" enctype="multipart/form-data">
                 

@@ -22,7 +22,7 @@ $module = $_SESSION['prf_mdls'] ;
 <body>
     
     <div class="card col-xl-8 offset-3 mt-5">
-        <div class="card-header">Formulaire d'absence</div>
+        <div class="card-header">Formulaire de consultation d'Absence</div>
         <div class="card-body">
             <p class="text-primary">Veuillez saisir toutes les critères pour consulter les abscences</p>
             <form action="../../routing/routing.php" method="post" class="form">
