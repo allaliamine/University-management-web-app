@@ -168,7 +168,7 @@
                         <!--profile icon + dropdown menu-->
                         <li class="nav-item mx-1 dropdown " style="list-style: none;">
                             <a class="nav-link py-2" data-toggle="dropdown" data-bs-toggle="dropdown">
-                                <span class="username">Bonjour, <?= $_SESSION['admin']['Prenom'];?></span>
+                                <span class="username">Bonjour, <?php echo " ".strtoupper($_SESSION['admin']['Nom']);?> </span>
                                 <img class="img-profile rounded-circle" src="https://ensah.ma/apps/eservices/resources/img/user-1.png" alt="image">
                             </a>
                         
