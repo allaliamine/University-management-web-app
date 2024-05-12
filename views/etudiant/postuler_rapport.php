@@ -17,7 +17,10 @@ $rapports=$_SESSION['toutrapport'];
     <link rel="stylesheet" href="style_Etudiant.css">
 </head>
 <body>
+
+    <?php if( isset($_SESSION['etat_rapport_succes']) ||  isset($_SESSION['etat_rapport_fail']) || isset($_SESSION['error'])) { ?>
     <div class="card col-xl-8 offset-3 mt-5" style="height: 10px;">
+
         <?php if(isset($_SESSION['etat_rapport_succes'])) {?>
             <div class="alert alert-success d-flex align-items-center" role="alert">
                 <div>
@@ -44,6 +47,7 @@ $rapports=$_SESSION['toutrapport'];
             <?php unset($_SESSION['error']); ?>
         <?php } ?>
     </div>
+    <?php } ?>
     <div class="container mt-5" >
         <div class="row">
             <div class="col-xl-10 offset-2">

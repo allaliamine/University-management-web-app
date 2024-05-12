@@ -227,7 +227,7 @@ require_once '../../securiteetd.php';
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-primary" href="#" style="text-decoration: none;">
+                                            <a class="text-primary" href="../../routing/routing.php?action=getAllCours&etape=1" style="text-decoration: none;">
                                                 Acceder au Cours
                                             </a>
                                         </div>
@@ -298,7 +298,7 @@ require_once '../../securiteetd.php';
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-danger" href="#" style="text-decoration: none;">
+                                            <a class="text-danger" href="../../routing/routing.php?action=noteetd" style="text-decoration: none;">
                                                 Affichage Notes
                                             </a>
                                         </div>
