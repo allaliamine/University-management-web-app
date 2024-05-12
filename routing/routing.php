@@ -383,6 +383,8 @@ if(isset($_POST['importSubmit'])){
     }else{ 
         $_SESSION['etat_note_fail']='Fichier unvalide, format insuportable';
     } 
+
+    header('location: ../views/admin/publier_note.php');
 } 
  
 

@@ -62,15 +62,6 @@ $levels = $_SESSION['levels'];
 
               </div>
 
-                <script>
-                    document.getElementById('toutes_filieres').addEventListener('change', function() {
-                        var checkboxes = document.querySelectorAll('input[name="check_list[]"]');
-                        checkboxes.forEach(function(checkbox) {
-                            checkbox.disabled = this.checked;
-                            checkbox.checked = !this.checked;
-                        }, this);
-                    });
-                </script>
                      
                     <!----  importerfile---> 
                     <div class="form-group mb-4">

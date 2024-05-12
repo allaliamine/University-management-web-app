@@ -306,7 +306,7 @@ require_once '../../securiteadmin.php';
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-primary" href="#" style="text-decoration: none;">
+                                            <a class="text-primary" href="../../routing/routing.php?action=annonce" style="text-decoration: none;">
                                                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbspPublication&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                             </a>
                                         </div>
