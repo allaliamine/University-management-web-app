@@ -2,7 +2,7 @@
 
 session_start();
 $notes=$_SESSION['notes'];
-require_once '../../securite.php';
+require_once '../../securiteetd.php';
 include '../../includes/sidebar_etd.php';
 
 

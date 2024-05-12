@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once '../../securite.php';
+require_once '../../securiteetd.php';
 include '../../includes/sidebar_etd.php';
 
 $rapports=$_SESSION['toutrapport'];
