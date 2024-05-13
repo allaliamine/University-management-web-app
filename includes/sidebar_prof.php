@@ -174,7 +174,7 @@
                                     <div class="card-header user_menu text-center text-light">Profile</div>
                                     <div class="card-body py-1 ">
                                 
-                                        <a class="dropdown-item ps-0" href="#">
+                                        <a class="dropdown-item ps-0" href="./afficher_info.php">
                                             <i class="fa-solid fa-user"></i>
                                             Compte
                                         </a>
@@ -183,18 +183,6 @@
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Editer Mon Compte
                                         </a>
-                                    
-                                        <a class="dropdown-item ps-0" href="#">
-                                            <i class="fa-solid fa-gear"></i>
-                                            Parametre
-                                        </a>
-
-                                        <a class="dropdown-item ps-0" href="#">
-                                            <i class="fa-solid fa-circle-question"></i>
-                                            Aide
-                                        </a>
-
-
                                     </div>
                                 </div>
                             </div>

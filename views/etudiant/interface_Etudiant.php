@@ -184,18 +184,6 @@ $authentification = $_SESSION['chart'];
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Editer Mon Compte
                                         </a>
-                                    
-                                        <a class="dropdown-item ps-0" href="#">
-                                            <i class="fa-solid fa-gear"></i>
-                                            Parametre
-                                        </a>
-
-                                        <a class="dropdown-item ps-0" href="#">
-                                            <i class="fa-solid fa-circle-question"></i>
-                                            Aide
-                                        </a>
-
-
                                     </div>
                                 </div>
                             </div>
