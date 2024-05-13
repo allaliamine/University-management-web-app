@@ -14,40 +14,33 @@ $todo=$_SESSION['todo'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do list </title>
     <link rel="stylesheet" href="style_Prf.css">
-
-    <style>
-        table{
-            background-color:#dfdfdf !important;
-        }
-        thead{
-            background-color: #212529 !important;
-            color: white !important;
-        }
-    </style>
 </head>
 <body>
-        <h1 class="py-4 my-4" style="margin-left: 300px;">Votre To-Do List</h1>
+    <div class="card col-xl-10 offset-2 border-0 mt-3">
+        <div class="card-body p-0 m-0">
 
-        <div class="w-50 m-auto" >
+        <h1 class="text-center my-4">Votre To-Do List</h1>
+
+        <div class="w-75 m-auto" >
         <form action="../../routing/routing.php" method="post">
         <div class="form-group">
             <h5 for="title">Nouvelle tâche...</h5>
             <input class="form-control" type="text" name="task" id="task" placeholder="Ajouter votre tâche ici...." Required>
             </div><br>
-            <button type="submit" name="action" value="addtodo" class="btn btn-success btn-sm" onclick="return confirm('Vous êtes sûr d;ajouter cette tache ?')">Ajouter</button>
+            <button type="submit" name="action" value="addtodo" class="btn btn-success btn-sm" onclick="return confirm('Vous êtes sûr d;ajouter cette tache ?')"  style="background-color:#10504f; border-color:#10504f; color:white;">Ajouter</button>
         </form>
 
 
         </div><br>
         <hr class="bg-dark w-50 m-auto">
-        <div class="lists w-50 m-auto my-4">
+        <div class="lists w-75 m-auto my-4">
             <h1>Votre Liste</h1>
             <div id="lists">
-            <table class="table table-light table-hover" >
-                <thead >
+            <table class="table table-bordered border-dark table-light table-hover" >
+                <thead class="table-dark">
                     <tr>
                     <th scope="col" name="id">Tâche.No</th>
-                    <th scope="col">Tâche</th>
+                    <th scope="col" class="w-50">Tâche</th>
                     <th scope="col">Etat</th>
                     <th>Action</th>
                     </tr>
@@ -64,9 +57,9 @@ $todo=$_SESSION['todo'];
                             </td>
                             <td><?php echo $td['act']  ?></td>
                             <td>
-                                <a href="../../routing/routing.php?todolist=terminer&id=<?= $td['id']?>" class="btn btn-info btn-sm" onclick="return confirm('Vous êtes sûr que cette tâche est terminée ?')">Terminer</a>
-                                <button class="btn btn-success btn-sm edit-task">Edit</button>
-                                <a href="../../routing/routing.php?todolist=supprimer&id=<?= $td['id']?>" class="btn btn-danger btn-sm" onclick="return confirm('Vous êtes sûr de supprimer cette tâche ?')">Supprimer</a>
+                                <a href="../../routing/routing.php?todolist=terminer&id=<?= $td['id']?>" class="btn btn-info btn-sm"  style="background-color:#77628c; border-color:#77628c; color:white;" onclick="return confirm('Vous êtes sûr que cette tâche est terminée ?')">Terminer</a>
+                                <button class="btn btn-success btn-sm edit-task" style="background-color:#acc6aa; border-color:#acc6aa; color:white;">Edit</button>
+                                <a href="../../routing/routing.php?todolist=supprimer&id=<?= $td['id']?>" class="btn btn-danger btn-sm" style="background-color:#71a0a5; border-color:#71a0a5; color:white;" onclick="return confirm('Vous êtes sûr de supprimer cette tâche ?')">Supprimer</a>
                             </td>
                             
                         </tr>
@@ -75,7 +68,8 @@ $todo=$_SESSION['todo'];
         </table>
             </div>
         </div>
-
+        </div>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
