@@ -24,7 +24,7 @@ if (isset($_SESSION['studentByCin'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../admin/style_admin.css">
-    <title>Document</title>
+    <title>Retrancher Etudiant</title>
     <style>
         .table-container {
             margin-left: 80px;

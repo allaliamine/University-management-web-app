@@ -12,7 +12,7 @@ include '../../includes/sidebar_etd.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Consulter Notes</title>
     <link rel="stylesheet" href="style_Etudiant.css">
 </head>
 <body>

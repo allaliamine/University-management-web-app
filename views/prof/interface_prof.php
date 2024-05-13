@@ -4,7 +4,7 @@ session_start();
 require_once '../../securiteprof.php';
 
 
-// var_dump($_SESSION['etd_niveau']);
+$authentification = $_SESSION['chart'];
 ?>
 
 <html lang="en">
@@ -18,7 +18,7 @@ require_once '../../securiteprof.php';
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="style_Prf.css">
-    <script src="../../static/js/chart.js"></script>
+    <!-- <script src="../../static/js/chart.js"></script> -->
 </head>
 
 <body id="page-top">
@@ -439,6 +439,56 @@ require_once '../../securiteprof.php';
 
         
     </div><!--end of the wrapper (all the page)-->
+
+    <script>
+
+       document.addEventListener('DOMContentLoaded', () => {
+            // Get today's date
+            var today = new Date();
+            var labels = [];
+            authentifications = <?php print_r($authentification); ?>
+
+            // Get the dates of the five days preceding today
+            for (var i = 0; i <= 5; i++) {
+
+                var date = new Date(today);
+                date.setDate(today.getDate() - i);
+
+                // Format the date as 'yyyy-mm-dd'
+                var formattedDate = date.toISOString().split('T')[0];
+
+                // Push the formatted date to the labels array
+                labels.push(formattedDate);
+            }
+
+            labels.reverse();
+
+
+            var dataPoints = authentifications.map(function(item) {
+                return item['count(*)'];
+            });
+
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Nombre d\'acces',
+                    data: dataPoints, 
+                    fill: false,
+                    borderColor: '#10504F',
+                    tension: 0.1,
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+            };
+
+            const ctx = document.getElementById('myChart').getContext('2d');
+            new Chart(ctx, config);
+        });
+
+    </script>
 
     
 </body>

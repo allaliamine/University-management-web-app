@@ -29,6 +29,14 @@ if ( isset($_POST['submit']) ) {
 
     try {
         $authController = new AuthController();
+        $res = $log->getAllAuthentifications();
+
+
+        $res = json_encode($res);
+
+
+        $_SESSION['chart'] = $res;
+
         $authController->login($login, $password);
 
     } catch (Exception $e) {

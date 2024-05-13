@@ -43,12 +43,26 @@ class loginController{
     }
 
 
+    public function getAllAuthentifications(){
+
+        $today = new DateTime();
+        $dates = [];
+        $dates[] = $today->format('Y-m-d');
+        for ($i = 1; $i <= 5; $i++) {
+            $previousDate = $today->sub(new DateInterval('P1D'))->format('Y-m-d');
+            $dates[] = $previousDate;
+        }
+        
+        $dates = array_reverse($dates);
+        
+        $message = '%authentifier%';
+        $res = $this->logs->getAllAuthentifications($message, $dates);
 
 
+        return $res;
+    }
 
 }
-
-
 
 
 

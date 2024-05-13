@@ -27,6 +27,23 @@ class logginModel{
         return $res;
     }
 
+
+    function getAllAuthentifications($message,$dates){
+
+        global $conn;
+        $counts = [];
+
+        foreach($dates as $date){
+            $req = $conn->prepare("select count(*) from Journalisation where action like ? and Date = ?");
+            $params = array($message,$date);
+            $req->execute($params);
+            $res = $req->fetch();
+
+            $counts[] = $res;
+
+        }
+        return $counts;
+    }
 }
 
 
