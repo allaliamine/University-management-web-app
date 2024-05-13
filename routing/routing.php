@@ -116,9 +116,13 @@ if(isset($_GET['action'])){
 
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
+
+            echo $levels;
+            echo $modules;
+
             $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "Rapport" ', $_SESSION['prof']['IdCompte']);
 
-            header("location: ../views/prof/rapport.php");
+            header('location: ../views/prof/rapport.php');
             exit();
             break;
 
@@ -311,8 +315,7 @@ if(isset($_GET['action'])){
             
 
         default:
-        
-        exit();
+
         break;
 
 
@@ -446,7 +449,7 @@ if (isset($_POST['publier_annonce'])) {
 
     if (isset($_FILES['annonce']) && $_FILES['annonce']['error'] == 0) {
 
-        if($_FILES["file"]["type"] == 'application/pdf'){
+      
 
             $file_name = $_FILES['annonce']['name'];  
             $file_tmp = $_FILES['annonce']['tmp_name']; 
@@ -476,9 +479,9 @@ if (isset($_POST['publier_annonce'])) {
                 $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors de publication d annonce ', $_SESSION['admin']['IdCompte']);
 
             }
-        }else{
-            $log->createAction($_SESSION['admin']['CIN'],'error','etd: a tenter ajouter un rapport avec un fichier non pdf ',$_SESSION['admin']['IdCompte'] );
-        }
+        // }else{
+        //     $log->createAction($_SESSION['admin']['CIN'],'error','etd: a tenter ajouter un rapport avec un fichier non pdf ',$_SESSION['admin']['IdCompte'] );
+        // }
     }
     header('location: ../views/admin/publier_annonce.php');
 }
@@ -676,6 +679,7 @@ if(isset($_POST['rapportpublier'])){
     }else{
         $log->createAction($_SESSION['etd']['CNE'],'error','etd: a tenter ajouter un rapport avec un fichier non pdf ',$_SESSION['etd']['IdCompte'] );
     }
+    header('location: ../views/etudiant/postuler_rapport.php');
 }
 
 //Consulter les rapports des etudiants par le prof
@@ -819,7 +823,7 @@ if(isset($_POST['faire_absence'])){
     $file_tmp = $_FILES['cours']['tmp_name']; 
     $destination = "../uploads/CoursProf/". basename($file_name);
 
-    if($_FILES["file"]["type"] == 'application/pdf'){
+    // if($_FILES["file"]["type"] == 'application/pdf'){
 
         if (move_uploaded_file($file_tmp, $destination)){
 
@@ -841,9 +845,9 @@ if(isset($_POST['faire_absence'])){
         }else{
             $log->createAction($_SESSION['prof']['CIN'],'error','prof: error lors de publication de cours ', $_SESSION['prof']['IdCompte']);
         }
-    }else{
-        $log->createAction($_SESSION['prof']['CIN'],'error','prof: a tenter ajouter un rapport avec un fichier non pdf ', $_SESSION['prof']['IdCompte'] );
-    }
+    // }else{
+    //     $log->createAction($_SESSION['prof']['CIN'],'error','prof: a tenter ajouter un rapport avec un fichier non pdf ', $_SESSION['prof']['IdCompte'] );
+    // }
     header('location: ../views/prof/publier_cours.php');
 }
 
