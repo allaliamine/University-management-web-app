@@ -2,8 +2,13 @@
 
 session_start();
 require_once '../../securiteetd.php';
-
 $authentification = $_SESSION['chart'];
+if(!isset($_SESSION['allnotification'])){
+header("Location: ../../routing/routing.php?action=actualite");
+}
+else{
+$etd=$_SESSION['etd'];
+$notification= $_SESSION['allnotification'];
 ?>
 
 <html lang="en">
@@ -56,7 +61,7 @@ $authentification = $_SESSION['chart'];
                    <h3>Rapport</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=notification">
                    <span class="material-symbols-outlined">Notifications</span>
                    <h3>Notifications</h3>
                </a>
@@ -348,47 +353,21 @@ $authentification = $_SESSION['chart'];
                                         </div>
                                         
                                         <div class="card-body">
-
+                                        <?php for ($i = 0; $i < 4; $i++) {?>
+                                           <?php  $row = $notification[$i]; ?>
                                             <div>
-                                                <p class="atualite-titre"> titre1 </p>
+                                                <p class="actualite-titre"> <?php echo $row['Titre'] ?></p>
                                                 <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
+                                                  annonce tres important
                                                 </span>
-                                                <a href="#lien"> 
+                                                <a href='../../routing/routing.php?idActualite=<?= $row["IdAnnonce"]  ?>'> 
                                                     <p class="text-success text-center ms-5">lire la suite...>> </p>
                                                 </a>
                                             </div>
-    
+                                             <?php } ?>
                                             <hr>
-                                            
-                                            <div>
-                                                <p class="atualite-titre"> titre2</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-    
-                                            <hr>
-                                            <div>
-                                                <p class="atualite-titre"> titre3</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-    
-                                            <hr>
-                                            <div>
-                                                <p class="atualite-titre"> titre4</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
+                                       
+                                                <a href="consulterActualite.php"> 
                                                     <p class="text-success text-center ms-5">lire la suite...>> </p>
                                                 </a>
                                             </div>
@@ -471,3 +450,4 @@ $authentification = $_SESSION['chart'];
     
 </body>
 </html>
+<?php } ?>
