@@ -1,6 +1,6 @@
 <?php
 
-// require_once '../config/conn.php';
+require_once '../config/conn.php';
 
 class logginModel{
 
@@ -22,7 +22,6 @@ class logginModel{
 
         $req = $conn->prepare('select * from Journalisation');
         $req->execute();
-
         $res = $req->fetchAll();
 
         return $res;

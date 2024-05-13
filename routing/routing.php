@@ -310,9 +310,23 @@ if(isset($_GET['action'])){
 
                 header('location: ../views/etudiant/consulter_coursfn.php');
 
-            }            
-           
+            }    
             
+        case 'tracker': 
+
+            require_once '../controller/logController.php';
+            $logs = new loginController();
+    
+            $res = $logs->getAllLogins();
+
+            
+
+           $_SESSION['logins'] = $res;
+           
+           header('location: ../views/admin/tracker_users.php');
+
+           exit();
+           break;
 
         default:
 

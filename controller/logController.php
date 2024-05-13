@@ -34,6 +34,15 @@ class loginController{
     }
 
 
+    public function getAllLogins(){
+        
+        $res = $this->logs->getAllLogins();
+
+        return $res;
+
+    }
+
+
 
 
 

@@ -49,7 +49,7 @@ require_once '../../securiteadmin.php';
                    <h3>Publier Annonces</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=tracker">
                    <span class="material-symbols-outlined">Group</span>
                    <h3>Tracker les utilisatuers</h3>
                </a>
