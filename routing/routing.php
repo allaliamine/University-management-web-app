@@ -332,6 +332,16 @@ if(isset($_GET['action'])){
            exit();
            break;
 
+        case 'todolist':
+            require_once '../controller/todolistController.php';
+            $todolistController=new todolistController();
+            $idprof=$_SESSION['prof']['IdProf'];
+            $todo=$todolistController->fetch_todo($idprof);
+            $_SESSION['todo']=$todo;
+            header('location: ../views/prof/todolist.php');
+            exit();
+            break;
+
         default:
 
         break;
@@ -957,7 +967,99 @@ if(isset($_GET['operation'])){
             break;
     }
 }
-     
+   
+
+if(isset($_GET['todolist'])){
+    session_start();
+
+    $operation = $_GET['todolist'];
+    $id_prof=$_SESSION['prof']['IdProf'];
+    $id = $_GET['id'];
+
+    require_once '../controller/todolistController.php';
+    $todolistController = new todolistController();
+
+    switch($operation){
+
+        //For finishing a task
+        case 'terminer':
+            try{
+                $todolistController->terminer($id);
+            }catch(PDOException){
+                $_SESSION['todolist_error'] = "Oops erreur lors de l'operation";
+            }
+
+            $todo = $todolistController->fetch_todo($_SESSION['prof']['IdProf']);
+            $_SESSION['todo']= $todo;
+
+            header('location: ../views/prof/todolist.php');
+
+
+            exit();
+            break;
+
+        //For deleting
+        case 'supprimer':
+            try{
+                $todolistController->delete($id);
+            }catch(PDOException){
+                $_SESSION['todolist_error'] = "Oops erreur lors de l'operation";
+            }
+
+            $todo = $todolistController->fetch_todo($_SESSION['prof']['IdProf']);
+            $_SESSION['todo']= $todo;
+
+            header('location: ../views/prof/todolist.php');
+
+
+            exit();
+            break;
+    }
+}
+
+//For adding
+
+if(isset($_POST['action']) && $_POST['action'] === 'addtodo'){
+    session_start();
+    require_once '../controller/todolistController.php';
+    $todolistController = new todolistController();
+    $id_prof = $_SESSION['prof']['IdProf'];
+    $task = $_POST['task'];
+    try{
+        $todolistController->add($task, $id_prof);
+    }catch(PDOException){
+        $_SESSION['todolist_error'] = "Oops erreur lors de l'operation";
+    }
+
+    $todo = $todolistController->fetch_todo($_SESSION['prof']['IdProf']);
+    $_SESSION['todo'] = $todo;
+
+    header('location: ../views/prof/todolist.php');
+    exit();
+}
+
+//For editing
+
+if(isset($_POST['action']) && $_POST['action'] === 'editTask'){
+    session_start();
+    require_once '../controller/todolistController.php';
+    $todolistController = new todolistController();
+    $id = $_POST['id'];
+    $task = $_POST['task'];
+
+    try{
+        $todolistController->edit($id, $task);
+    }catch(PDOException){
+    }
+
+    $todo = $todolistController->fetch_todo($_SESSION['prof']['IdProf']);
+    $_SESSION['todo'] = $todo;
+
+    header('location: ../views/prof/todolist.php');
+    exit();
+}
+
+
  
 
 

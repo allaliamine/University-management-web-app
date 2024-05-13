@@ -62,6 +62,10 @@ require_once '../../securiteprof.php';
                    <h3>Rapport</h3>
                </a>
 
+               <a href="../../routing/routing.php?action=todolist">
+                   <span class="material-symbols-outlined">checklist</span>
+                   <h3>To-Do list</h3>
+               </a>
 
                <a href="#">
                    <span class="material-symbols-outlined">Notifications</span>
