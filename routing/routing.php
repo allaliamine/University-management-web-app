@@ -299,6 +299,8 @@ if(isset($_GET['action'])){
                 $_SESSION['lvl_mdls']= $moduleOfniveau;
                 $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé à "Cours" ', $_SESSION['etd']['IdCompte']);
                 header('location: ../views/etudiant/consulter_cours.php');
+                exit();
+                break;
 
             }elseif($_GET['etape'] == 2){
 
@@ -309,6 +311,8 @@ if(isset($_GET['action'])){
                 $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé consulter les cours de module ', $_SESSION['etd']['IdCompte']);
 
                 header('location: ../views/etudiant/consulter_coursfn.php');
+                exit();
+                break;
 
             }    
             
