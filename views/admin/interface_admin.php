@@ -39,7 +39,13 @@ $authentification = $_SESSION['chart'];
                    <h3>Dashboard</h3>
                </a>
                 
+               
+               <a href="calender/file.html" >
+                   <span class="material-symbols-outlined">calendar_month</span>
+                   <h3>Calendrier</h3>
+               </a>
 
+               
                <a href="../../routing/routing.php?action=note" >
                    <span class="material-symbols-outlined">menu_book</span>
                    <h3>Publier Notes</h3>

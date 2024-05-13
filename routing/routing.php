@@ -322,7 +322,25 @@ if(isset($_GET['action'])){
                 exit();
                 break;
 
-            }    
+            }   
+        case 'notification':
+                require_once '../controller/notificationEtudController.php';
+                $notificationEtudController = new notificationEtudController();
+                $idNiveau = $_SESSION['etd']['IdNiveau'];
+                $notification = $notificationEtudController->getNotificationRapportByNiveau($idNiveau);
+                $_SESSION['notification'] = $notification;
+                header('location: ../views/etudiant/consulterNotification.php');
+                exit();
+                break;
+            
+        case 'actualite':
+                require_once '../controller/notificationEtudController.php';
+                $notificationEtudController = new notificationEtudController();
+                $notification = $notificationEtudController->getAllNotification();
+                $_SESSION['allnotification']=$notification;    
+                header('location: ../views/etudiant/interface_Etudiant.php') ;           
+                exit();
+                break;      
             
         case 'tracker': 
 
@@ -359,6 +377,56 @@ if(isset($_GET['action'])){
     
 }
 
+
+/**
+ * pour afficher chaque annonce:
+ * 
+ */
+if(isset($_GET['idAnnonce'])){
+    session_start();
+    require "../controller/notificationEtudController.php";
+    $idAnnonce = $_GET['idAnnonce'];
+    $idNiveau = $_SESSION['etd']['IdNiveau'];
+    $idFiliere= $_SESSION['etd']['IdFiliere'];
+    $notificationEtudController = new notificationEtudController();
+    $notification = $notificationEtudController->lireNotification($idAnnonce);
+    $nameFiliere= $notificationEtudController->getFiliereName($idFiliere);
+    $nameLevel= $notificationEtudController->getLevelName($idNiveau);
+    
+    $_SESSION['notificationDetail'] = $notification;
+    $_SESSION['filiere'] = $nameFiliere['Nom'];
+    $_SESSION['niveau'] = $nameLevel['Nom'];
+    
+    header('location: ../views/etudiant/lireNotification.php');
+   
+   
+   }
+   
+   
+   /**
+    * pour afficher chaque actualite:
+    * 
+    */
+   if(isset($_GET['idActualite'])){
+    session_start();
+    require "../controller/notificationEtudController.php";
+    $idActualite = $_GET['idActualite'];
+    
+    $notificationEtudController = new notificationEtudController();
+    $notification = $notificationEtudController->showDetailActualite($idActualite);
+    $cible= $notificationEtudController->isActualitePublic($idActualite);
+    $_SESSION['actualiteDetail'] = $notification;
+    $_SESSION['cible']= $cible;
+    
+    header('location: ../views/etudiant/lireActualite.php');
+   
+   
+   }
+   
+   
+   
+   
+   
 
 /**
  * pour inserer le compte et etudiant

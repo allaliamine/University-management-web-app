@@ -47,7 +47,7 @@
                    <h3>Rapport</h3>
                </a>
 
-               <a href="#">
+               <a href="../../routing/routing.php?action=notification">
                    <span class="material-symbols-outlined">Notifications</span>
                    <h3>Notifications</h3>
                </a>
