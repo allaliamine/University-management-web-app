@@ -2,7 +2,6 @@
 session_start();
 //echo $_SESSION['error'];
 
-
 ?>
 
 <!DOCTYPE html>
