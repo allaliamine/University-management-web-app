@@ -10,7 +10,7 @@ function getAnnonceID($nom){
 
     global $conn;
 
-    $query = "SELECT * FROM annonce WHERE Titre=?;";
+    $query = "SELECT * FROM annonce WHERE Nom_fichier = ?";
     $stm=$conn->prepare($query);
     $stm ->execute([$nom]);
     $result=$stm->fetch(PDO::FETCH_ASSOC);
@@ -19,12 +19,13 @@ function getAnnonceID($nom){
 
 }
 
-function InsertAnnonce($nom){
+function InsertAnnonce($titre,$descriptif,$Nom_fichier,$date){
      
     global $conn;
-    $query = "INSERT INTO annonce (Titre , IdAdmin ) VALUES (?,?);";
+
+    $query = "INSERT INTO annonce (Titre, Descriptif, Nom_fichier ,date, IdAdmin ) VALUES (?,?,?,?,?);";
     $stm = $conn ->prepare($query);
-    $stm -> execute ([$nom,1]);
+    $stm ->execute([$titre,$descriptif,$Nom_fichier,$date,1]);
 
 }
 

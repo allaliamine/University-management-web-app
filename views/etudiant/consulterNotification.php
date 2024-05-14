@@ -25,31 +25,31 @@ if (isset($_SESSION['notification']) ) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications</title>
-    <link rel="stylesheet" href="style_Etudiant.css">
-    <!-- Ajoutez le lien vers Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-     <style>
-       .pagination-link {
-       color: #10504f;
-}.page-item.active .page-link {
-    background-color: #10504f;
-    border-color: #10504f;
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notifications</title>
+<link rel="stylesheet" href="style_Etudiant.css">
 
-/* Boutons de pagination désactivés */
-.page-item.disabled .page-link {
-    background-color: lightgray;
-    border-color: lightgray;
-    color: #10504f;
-}.page-item:hover .page-link {
-    background-color: #10504f;
-    border-color:#10504f;
-    color: white;
-}
-        </style>
+<style>
+   .pagination-link {
+        color: #10504f;
+    }
+    .page-item.active .page-link {
+        background-color: #10504f;
+        border-color: #10504f;
+    }
+    /* Boutons de pagination désactivés */
+    .page-item.disabled .page-link {
+        background-color: lightgray;
+        border-color: lightgray;
+        color: #10504f;
+    }
+    .page-item:hover .page-link {
+        background-color: #10504f;
+        border-color:#10504f;
+        color: white;
+    }
+</style>
 </head>
 <body>
 <div class="card col-xl-8 offset-3 mt-5">
@@ -74,8 +74,7 @@ if (isset($_SESSION['notification']) ) {
                             <td><?= $row["Titre"] ?></td>
                             <td><?= $row["date"] ?></td>
                             <td>
-                            
-                                 <a href='../../routing/routing.php?idAnnonce=<?= $row["IdAnnonce"] ?>' >Lire</a>
+                                <a href='../../routing/routing.php?idAnnonce=<?= $row["IdAnnonce"] ?>' >Lire</a>
                             </td>
                         </tr>
                     <?php } ?>

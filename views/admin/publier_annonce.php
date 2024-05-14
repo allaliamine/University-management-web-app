@@ -19,81 +19,95 @@ $levels = $_SESSION['levels'];
 <body>
     <div class="col-xl-8 offset-3 mt-5">
         <div class="card">
+
             <div class="card-header text-success">Publier les Annonces</div>
             <div class="card-body">
 
-        <form action="../../routing/routing.php" method="post" class="form" enctype="multipart/form-data">
+                <form action="../../routing/routing.php" method="post" class="form" enctype="multipart/form-data">
 
                     <div class="form-check">
-                    <?php foreach($majors as $mjr) { ?>
                         
-                        <label><?= $mjr['Nom']; ?></label>
-                    
-                        <?php foreach($levels as $lvl) { ?>
+                        <?php foreach($majors as $mjr) { ?>
+                            
+                            <label><?= $mjr['Nom']; ?></label>
                         
-                            <?php if($lvl['IdFiliere'] == $mjr['IdFiliere']) { ?>
+                            <?php foreach($levels as $lvl) { ?>
                             
-                                <div class="form-check">
-                            
-                                    <input class="form-check-input" type="checkbox" value="<?= $lvl['IdNiveau']; ?>" name="check_list[]">
-                            
-                                    <label class="form-check-label">
-                                        <?php echo $lvl['Nom']; ?>
-                                    </label>
-                                    
-                                </div>
-                            
-                            <?php } ?>
-                            
-                        <?php } ?>
-                            
-                    <?php } ?>
-                            
-                    <hr>
-                   <div class="form-check">
+                                <?php if($lvl['IdFiliere'] == $mjr['IdFiliere']) { ?>
                                 
-                            <input class="form-check-input" type="checkbox" value="0" name="check_list" id="toutes_filieres">
+                                    <div class="form-check">
                                 
-                            <label class="form-check-label">
-                                Toutes les Filieres 
-                            </label>
+                                        <input class="form-check-input" type="checkbox" value="<?= $lvl['IdNiveau']; ?>" name="check_list[]">
+                                
+                                        <label class="form-check-label">
+                                            <?php echo $lvl['Nom']; ?>
+                                        </label>
                                         
+                                    </div>
+                                
+                                <?php } ?>
+                                
+                            <?php } ?>
+                                
+                        <?php } ?>
+                    
+
+                        <hr>
+
+                        <div class="form-check">
+                                    
+                            <input class="form-check-input" type="checkbox" value="0" name="toutes_filieres" id="toutes_filieres">
+                                    
+                                <label class="form-check-label">
+                                    Toutes les Filieres 
+                                </label>
+                                            
+                            </div>
                         </div>
 
-              </div>
-
-                     
-                    <!----  importerfile---> 
-                    <div class="form-group mb-4">
-                        
-                        <label class="form-label" >Choisir un fichier pour l'importation:</label>
-                        <input type="file" accept=".pdf" name="annonce" class="form-control" required>
-                    </div>
-                                  
-                    <input type="submit" name="publier_annonce" class="btn btn-primary" value="Publier" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
+                        <div class="form-group mb-4">
                                 
-            </form>
+                            <label class="form-label" >Titre de l'Annonce : </label>
+                            <input type="text" name="titre" class="form-control" required>
+                        </div>
 
-            <?php if(isset($_SESSION['annonce_valide'])) {?>
-                <div class="alert alert-success d-flex align-items-center" role="alert">
-                    <div>
-                        <?php echo $_SESSION['annonce_valide'];?>
-                    </div>
-                </div>
-                <?php unset($_SESSION['annonce_valide']); ?>
-            <?php } ?>
+                        <div class="form-group mb-4">
+                            
+                            <label class="form-label" >Descriptif de l'Annonce : </label>
+                            <input type="text" name="descriptif" class="form-control" required>
+                        </div>
+                        
+                        <!----  importerfile---> 
+                        <div class="form-group mb-4">
+                            
+                            <label class="form-label" >Choisir un fichier pour l'importation:</label>
+                            <input type="file" accept=".pdf" name="annonce" class="form-control" required>
+                        </div>
 
-            <?php if(isset($_SESSION['annonce_invalide'])) {?>
-                <div class="alert alert-danger d-flex align-items-center" role="alert">
-                    <div>
-                        <?php echo $_SESSION['annonce_invalide'];?>
+                        <input type="submit" name="publier_annonce" class="btn btn-primary" value="Publier" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
+
                     </div>
-                </div>
-                <?php unset($_SESSION['annonce_invalide']); ?>
-            <?php } ?>
+                                
+                </form>
+
+                <?php if(isset($_SESSION['annonce_valide'])) {?>
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <div>
+                            <?php echo $_SESSION['annonce_valide'];?>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['annonce_valide']); ?>
+                <?php } ?>
+
+                <?php if(isset($_SESSION['annonce_invalide'])) {?>
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                        <div>
+                            <?php echo $_SESSION['annonce_invalide'];?>
+                        </div>
+                    </div>
+                    <?php unset($_SESSION['annonce_invalide']); ?>
+                <?php } ?>
             
-
-
             </div>
         </div>
 

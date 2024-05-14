@@ -329,6 +329,7 @@ if(isset($_GET['action'])){
                 $idNiveau = $_SESSION['etd']['IdNiveau'];
                 $notification = $notificationEtudController->getNotificationRapportByNiveau($idNiveau);
                 $_SESSION['notification'] = $notification;
+                $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé a "notification"', $_SESSION['etd']['IdCompte']);
                 header('location: ../views/etudiant/consulterNotification.php');
                 exit();
                 break;
@@ -364,6 +365,7 @@ if(isset($_GET['action'])){
             $idprof=$_SESSION['prof']['IdProf'];
             $todo=$todolistController->fetch_todo($idprof);
             $_SESSION['todo']=$todo;
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "to do list" ', $_SESSION['prof']['IdCompte']);
             header('location: ../views/prof/todolist.php');
             exit();
             break;
@@ -398,7 +400,8 @@ if(isset($_GET['idAnnonce'])){
     $_SESSION['notificationDetail'] = $notification;
     $_SESSION['filiere'] = $nameFiliere['Nom'];
     $_SESSION['niveau'] = $nameLevel['Nom'];
-   
+
+    $log->createAction($_SESSION['etd']['CNE'],'info','etd: a consulter une notification', $_SESSION['etd']['IdCompte']);
     header('location: ../views/etudiant/lireNotification.php');
    
    
@@ -420,17 +423,13 @@ if(isset($_GET['idAnnonce'])){
     $notificationEtudController->consultationAnnonce($idActualite,$idEtudiant);
     $_SESSION['actualiteDetail'] = $notification;
     $_SESSION['cible']= $cible;
-    
+
+    $log->createAction($_SESSION['etd']['CNE'],'info','etd: a consulter une Actualite', $_SESSION['etd']['IdCompte']);
     header('location: ../views/etudiant/lireActualite.php');
    
    
    }
    
-   
-   
-   
-   
-
 /**
  * pour inserer le compte et etudiant
  */
@@ -553,45 +552,55 @@ if (isset($_POST['publier_annonce'])) {
     require_once '../controller/AnnonceController.php';
     session_start();
     
+    if (isset($_FILES['annonce']) && $_FILES['annonce']['error'] == 0 && (!empty($_POST['check_list']) || isset($_POST['toutes_filieres'])) ) {
 
-    if (isset($_FILES['annonce']) && $_FILES['annonce']['error'] == 0) {
+        $file_name = $_FILES['annonce']['name'];  
+        $file_tmp = $_FILES['annonce']['tmp_name']; 
+        $destination = "../uploads/". basename($file_name);
+        $titre = $_POST['titre'];
+        $descriptif = $_POST['descriptif'];
 
-      
-
-            $file_name = $_FILES['annonce']['name'];  
-            $file_tmp = $_FILES['annonce']['tmp_name']; 
-            $destination = "../uploads/". basename($file_name);
-
-            if (move_uploaded_file($file_tmp, $destination)){
+        if (move_uploaded_file($file_tmp, $destination)){
+            echo "i got here <br>";
+                
+            if(!empty($_POST['check_list'])){
+                echo "again";
+                $annonce = new AnnonceController();
+                $annonce->insertAnnonce($titre, $descriptif, $file_name);
+                echo "again";
+                foreach($_POST['check_list'] as $value){
+                    $value = (int) $value;
+                    echo $value."<br>";
+                    $annonce->insertAnnonceNiveau($file_name, $value);
+                    $_SESSION['annonce_valide']="annonce a ete publier ";
                     
-                if(!empty($_POST['check_list'])){
-
-                    $annonce = new AnnonceController();
-                    $annonce->insertAnnonce($file_name);
-
-                    foreach($_POST['check_list'] as $value){
-
-                        $value = (int) $value;
-                        $annonce ->insertAnnonceNiveau($file_name, $value);
-
-                        $_SESSION['annonce_valide']="annonce a ete publier ";
-                        
-                    }
-                    $log->createAction($_SESSION['admin']['CIN'],'info','admin: a publier une annonce ', $_SESSION['admin']['IdCompte']);
-            
                 }
-    
+                $log->createAction($_SESSION['admin']['CIN'],'info','admin: a publier une annonce ', $_SESSION['admin']['IdCompte']);
+        
             }else{
-                $_SESSION['annonce_invalide']="Erreur!! l'Annonce n'a pas ete publier ";
-                $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors de publication d annonce ', $_SESSION['admin']['IdCompte']);
-
+                $all = $_POST['toutes_filieres'];
+                $all = (int) $all;
+                var_dump($all);
+                echo "<br>";
+                echo "ini wlh <br>";
+                $annonce = new AnnonceController();
+                $annonce->insertAnnonce($titre, $descriptif,$file_name);
+                echo "test insert1<br>";
+                $annonce->insertAnnonceNiveau($file_name, $all);
+                echo "test insert2<br>";
             }
-        // }else{
-        //     $log->createAction($_SESSION['admin']['CIN'],'error','etd: a tenter ajouter un rapport avec un fichier non pdf ',$_SESSION['admin']['IdCompte'] );
-        // }
+    
+        }else{
+            $_SESSION['annonce_invalide']="Erreur!! l'Annonce n'a pas ete publier ";
+            $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors de publication d annonce ', $_SESSION['admin']['IdCompte']);
+        }
+
+    }else{
+        $log->createAction($_SESSION['admin']['CIN'],'error','etd: a tenter ajouter un rapport avec un fichier non pdf ',$_SESSION['admin']['IdCompte'] );
     }
+    
     header('location: ../views/admin/publier_annonce.php');
-}
+} 
 
 /**
  * pour avoir les etudiants de niveau (retrancher etd ):

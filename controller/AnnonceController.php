@@ -13,13 +13,16 @@ class AnnonceController
     }
 
 
-    public function insertAnnonce($nom){
-        $this->annonce_Model->InsertAnnonce($nom);
+    public function insertAnnonce($titre,$descriptif,$Nom_fichier){
+
+        $date = date("Y-m-d");
+        $this->annonce_Model->InsertAnnonce($titre,$descriptif,$Nom_fichier,$date);
     }
 
     public function insertAnnonceNiveau($nom, $niveau){
 
-        $id=$this->annonce_Model->getAnnonceID($nom);
+        $id = $this->annonce_Model->getAnnonceID($nom);
+        
         $this->annonce_Model->InsertAnnonceNiveau($id,$niveau);
 
 

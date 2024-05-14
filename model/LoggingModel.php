@@ -20,7 +20,7 @@ class logginModel{
     function getAllLogins(){
         global $conn;
 
-        $req = $conn->prepare('select * from Journalisation');
+        $req = $conn->prepare('select * from Journalisation order by Date desc, Heure desc');
         $req->execute();
         $res = $req->fetchAll();
 

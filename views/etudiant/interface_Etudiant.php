@@ -40,7 +40,7 @@ $notification= $_SESSION['allnotification'];
             <div class="side-bar flex">
 
                 
-               <a href="#" >
+               <a href="./interface_Etudiant.php" >
                    <span class="material-symbols-outlined">grid_view</span>
                    <h3>Dashboard</h3>
                </a>
@@ -353,25 +353,25 @@ $notification= $_SESSION['allnotification'];
                                         </div>
                                         
                                         <div class="card-body">
-                                        <?php for ($i = 0; $i < 4; $i++) {?>
-                                           <?php  $row = $notification[$i]; ?>
-                                            <div>
-                                                <p class="actualite-titre"> <?php echo $row['Titre'] ?></p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                  annonce tres important
-                                                </span>
-                                                <a href='../../routing/routing.php?idActualite=<?= $row["IdAnnonce"]  ?>'> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-                                             <?php } ?>
-                                            <hr>
-                                       
-                                                <a href="consulterActualite.php"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
+                                            <?php for ($i = 0; $i < 4; $i++) {?>
+                                                <?php  $row = $notification[$i]; ?>
+                                                <div>
+                                                    <p class="text-success text-uppercase fw-bold"> <?php echo $row['Titre'] ?></p>
+                                                    <span class="d-inline-block text-truncate" style="max-width: 200px;">
+                                                        <?php echo $row['Descriptif']; ?>
+                                                    </span>
+                                                    <a href='../../routing/routing.php?idActualite=<?= $row["IdAnnonce"] ?>'> 
+                                                        <p class="text-success text-center ms-5 text-opacity-50">lire la suite...>> </p>
+                                                    </a>
+                                                </div>
+                                            <?php } ?>
 
+                                            <hr>
+                                    
+                                            <a href="consulterActualite.php"> 
+                                                <p class="text-success text-center ms-5">lire la suite...>> </p>
+                                            </a>
+                                            
                                         </div><!--card-body fin-->
 
                                     </div><!--card fin -->
