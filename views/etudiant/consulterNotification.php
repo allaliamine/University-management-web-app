@@ -115,23 +115,7 @@ if (isset($_SESSION['notification']) ) {
 </div>
 </div>
 <?php } ?>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Sélectionnez tous les liens "Lire"
-        var readLinks = document.querySelectorAll('tbody a');
 
-        // Ajoutez un gestionnaire d'événements à chaque lien
-        readLinks.forEach(function (link) {
-            link.addEventListener('click', function () {
-                // Trouvez la ligne parente de l'annonce (tr)
-                var announcementRow = link.closest('tr');
-
-                // Ajoutez la classe CSS pour marquer l'annonce comme lue
-                announcementRow.classList.add('annonce-lue');
-            });
-        });
-    });
-</script>
 
 <!-- Ajoutez le script de Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

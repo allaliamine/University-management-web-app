@@ -66,6 +66,20 @@ class notificationEtud{
         return $res;
     }
 
+    public function consultationAnnonce($idAnnonce, $idEtudiant) {
+        global $conn;
+    
+       
+        $checkQuery = $conn->prepare('SELECT COUNT(*) AS count FROM consultation_annonce WHERE IdAnnonce = ? AND IdEtudiant = ?');
+        $checkQuery->execute([$idAnnonce, $idEtudiant]);
+        $result = $checkQuery->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result['count'] == 0) {
 
+
+             $req = $conn->prepare('INSERT INTO `consultation_annonce`(`IdAnnonce`, `IdEtudiant`) VALUES (?,?) ');
+            $req->execute([$idAnnonce, $idEtudiant]);
+        }
+    }
 
 }

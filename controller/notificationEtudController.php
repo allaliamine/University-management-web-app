@@ -55,6 +55,12 @@ public function lireNotification($idAnnonce){
     return $actualite;
 
   }
+  public function consultationAnnonce($idAnnonce, $idEtudiant){
+      
+    $notificationEtud = new notificationEtud();
+    $notificationEtud->consultationAnnonce($idAnnonce, $idEtudiant);
+   
+  }
 
    
 }

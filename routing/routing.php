@@ -388,15 +388,17 @@ if(isset($_GET['idAnnonce'])){
     $idAnnonce = $_GET['idAnnonce'];
     $idNiveau = $_SESSION['etd']['IdNiveau'];
     $idFiliere= $_SESSION['etd']['IdFiliere'];
+    $idEtudiant= $_SESSION['etd']['IdEtudiant'];
     $notificationEtudController = new notificationEtudController();
     $notification = $notificationEtudController->lireNotification($idAnnonce);
     $nameFiliere= $notificationEtudController->getFiliereName($idFiliere);
     $nameLevel= $notificationEtudController->getLevelName($idNiveau);
+    $notificationEtudController->consultationAnnonce($idAnnonce,$idEtudiant);
     
     $_SESSION['notificationDetail'] = $notification;
     $_SESSION['filiere'] = $nameFiliere['Nom'];
     $_SESSION['niveau'] = $nameLevel['Nom'];
-    
+   
     header('location: ../views/etudiant/lireNotification.php');
    
    
@@ -411,10 +413,11 @@ if(isset($_GET['idAnnonce'])){
     session_start();
     require "../controller/notificationEtudController.php";
     $idActualite = $_GET['idActualite'];
-    
+    $idEtudiant= $_SESSION['etd']['IdEtudiant'];
     $notificationEtudController = new notificationEtudController();
     $notification = $notificationEtudController->showDetailActualite($idActualite);
     $cible= $notificationEtudController->isActualitePublic($idActualite);
+    $notificationEtudController->consultationAnnonce($idActualite,$idEtudiant);
     $_SESSION['actualiteDetail'] = $notification;
     $_SESSION['cible']= $cible;
     
