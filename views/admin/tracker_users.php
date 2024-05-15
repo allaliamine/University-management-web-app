@@ -66,7 +66,7 @@ if (isset($_SESSION['logins'])) {
                 <ul class="pagination">
                     <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
                         <li class="page-item <?= $i == $current_page ? 'active' : ''; ?>">
-                            <a class="page-link" href="./tracker_users.php?page=<?= $i; ?>"> <?= $i; ?> </a>
+                            <a class="page-link"  href="./tracker_users.php?page=<?= $i; ?>"> <?= $i; ?> </a>
                         </li>
                     <?php } ?>
                 </ul>

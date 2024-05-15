@@ -1,3 +1,14 @@
+<?php
+
+
+$countNotif = $_SESSION['countNotif'];    
+$countSeenNotif = $_SESSION['countSeenNotif']; 
+
+
+$countNotif = $countNotif[0]["nmbrAnnonce"];
+$countSeenNotif = $countSeenNotif[0]["nmbrSeen"];
+?>
+
 <html lang="en">
 <head>
     <title>Edu-Net</title>
@@ -26,7 +37,7 @@
             <div class="side-bar flex">
 
                 
-               <a href="../../views/etudiant/interface_Etudiant.php" >
+               <a href="../../routing/routing.php?action=actualite" >
                    <span class="material-symbols-outlined">grid_view</span>
                    <h3>Dashboard</h3>
                </a>
@@ -118,37 +129,12 @@
     
                         <!--notif icon + dropdown menu-->
                         <li class="nav-item mx-1 dropdown" style="list-style: none;" >
-                            <a  class="nav-link" data-toggle="dropdown" data-bs-toggle="dropdown">
+                            <a  class="nav-link" href="../../routing/routing.php?action=notification">
                                 <i class="fa-solid fa-inbox"></i>
                                 <span class="translate-middle badge rounded-pill bg-danger">
-                                    +99
+                                    <?php echo $countNotif - $countSeenNotif; ?>
                                 </span>
                             </a>
-        
-                            <ul class="dropdown-menu shadow p-0 dropdown-menu-right">
-                                <div class="card m-0 p-0">
-                                    <div class="card-header msg_menu text-center text-light">Messagerie</div>
-                                    <div class="card-body py-1">
-                                    
-                                        <li><a class="list-group-item dropdown-item"  href="#">notif</a></li>
-                                        
-                                        <li><a class="list-group-item dropdown-item" href="#">other notif</a></li>
-                                    
-                                        <li><a class="list-group-item dropdown-item" href="#">other notif</a></li>
-        
-                                        <hr class="my-1">
-        
-                                        <li >
-                                            <a class="dropdown-item text-center " href="#">
-                                                <span class="text-success">
-                                                    Lire plus de messages >>
-                                                </span>
-                                            </a>
-                                        </li>
-        
-                                    </div>
-                                </div>
-                            </ul>
                         </li>
                         <!--end of notif icon + dropdown menu-->
                         
@@ -171,7 +157,7 @@
                                             Compte
                                         </a>
                                         
-                                        <a class="dropdown-item ps-0" href="#">
+                                        <a class="dropdown-item ps-0" href="../../routing/routing.php?action=editerCompte&role=2">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Editer Mon Compte
                                         </a>                            

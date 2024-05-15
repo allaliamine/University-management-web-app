@@ -55,8 +55,28 @@ if(isset($_GET['action'])){
 
     $action = $_GET['action'];
     require_once '../controller/logController.php';
+    require_once '../controller/notificationEtudController.php';
+
+    $notificationEtudController = new notificationEtudController();
+    $notification = $notificationEtudController->getAllNotification();
+    $_SESSION['allnotification'] = $notification;
+
 
     $log = new loginController();
+
+    if( isset($_SESSION['etd']) ){
+
+
+        $numberOfAllNotif = $notificationEtudController->getNotif();
+        $seenBystudent = $notificationEtudController->getSeenNotifOfStudent($_SESSION['etd']['IdEtudiant']);
+
+        $_SESSION['countNotif'] = $numberOfAllNotif;    
+        $_SESSION['countSeenNotif'] = $seenBystudent;    
+
+        
+        
+    }
+
 
     switch ($action){
 
@@ -323,25 +343,34 @@ if(isset($_GET['action'])){
                 break;
 
             }   
+
         case 'notification':
-                require_once '../controller/notificationEtudController.php';
-                $notificationEtudController = new notificationEtudController();
-                $idNiveau = $_SESSION['etd']['IdNiveau'];
-                $notification = $notificationEtudController->getNotificationRapportByNiveau($idNiveau);
-                $_SESSION['notification'] = $notification;
-                $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé a "notification"', $_SESSION['etd']['IdCompte']);
-                header('location: ../views/etudiant/consulterNotification.php');
-                exit();
-                break;
+            require_once '../controller/notificationEtudController.php';
+            $notificationEtudController = new notificationEtudController();
+            $idNiveau = $_SESSION['etd']['IdNiveau'];
+            $notification = $notificationEtudController->getNotificationRapportByNiveau($idNiveau);
+            $_SESSION['notification'] = $notification;
+            $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé a "notification"', $_SESSION['etd']['IdCompte']);
+            header('location: ../views/etudiant/consulterNotification.php');
+            exit();
+            break;
             
         case 'actualite':
-                require_once '../controller/notificationEtudController.php';
-                $notificationEtudController = new notificationEtudController();
-                $notification = $notificationEtudController->getAllNotification();
-                $_SESSION['allnotification']=$notification;    
-                header('location: ../views/etudiant/interface_Etudiant.php') ;           
-                exit();
-                break;      
+            // require_once '../controller/notificationEtudController.php';
+            // $notificationEtudController = new notificationEtudController();
+            // $notification = $notificationEtudController->getAllNotification();
+
+            // $numberOfAllNotif = $notificationEtudController->getNotif();
+            // $seenBystudent = $notificationEtudController->getSeenNotifOfStudent($_SESSION['etd']['IdEtudiant']);
+
+            // $_SESSION['countNotif'] = $numberOfAllNotif;    
+            // $_SESSION['countSeenNotif'] = $seenBystudent;    
+
+            // $_SESSION['allnotification'] = $notification;   
+
+            header('location: ../views/etudiant/interface_Etudiant.php') ;           
+            exit();
+            break;      
             
         case 'tracker': 
 
@@ -369,6 +398,48 @@ if(isset($_GET['action'])){
             header('location: ../views/prof/todolist.php');
             exit();
             break;
+
+        case 'compte':
+            if($_GET['role'] == 0 ){
+                $log->createAction($_SESSION['admin']['CIN'],'info','admin: est allé à "Compte" ', $_SESSION['admin']['IdCompte']);
+                header('location: ../views/admin/afficher_info.php');
+                exit();
+                break;
+
+            }
+            elseif($_GET['role'] == 1 ){
+                $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "Compte" ', $_SESSION['prof']['IdCompte']);
+                header('location: ../views/prof/afficher_info.php');
+                exit();
+                break;
+            }
+            if($_GET['role'] == 2 ){
+                $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé à "Compte" ', $_SESSION['etd']['IdCompte']);
+                header('location: ../views/etudiant/afficher_info.php');
+                exit();
+                break;
+            }
+
+        case 'editerCompte':
+            if($_GET['role'] == 0 ){
+                $log->createAction($_SESSION['admin']['CIN'],'info','admin: est allé à "editer compte" ', $_SESSION['admin']['IdCompte']);
+                header('location: ../views/admin/editer_compte.php');
+                exit();
+                break;
+
+            }
+            elseif($_GET['role'] == 1 ){
+                $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "editer compte" ', $_SESSION['prof']['IdCompte']);
+                header('location: ../views/prof/editer_compte.php');
+                exit();
+                break;
+            }
+            if($_GET['role'] == 2 ){
+                $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé à "editer compte" ', $_SESSION['etd']['IdCompte']);
+                header('location: ../views/etudiant/editer_compte.php');
+                exit();
+                break;
+            } 
 
         default:
 
@@ -1147,9 +1218,235 @@ if(isset($_POST['action']) && $_POST['action'] === 'editTask'){
     exit();
 }
 
+/* changer compte details (Admin) */
+if(isset($_POST['compteAdmin'])){
+    session_start();
+
+    require_once '../controller/CompteController.php';
+
+    $compte = new CompteController();
+
+    $pattern = "/^0\d{9}$/";
+
+    $idAdmin = $_SESSION['admin']['IdAdmin'];
+    $idCompte = $_SESSION['admin']['IdCompte'];  
+    
+    
+    if(!empty($_POST['email'])) {
+        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $email = $_POST['email'];
+
+            $admin = $compte->getAdminByIdCompte($idCompte);
+            $_SESSION['admin'] = $admin;
+
+            $compte->changeAdminInfo($email, $_SESSION['admin']['Tel'], $idAdmin);
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: a changer l\'email ', $_SESSION['admin']['IdCompte']);
+            $_SESSION['editer-success'] = "Votre email/numéro de téléphone a été modifié avec succès";
+        }else{
+            $_SESSION['email-invalide']= "format de l'email est invalide ";
+        }
+    }
+
+    
+    if (!empty($_POST['numero'])) {
+        if(preg_match($pattern, $_POST['numero'])){
+            $tel = (int) $_POST['numero'];
+
+            $admin = $compte->getAdminByIdCompte($idCompte);
+            $_SESSION['admin'] = $admin;
+
+            $compte->changeAdminInfo($_SESSION['admin']['Email'], $tel, $idAdmin);
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: a changer le numero de telephone ', $_SESSION['admin']['IdCompte']);
+            $_SESSION['editer-success'] = "Votre email/numéro de téléphone a été modifié avec succès";
+        }else{
+            $_SESSION['tel-invalide']="format de numéro de téléphone est invalide ";
+        }
+    }
+
+    
+    if(isset($_POST['mdp']) && isset($_POST['mdp2']) && isset($_POST['mdp-1'])) {
+        $mdp = $_POST['mdp'];
+        $mdp2 = $_POST['mdp2'];
+        $AncienneMdp =  $_POST['mdp-1'];
+        
+        if (!empty($mdp) && !empty($mdp2) && !empty($AncienneMdp)) {
+            if($AncienneMdp == $_SESSION['admin']['Mdp']){
+                if($mdp == $mdp2){
+                    $compte->changeAdminpassword($mdp, $idAdmin);
+                    $compte->changeComptePassword($mdp, $idCompte);
+                    $log->createAction($_SESSION['admin']['CIN'],'info','admin: a changer mot de passe ', $_SESSION['admin']['IdCompte']);
+                    $_SESSION['mdp-success'] = "Votre mot de passe a été changé avec succès";
+                } else {
+                    $_SESSION['mdp-non-identique'] = "Les deux mots de passe ne sont pas identiques";
+                }
+            } else {
+                $_SESSION['ancienn-mdp-invalide'] = "L'ancien mot de passe n'est pas correct";
+            }
+        }
+    }
+
+    
+    $admin = $compte->getAdminByIdCompte($idCompte);
+    $_SESSION['admin'] = $admin;
+
+    
+    header('location: ../views/admin/editer_compte.php');
+}
+
+/* changer compte details (prof)*/
+if(isset($_POST['compteProf'])){
+    session_start();
+
+    require_once '../controller/CompteController.php';
+
+    $compte = new CompteController();
+
+    $pattern = "/^0\d{9}$/";
+
+    $idProf = $_SESSION['prof']['IdProf'];
+    $idCompte = $_SESSION['prof']['IdCompte'];  
+    
+    
+    if(!empty($_POST['email'])) {
+        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $email = $_POST['email'];
+
+            $prof = $compte->getProfByIdCompte($idCompte);
+            $_SESSION['prof'] = $prof;
+
+            $compte->changeProfInfo($email, $_SESSION['prof']['Tel'], $idProf);
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: a changer l\'email ', $_SESSION['prof']['IdCompte']);
+            $_SESSION['editer-success'] = "Votre email/numéro de téléphone a été modifié avec succès";
+        }else{
+            $_SESSION['email-invalide']= "format de l'email est invalide ";
+        }
+    }
+
+    
+    if (!empty($_POST['numero'])) {
+        if(preg_match($pattern, $_POST['numero'])){
+            $tel = (int) $_POST['numero'];
+
+            $prof = $compte->getProfByIdCompte($idCompte);
+            $_SESSION['prof'] = $prof;
+
+            $compte->changeProfInfo($_SESSION['prof']['Email'], $tel, $idProf);
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: a changer le numero de telephone ', $_SESSION['prof']['IdCompte']);
+            $_SESSION['editer-success'] = "Votre email/numéro de téléphone a été modifié avec succès";
+        }else{
+            $_SESSION['tel-invalide']="format de numéro de téléphone est invalide ";
+        }
+    }
+
+    
+    if(isset($_POST['mdp']) && isset($_POST['mdp2']) && isset($_POST['mdp-1'])) {
+
+        $mdp = $_POST['mdp'];
+        $mdp2 = $_POST['mdp2'];
+        $AncienneMdp =  $_POST['mdp-1'];
+        
+        if (!empty($mdp) && !empty($mdp2) && !empty($AncienneMdp)) {
+            if($AncienneMdp == $_SESSION['prof']['Mdp']){
+                if($mdp == $mdp2){
+                    $compte->changeProfpassword($mdp, $idProf);
+                    $compte->changeComptePassword($mdp, $idCompte);
+                    $log->createAction($_SESSION['prof']['CIN'],'info','prof: a changer mot de passe', $_SESSION['prof']['IdCompte']);
+                    $_SESSION['mdp-success'] = "Votre mot de passe a été changé avec succès";
+                } else {
+                    $_SESSION['mdp-non-identique'] = "Les deux mots de passe ne sont pas identiques";
+                }
+            } else {
+                $_SESSION['ancienn-mdp-invalide'] = "L'ancien mot de passe n'est pas correct";
+            }
+        }
+    }
+
+    
+    $prof = $compte->getProfByIdCompte($idCompte);
+    $_SESSION['prof'] = $prof;
+
+    
+    header('location: ../views/prof/editer_compte.php');
+}
+
+
+/* changer compte details (etudiant)*/
+if(isset($_POST['compteEtudiant'])){
+    session_start();
+
+    require_once '../controller/CompteController.php';
+
+    $compte = new CompteController();
+
+    $pattern = "/^0\d{9}$/";
+
+    $idEtud = $_SESSION['etd']['IdEtudiant'];
+    $idCompte = $_SESSION['etd']['IdCompte'];  
+    
+    
+    if(!empty($_POST['email'])) {
+        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $email = $_POST['email'];
+
+            $etd = $compte->getEtudiantByIdCompte($idCompte);
+            $_SESSION['etd'] = $etd;
+
+            $compte->changeEtudiantInfo($email, $_SESSION['etd']['Tel'], $idEtud);
+            $log->createAction($_SESSION['etd']['CNE'],'info','etd: a changer l\'email ', $_SESSION['etd']['IdCompte']);
+            $_SESSION['editer-success'] = "Votre email/numéro de téléphone a été modifié avec succès";
+        }else{
+            $_SESSION['email-invalide']= "format de l'email est invalide ";
+        }
+    }
+
+    
+    if (!empty($_POST['numero'])) {
+        if(preg_match($pattern, $_POST['numero'])){
+            $tel = (int) $_POST['numero'];
+
+            $etd = $compte->getEtudiantByIdCompte($idCompte);
+            $_SESSION['etd'] = $etd;
+
+            $compte->changeEtudiantInfo($_SESSION['etd']['Email'], $tel, $idEtud);
+            $log->createAction($_SESSION['etd']['CNE'],'info','etd: a changer le numero de telephone ', $_SESSION['etd']['IdCompte']);
+            $_SESSION['editer-success'] = "Votre email/numéro de téléphone a été modifié avec succès";
+        }else{
+            $_SESSION['tel-invalide']="format de numéro de téléphone est invalide ";
+        }
+    }
+
+    
+    if(isset($_POST['mdp']) && isset($_POST['mdp2']) && isset($_POST['mdp-1'])) {
+
+        $mdp = $_POST['mdp'];
+        $mdp2 = $_POST['mdp2'];
+        $AncienneMdp =  $_POST['mdp-1'];
+        
+        if (!empty($mdp) && !empty($mdp2) && !empty($AncienneMdp)) {
+            if($AncienneMdp == $_SESSION['etd']['Mdp']){
+                if($mdp == $mdp2){
+                    $compte->changeEtudiantpassword($mdp, $idEtud);
+                    $compte->changeComptePassword($mdp, $idCompte);
+                    $log->createAction($_SESSION['etd']['CNE'],'info','etd: a changer mot de passe', $_SESSION['etd']['IdCompte']);
+                    $_SESSION['mdp-success'] = "Votre mot de passe a été changé avec succès";
+                } else {
+                    $_SESSION['mdp-non-identique'] = "Les deux mots de passe ne sont pas identiques";
+                }
+            } else {
+                $_SESSION['ancienn-mdp-invalide'] = "L'ancien mot de passe n'est pas correct";
+            }
+        }
+    }
+
+    
+    $etd = $compte->getEtudiantByIdCompte($idCompte);
+    $_SESSION['etd'] = $etd;
+
+    
+    header('location: ../views/etudiant/editer_compte.php');
+}
 
  
 
 
 ?>
-

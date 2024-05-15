@@ -50,43 +50,32 @@ $levels = $_SESSION['levels'];
                             <?php } ?>
                                 
                         <?php } ?>
-                    
-
-                        <hr>
-
-                        <div class="form-check">
-                                    
-                            <input class="form-check-input" type="checkbox" value="0" name="toutes_filieres" id="toutes_filieres">
-                                    
-                                <label class="form-check-label">
-                                    Toutes les Filieres 
-                                </label>
-                                            
-                            </div>
                         </div>
+                    
+                        <hr>
 
                         <div class="form-group mb-4">
                                 
                             <label class="form-label" >Titre de l'Annonce : </label>
-                            <input type="text" name="titre" class="form-control" required>
+                            <input type="text" name="titre" class="form-control h-25" required>
                         </div>
 
                         <div class="form-group mb-4">
                             
                             <label class="form-label" >Descriptif de l'Annonce : </label>
-                            <input type="text" name="descriptif" class="form-control" required>
+                            <input type="text" name="descriptif" class="form-control h-25" required>
                         </div>
                         
                         <!----  importerfile---> 
                         <div class="form-group mb-4">
                             
                             <label class="form-label" >Choisir un fichier pour l'importation:</label>
-                            <input type="file" accept=".pdf" name="annonce" class="form-control" required>
+                            <input type="file" accept=".pdf" name="annonce" class="form-control h-25" required>
                         </div>
 
-                        <input type="submit" name="publier_annonce" class="btn btn-primary" value="Publier" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
+                        <input type="submit" name="publier_annonce" class="btn btn-success" id="bouton" value="Publier" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
 
-                    </div>
+                    
                                 
                 </form>
 

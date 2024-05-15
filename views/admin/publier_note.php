@@ -20,10 +20,10 @@ $modules = $_SESSION['modules'];
 <body>
 
 <div class="card col-xl-8 offset-3 mt-5">
-    <div class="card-header">formulaire de Publication des notes</div>
+    <div class="card-header">Formulaire de Publication des notes</div>
     <div class="card-body">
 
-        <p class="text-primary">Veuillez saisir toutes les critères de la publication</p>
+        <p class="text-success">Veuillez saisir toutes les critères de la publication</p>
 
         <form action="../../routing/routing.php" method="post" class="form" enctype="multipart/form-data">
 
@@ -51,7 +51,7 @@ $modules = $_SESSION['modules'];
 
             <div class="form-group mb-4">
                 <label class="form-label">Choisir un fichier de l'importation:</label>
-                <input type="file" accept=".xlsx, .xls" name="file" class="form-control" required>
+                <input type="file" accept=".xlsx, .xls" name="file" class="form-control h-25" required>
             </div>
 
             <input type="submit" name="importSubmit" class="btn btn-success" id="bouton" value="publier" onclick="return confirm('Vous etes sure effectuer cette operation ?')">

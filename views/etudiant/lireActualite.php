@@ -9,7 +9,6 @@ if(isset($_SESSION['actualiteDetail'])) {
     $cible = $_SESSION['cible'];
     $nbr=count($cible);
 ($cible);
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +34,7 @@ if(isset($_SESSION['actualiteDetail'])) {
 
         <div class="card-body">
             <div>  Une nouvelle actualite est publie sur le tableau d'actualite: </div>
-                <?php $path="../../uploads/".$res[0]['Titre']; ?>
+                <?php $path="../../uploads/".$res[0]['Nom_fichier']; ?>
                 <a href="<?= $path; ?>" download>Download Here</a>
                 <div>publie le : <?php echo $res[0]['date']?> </div>
                 </div>

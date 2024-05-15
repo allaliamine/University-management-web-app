@@ -24,7 +24,7 @@ $levels = $_SESSION['levels'];
         <div class="card-header">formulaire d'ajout des etudiants</div>
         <div class="card-body">
 
-            <p class="text-primary">Veuillez saisir toutes les critères de l'ajout</p>
+            <p class="text-success">Veuillez saisir toutes les critères de l'ajout</p>
 
             <form action="../../routing/routing.php" method="post" class="form" enctype="multipart/form-data">
                 
@@ -52,7 +52,7 @@ $levels = $_SESSION['levels'];
                 </div>
 
                 
-                <input type="submit" name="ajout-etudiant" id="bouton" class="btn btn-primary" value="ajouter" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
+                <input type="submit" name="ajout-etudiant" id="bouton" class="btn btn-success" value="ajouter" onclick="return confirm('Vous etes sure effectuer cette operation ?')">
             </form>
 
             <?php if(isset($_SESSION['ajouterEtudiant'])) {?>

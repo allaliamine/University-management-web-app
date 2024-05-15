@@ -56,11 +56,6 @@
                    <h3>To-Do list</h3>
                </a>
 
-               <a href="#">
-                   <span class="material-symbols-outlined">Notifications</span>
-                   <h3>Notifications</h3>
-               </a>
-
                <a href="../../logout.php">
                     <span class="material-symbols-outlined">logout</span>
                     <h3>Log-out</h3>
@@ -122,43 +117,6 @@
                         </li>
                         <!--end of search media queries-->
 
-
-    
-                        <!--notif icon + dropdown menu-->
-                        <li class="nav-item mx-1 dropdown" style="list-style: none;" >
-                            <a  class="nav-link" data-toggle="dropdown" data-bs-toggle="dropdown">
-                                <i class="fa-solid fa-inbox"></i>
-                                <span class="translate-middle badge rounded-pill bg-danger">
-                                    +99
-                                </span>
-                            </a>
-        
-                            <ul class="dropdown-menu shadow p-0 dropdown-menu-right">
-                                <div class="card m-0 p-0">
-                                    <div class="card-header msg_menu text-center text-light">Messagerie</div>
-                                    <div class="card-body py-1">
-                                    
-                                        <li><a class="list-group-item dropdown-item"  href="#">notif</a></li>
-                                        
-                                        <li><a class="list-group-item dropdown-item" href="#">other notif</a></li>
-                                    
-                                        <li><a class="list-group-item dropdown-item" href="#">other notif</a></li>
-        
-                                        <hr class="my-1">
-        
-                                        <li >
-                                            <a class="dropdown-item text-center " href="#">
-                                                <span class="text-success">
-                                                    Lire plus de messages >>
-                                                </span>
-                                            </a>
-                                        </li>
-        
-                                    </div>
-                                </div>
-                            </ul>
-                        </li>
-                        <!--end of notif icon + dropdown menu-->
                         
                         <div class="topbar-divider"></div>
 
@@ -174,15 +132,16 @@
                                     <div class="card-header user_menu text-center text-light">Profile</div>
                                     <div class="card-body py-1 ">
                                 
-                                        <a class="dropdown-item ps-0" href="./afficher_info.php">
+                                        <a class="dropdown-item ps-0" href="../../routing/routing.php?action=compte&role=1">
                                             <i class="fa-solid fa-user"></i>
                                             Compte
                                         </a>
                                         
-                                        <a class="dropdown-item ps-0" href="#">
+                                        <a class="dropdown-item ps-0" href="../../routing/routing.php?action=editerCompte&role=1">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Editer Mon Compte
                                         </a>
+
                                     </div>
                                 </div>
                             </div>

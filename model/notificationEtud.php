@@ -82,4 +82,30 @@ class notificationEtud{
         }
     }
 
+
+    public function getNotif(){
+
+        global $conn;
+
+        $req = $conn->prepare('select count(*) as nmbrAnnonce from Annonce');
+        $req->execute();
+        $res = $req->fetchAll();
+
+        return $res;
+
+    }
+
+
+    public function getSeenNotifOfStudent($idEtudiant){
+
+        global $conn;
+
+        $req = $conn->prepare('select count(*) as nmbrSeen from consultation_annonce where IdEtudiant = ?');
+        $req->execute([$idEtudiant]);
+        $res = $req->fetchAll();
+
+        return $res;
+
+    }
+
 }

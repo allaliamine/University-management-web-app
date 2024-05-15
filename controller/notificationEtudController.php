@@ -62,6 +62,20 @@ public function lireNotification($idAnnonce){
    
   }
 
+
+  public function getNotif(){
+    $res = $this->notificationEtud->getNotif();
+
+    return $res;
+
+  }
+
+  public function getSeenNotifOfStudent($idEtudiant){
+
+    $res = $this->notificationEtud->getSeenNotifOfStudent($idEtudiant);
+    return $res;
+  }
+
    
 }
 

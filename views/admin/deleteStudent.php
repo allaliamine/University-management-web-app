@@ -27,7 +27,7 @@ if(isset($_SESSION['FieldLevel'])){
 
            <?php if ($rowCount > 0) { ?>
 
-                <p class='text-primary mb-4'>Veuillez choisir le Niveau correspond : </p>
+                <p class='text-success mb-4'>Veuillez choisir le Niveau correspond : </p>
 
                 <?= $currentFiliere = null; ?>
 

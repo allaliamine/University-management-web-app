@@ -18,10 +18,10 @@ $modules = $_SESSION['modules'];
 <body>
 
 <div class="card col-xl-8 offset-3 mt-5">
-    <div class="card-header">formulaire de Publication d'annonce de postulation de Rapport</div>
+    <div class="card-header">Formulaire de Publication d'annonce de postulation de Rapport</div>
     <div class="card-body">
 
-        <p class="text-primary">Veuillez saisir toutes les critères de la publication</p>
+        <p class="text-success">Veuillez saisir toutes les critères de la publication</p>
 
         <form action="../../routing/routing.php" method="post" class="form" enctype="multipart/form-data">
 

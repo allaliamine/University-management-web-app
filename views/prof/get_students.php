@@ -25,7 +25,7 @@ $module = $_SESSION['prf_mdls'] ;
     <div class="card col-xl-8 offset-3 mt-5">
         <div class="card-header">Formulaire de consultation d'Absence</div>
         <div class="card-body">
-            <p class="text-primary">Veuillez saisir toutes les critères pour consulter les abscences</p>
+            <p class="text-success">Veuillez saisir toutes les critères pour consulter les abscences</p>
             <form action="../../routing/routing.php" method="post" class="form">
                 
                 <div class="form-group mb-4">
@@ -46,7 +46,7 @@ $module = $_SESSION['prf_mdls'] ;
                 </div>
 
 
-                <input type="submit" name="consulteStudent" id="bouton" class="btn btn-primary" value="acceder">
+                <input type="submit" name="consulteStudent" id="bouton" class="btn btn-success" value="acceder">
 
             </form>            
         </div>

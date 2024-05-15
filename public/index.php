@@ -62,16 +62,13 @@ session_start();
                                         <div class="form-group mt-3">
                                             <input name="password" type="password" class="form-control input-user" placeholder="Saisir votre mot de passe" required>
                                         </div>
-                                        <button type="submit" class="btn mt-3" name="submit"> Se connecter</button>
+                                        <button type="submit" class="btn mt-3 mb-4" name="submit"> Se connecter</button>
 
                                     </form>
                         
-                                    <div class="text-center mt-3">
-                                        <a class="small">Mot de passe oublié ?</a>
-                                    </div>
 
                                 </div>
-                                <div class="text-center pb-2">Copyright @ 2024 - tous les droits reserves</div>
+                                <div class="text-center pb-0 mb-0">Copyright @ 2024 - tous les droits reserves</div>
                             </div>
 
                             <div class="col-lg-6 right-side py-5 pe-3">

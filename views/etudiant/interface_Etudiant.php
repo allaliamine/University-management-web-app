@@ -1,14 +1,26 @@
 <?php
-
 session_start();
 require_once '../../securiteetd.php';
 $authentification = $_SESSION['chart'];
+
+
+
 if(!isset($_SESSION['allnotification'])){
-header("Location: ../../routing/routing.php?action=actualite");
+
+    header("Location: ../../routing/routing.php?action=actualite");
 }
 else{
-$etd=$_SESSION['etd'];
-$notification= $_SESSION['allnotification'];
+    $etd=$_SESSION['etd'];
+    $notification= $_SESSION['allnotification'];
+
+    $countNotif = $_SESSION['countNotif'];    
+    $countSeenNotif = $_SESSION['countSeenNotif']; 
+
+   
+   $countNotif = $countNotif[0]["nmbrAnnonce"];
+   $countSeenNotif = $countSeenNotif[0]["nmbrSeen"];
+   
+}
 ?>
 
 <html lang="en">
@@ -132,37 +144,12 @@ $notification= $_SESSION['allnotification'];
     
                         <!--notif icon + dropdown menu-->
                         <li class="nav-item mx-1 dropdown" style="list-style: none;" >
-                            <a  class="nav-link" data-toggle="dropdown" data-bs-toggle="dropdown">
+                            <a  class="nav-link" href="../../routing/routing.php?action=notification">
                                 <i class="fa-solid fa-inbox"></i>
                                 <span class="translate-middle badge rounded-pill bg-danger">
-                                    +99
+                                    <?php echo $countNotif - $countSeenNotif; ?>
                                 </span>
                             </a>
-        
-                            <ul class="dropdown-menu shadow p-0 dropdown-menu-right">
-                                <div class="card m-0 p-0">
-                                    <div class="card-header msg_menu text-center text-light">Messagerie</div>
-                                    <div class="card-body py-1">
-                                    
-                                        <li><a class="list-group-item dropdown-item"  href="#">notif</a></li>
-                                        
-                                        <li><a class="list-group-item dropdown-item" href="#">other notif</a></li>
-                                    
-                                        <li><a class="list-group-item dropdown-item" href="#">other notif</a></li>
-        
-                                        <hr class="my-1">
-        
-                                        <li >
-                                            <a class="dropdown-item text-center " href="#">
-                                                <span class="text-success">
-                                                    Lire plus de messages >>
-                                                </span>
-                                            </a>
-                                        </li>
-        
-                                    </div>
-                                </div>
-                            </ul>
                         </li>
                         <!--end of notif icon + dropdown menu-->
                         
@@ -180,12 +167,12 @@ $notification= $_SESSION['allnotification'];
                                     <div class="card-header user_menu text-center text-light">Profile</div>
                                     <div class="card-body py-1 ">
                                 
-                                        <a class="dropdown-item ps-0" href="#">
+                                        <a class="dropdown-item ps-0" href="../../routing/routing.php?action=compte&role=2">
                                             <i class="fa-solid fa-user"></i>
                                             Compte
                                         </a>
                                         
-                                        <a class="dropdown-item ps-0" href="#">
+                                        <a class="dropdown-item ps-0" href="../../routing/routing.php?action=editerCompte&role=2">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                             Editer Mon Compte
                                         </a>
@@ -243,14 +230,14 @@ $notification= $_SESSION['allnotification'];
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-success" href="#" style="text-decoration: none;">
-                                                Ma Messagerie
+                                            <a class="text-success" href="../../routing/routing.php?action=notification" style="text-decoration: none;">
+                                                Mes Notifications
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-auto">
-                                        <i class="fas fa-file-alt fa-2x"></i>
+                                        <i class="fa-solid fa-bell fa-2x"></i>
                                     </div>
                                     
                                 </div>
@@ -267,8 +254,8 @@ $notification= $_SESSION['allnotification'];
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-warning" href="#" style="text-decoration: none;">
-                                            Emploi de Temps
+                                            <a class="text-warning" href="../../routing/routing.php?action=rapportetd" style="text-decoration: none;">
+                                                Deposer Rapport
                                             </a>
                                         </div>
                                     </div>
@@ -414,13 +401,14 @@ $notification= $_SESSION['allnotification'];
                 // Format the date as 'yyyy-mm-dd'
                 var formattedDate = date.toISOString().split('T')[0];
 
-                // Push the formatted date to the labels array
+                // insert date to the labels array
                 labels.push(formattedDate);
             }
 
             labels.reverse();
 
 
+            // extract values from json
             var dataPoints = authentifications.map(function(item) {
                 return item['count(*)'];
             });
@@ -431,7 +419,7 @@ $notification= $_SESSION['allnotification'];
                     label: 'Nombre d\'acces',
                     data: dataPoints, 
                     fill: false,
-                    borderColor: '#10504F',
+                    borderColor: '#198754',
                     tension: 0.1,
                 }]
             };
@@ -450,4 +438,3 @@ $notification= $_SESSION['allnotification'];
     
 </body>
 </html>
-<?php } ?>
