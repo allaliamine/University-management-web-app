@@ -132,8 +132,7 @@ $authentification = $_SESSION['chart'];
                             </ul>
                         </li>
                         <!--end of search media queries-->
-
-                        
+                       
                         <div class="topbar-divider"></div>
 
                         <!--profile icon + dropdown menu-->
@@ -426,7 +425,7 @@ $authentification = $_SESSION['chart'];
                     label: 'Nombre d\'acces',
                     data: dataPoints, 
                     fill: false,
-                    borderColor: '#198754',
+                    borderColor: '#10504F',
                     tension: 0.1,
                 }]
             };

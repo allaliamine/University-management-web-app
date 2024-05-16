@@ -128,6 +128,15 @@ $authentification = $_SESSION['chart'];
                         </li>
                         <!--end of search media queries-->
 
+                        <li class="nav-item mx-1 dropdown" style="list-style: none;" >
+                            <a  class="nav-link" data-toggle="dropdown" data-bs-toggle="dropdown">
+                                <i class="fa-solid fa-inbox"></i>
+                                <span class="translate-middle badge rounded-pill bg-danger">
+                                    +99
+                                </span>
+                            </a>
+                        </li>
+
                         
                         <div class="topbar-divider"></div>
 

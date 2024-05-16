@@ -46,6 +46,17 @@ $module = $_SESSION['prf_mdls'] ;
                 </div>
 
 
+                <div class="form-group mb-4">
+                    <label>Seance de :</label>
+                    <select name="seance" id="seance" class="form-control" required>
+                        <option value=""></option>
+                        <option value="Cours">Cours</option>
+                        <option value="TD">TD</option>
+                        <option value="TP">TP</option>
+                    </select>
+                </div>
+
+
                 <input type="submit" name="get_students" id="bouton" class="btn btn-success" value="acceder">
 
             </form>

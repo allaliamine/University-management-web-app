@@ -902,14 +902,20 @@ if(isset($_POST['get_students'])){
         $niveau = $_POST['niveau'];
         $module = $_POST['module'];
         $idprof = $_SESSION['prof']['IdProf'];
+        $seance = $_POST['seance'];
+
+        // echo $seance."<br>";
 
         $absnc = new absenceController();
-        $isDone = $absnc->isAbsenceAlreadyDone($idprof,$module);
+        // $isDone = $absnc->isAbsenceAlreadyDone($idprof,$module);
 
-        if(!$isDone){
+        // if(!$isDone){
 
             $_SESSION['abs_nv'] = $niveau;
             $_SESSION['abs_mdl'] = $module;
+            $_SESSION['type_abs'] = $seance;
+
+            // echo $_SESSION['type_abs'];
 
             $etds = $absnc->getAllStudentByNiveau($niveau);
             $_SESSION['etd_niveau'] = $etds;
@@ -918,12 +924,13 @@ if(isset($_POST['get_students'])){
 
             $log->createAction($_SESSION['prof']['CIN'],'info','prof: a acceder pour faire l absence ', $_SESSION['prof']['IdCompte']);
             
-        }else{
-            $log->createAction($_SESSION['prof']['CIN'],'error','prof: exceder l absence de jour  ', $_SESSION['prof']['IdCompte']);
-            $_SESSION['abs_done_already'] = "l'absence est deja fait pour ce module aujourdui! a Demain";
+        // }else{
+            // $log->createAction($_SESSION['prof']['CIN'],'error','prof: exceder l absence de jour  ', $_SESSION['prof']['IdCompte']);
+            // $_SESSION['abs_done_already'] = "l'absence est deja fait pour ce module aujourdui! a Demain";
         
-        }
+        // }
     }else{
+        $_SESSION['abs_done_already'] = "remplir tous les criteres!!";
         $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut afficher les etudiants sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
     }
     header('location: ../views/prof/faire_absencefn.php');
@@ -975,13 +982,12 @@ if(isset($_POST['faire_absence'])){
     $idprof = $_SESSION['prof']['IdProf'];
 
     $etd_absente = $_POST['etd_absc'];
-    echo $absLevel;
+    $type = $_SESSION['type_abs'];
 
     foreach($etd_absente as $etd){
         $etd = (int)$etd;
-
         try{
-            $absence->insertAbsence($idprof,$etd,$absModule);
+            $absence->insertAbsence($idprof,$etd,$type,$absModule);
             $log->createAction($_SESSION['prof']['CIN'],'info','prof: a fait l absence ', $_SESSION['prof']['IdCompte']);
             $_SESSION['abs_success'] = "les absence on ete bien ajouter";
 

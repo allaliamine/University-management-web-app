@@ -27,26 +27,26 @@ class absenceController{
     }
 
 
-    public function insertAbsence($prof,$etudiant,$module){
+    public function insertAbsence($prof,$etudiant,$type,$module){
         $duree = 2;
         $date = date("Y-m-d");
 
-        $this->profModel->insertAbsence($duree, $date,$prof,$etudiant,$module);
+        $this->profModel->insertAbsence($duree,$date,$type,$prof,$etudiant,$module);
     }
 
 
 
-    public function isAbsenceAlreadyDone($prof,$module){
-        $date = date("Y-m-d");
-        $res = $this->profModel->isAbsenceAlreadyDone($date,$prof,$module);
+    // public function isAbsenceAlreadyDone($prof,$module){
+    //     $date = date("Y-m-d");
+    //     $res = $this->profModel->isAbsenceAlreadyDone($date,$prof,$module);
 
-        if($res){
-            return true;
-        }else{
-            return false;
-        }
+    //     if($res){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
 
-    }
+    // }
 
     public function getStudentWithAbsence($niveau){
         $res = $this->profModel->getStudentWithAbsence($niveau);

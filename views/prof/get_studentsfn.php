@@ -71,6 +71,7 @@ $details = $_SESSION['details'];
                         <thead>
                             <tr>
                                 <th>absence de :</th>
+                                <th>Seance de :</th>
                                 <th>Date d'absence</th>
                                 <th>Duree</th>
                             </tr>
@@ -80,6 +81,7 @@ $details = $_SESSION['details'];
                             <?php foreach ($details as $etd){ ?> 
                             <tr>
                                 <td><?= $etd['Nom']." ".$etd['Prenom']; ?></td>
+                                <td><?= $etd['Type']?></td>
                                 <td><?= $etd['Date_abscence']?></td>
                                 <td><?= $etd['Duree']." H"; ?></td>
                             </tr>
