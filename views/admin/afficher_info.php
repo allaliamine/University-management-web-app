@@ -3,6 +3,7 @@ session_start();
 
 
 require_once '../../includes/sidebar_admin.php';
+require_once '../../securiteadmin.php';
 $admin = $_SESSION['admin'];
 ?>
 

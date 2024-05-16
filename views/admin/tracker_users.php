@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../../includes/sidebar_admin.php';
+require_once '../../securiteadmin.php';
 
 // Check if 'logins' session variable is set
 if (isset($_SESSION['logins'])) {
@@ -34,7 +35,10 @@ if (isset($_SESSION['logins'])) {
     <div class="card col-xl-8 offset-3 mt-5 overflow-scroll">
         <div class="card-header">Formulaire d'Activite des utilisateurs</div>
         <div class="card-body">        
-            <div class="form-group mb-4">
+            <div class="form-control">
+
+            </div>
+            <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
