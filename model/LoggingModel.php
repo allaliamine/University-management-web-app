@@ -44,6 +44,21 @@ class logginModel{
         }
         return $counts;
     }
+
+
+    function getLoginbycne($cne){
+        global $conn;
+
+
+        $req = $conn->prepare('select * from Journalisation where CNE = ? order by Date desc, Heure desc');
+        $params = array($cne);
+        $req->execute($params);
+        $res = $req->fetchAll();
+
+
+        return $res;
+
+    }
 }
 
 

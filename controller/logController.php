@@ -62,6 +62,13 @@ class loginController{
         return $res;
     }
 
+
+    public function getLogsBycne($cne){
+        $res = $this->logs->getLoginbycne($cne);
+
+        return $res;
+    }
+
 }
 
 

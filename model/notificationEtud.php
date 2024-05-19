@@ -7,7 +7,7 @@ class notificationEtud{
         $req = $conn->prepare('SELECT date, Titre,annonce.IdAnnonce FROM annonce 
                                 JOIN annonce_niveau 
                                 ON annonce.Idannonce = annonce_niveau.Idannonce
-                                WHERE IdNiveau = ?');
+                                WHERE IdNiveau = ? order by date Desc');
         $req->execute(array($idNiveau));
         $res = $req->fetchAll();
         return $res;
@@ -41,7 +41,7 @@ class notificationEtud{
     public function getAllNotification(){
        
         global $conn;
-        $req = $conn->prepare('SELECT * from annonce order by date ');
+        $req = $conn->prepare('SELECT * from annonce order by date Desc');
         $req->execute();
         $res = $req->fetchAll();
         return $res;

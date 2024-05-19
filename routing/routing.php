@@ -92,6 +92,7 @@ if(isset($_GET['action'])){
             $_SESSION['majors'] = $majors;
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
+            
 
             $log->createAction($_SESSION['admin']['CIN'],'info','admin: est allé à "publier note" ', $_SESSION['admin']['IdCompte']);
             
@@ -379,8 +380,6 @@ if(isset($_GET['action'])){
     
             $res = $logs->getAllLogins();
 
-            
-
            $_SESSION['logins'] = $res;
            
            header('location: ../views/admin/tracker_users.php');
@@ -623,7 +622,7 @@ if (isset($_POST['publier_annonce'])) {
     require_once '../controller/AnnonceController.php';
     session_start();
     
-    if (isset($_FILES['annonce']) && $_FILES['annonce']['error'] == 0 && (!empty($_POST['check_list']) || isset($_POST['toutes_filieres'])) ) {
+    if (isset($_FILES['annonce']) && $_FILES['annonce']['error'] == 0 && ( !empty($_POST['check_list']) ) ) {
 
         $file_name = $_FILES['annonce']['name'];  
         $file_tmp = $_FILES['annonce']['tmp_name']; 
@@ -632,34 +631,35 @@ if (isset($_POST['publier_annonce'])) {
         $descriptif = $_POST['descriptif'];
 
         if (move_uploaded_file($file_tmp, $destination)){
-            echo "i got here <br>";
+            // echo "i got here <br>";
                 
             if(!empty($_POST['check_list'])){
-                echo "again";
+                // echo "again";
                 $annonce = new AnnonceController();
                 $annonce->insertAnnonce($titre, $descriptif, $file_name);
-                echo "again";
+                // echo "again";
                 foreach($_POST['check_list'] as $value){
                     $value = (int) $value;
-                    echo $value."<br>";
+                    // echo $value."<br>";
                     $annonce->insertAnnonceNiveau($file_name, $value);
                     $_SESSION['annonce_valide']="annonce a ete publier ";
                     
                 }
                 $log->createAction($_SESSION['admin']['CIN'],'info','admin: a publier une annonce ', $_SESSION['admin']['IdCompte']);
         
-            }else{
-                $all = $_POST['toutes_filieres'];
-                $all = (int) $all;
-                var_dump($all);
-                echo "<br>";
-                echo "ini wlh <br>";
-                $annonce = new AnnonceController();
-                $annonce->insertAnnonce($titre, $descriptif,$file_name);
-                echo "test insert1<br>";
-                $annonce->insertAnnonceNiveau($file_name, $all);
-                echo "test insert2<br>";
             }
+            // else{
+            //     $all = $_POST['toutes_filieres'];
+            //     $all = (int) $all;
+            //     // var_dump($all);
+            //     // echo "<br>";
+            //     // echo "ini wlh <br>";
+            //     $annonce = new AnnonceController();
+            //     $annonce->insertAnnonce($titre, $descriptif,$file_name);
+            //     echo "test insert1<br>";
+            //     $annonce->insertAnnonceNiveau($file_name, $all);
+            //     echo "test insert2<br>";
+            // }
     
         }else{
             $_SESSION['annonce_invalide']="Erreur!! l'Annonce n'a pas ete publier ";
@@ -812,6 +812,7 @@ if ( isset($_POST['rapportsubmit']) ) {
        
         
     }else{
+        $_SESSION['etat_rapport_error'] = "svp remplir tous les champs !!";
         $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut publier un rapport sans specifier les criteres', $_SESSION['prof']['IdCompte']);
     } 
 
@@ -1452,6 +1453,36 @@ if(isset($_POST['compteEtudiant'])){
     header('location: ../views/etudiant/editer_compte.php');
 }
 
+
+
+
+if(isset($_POST['searchUser'])){
+
+    session_start();
+    require_once '../controller/logController.php';
+
+    $logs = new loginController();
+
+    if(!empty($_POST['track'])){
+        $user = $_POST['track'];
+        // echo $user;
+
+        try{
+        $journalOfUser = $logs->getLogsBycne($user);
+        $_SESSION['journal_of_user'] = $journalOfUser;
+        $_SESSION['journal-error'] = "erreur lors de la recherche";
+        // var_dump($_SESSION['journal_of_user']);
+        $log->createAction($_SESSION['admin']['CIN'],'info','admin: a chercher les logs d\'un utilisateur ', $_SESSION['admin']['IdCompte']);
+
+        }catch(Exception $e){
+            $_SESSION['journal-error'] = "erreur lors de la recherche";
+        }
+
+    }else{
+        unset($_SESSION['journal_of_user']);
+    }
+    header('location: ../views/admin/tracker_users.php');
+}
  
 
 

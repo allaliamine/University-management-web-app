@@ -316,7 +316,7 @@ $authentification = $_SESSION['chart'];
                                     <div class="card shadow mb-4">
                                         
                                         <div class="card-header py-3">
-                                            <h6 class="m-0">Messageries</h6>
+                                            <h6 class="m-0">Actualites</h6>
                     
                                         </div>
                                         

@@ -3,11 +3,14 @@ session_start();
 require_once '../../includes/sidebar_admin.php';
 require_once '../../securiteadmin.php';
 
+
+// var_dump($_SESSION['journal_of_user']);
+
 // Check if 'logins' session variable is set
-if (isset($_SESSION['logins'])) {
+// if (isset($_SESSION['logins'])) {
 
-    $logins = $_SESSION['logins'];
 
+    $logins = isset($_SESSION['journal_of_user'])? $_SESSION['journal_of_user']: $_SESSION['logins'];
     $recodsPerPage = 30;
     $totalRecords = count($logins);
     $totalPages = ceil($totalRecords / $recodsPerPage);
@@ -18,9 +21,10 @@ if (isset($_SESSION['logins'])) {
     //index de recuperation des donnes de $logins selon num de page
     $start_index = ($current_page - 1) * $recodsPerPage;
 
+    
     //extraction des donnes pour affichage apres
     $pageRecords = array_slice($logins, $start_index, $recodsPerPage);
-}
+// }
 ?>
 
 <!DOCTYPE html>
@@ -34,10 +38,23 @@ if (isset($_SESSION['logins'])) {
 <body>
     <div class="card col-xl-8 offset-3 mt-5 overflow-scroll">
         <div class="card-header">Formulaire d'Activite des utilisateurs</div>
-        <div class="card-body">        
-            <div class="form-control">
+        <div class="card-body">      
 
-            </div>
+           
+
+                <div class="search-bar-div">
+
+                    <form class="navbar-search me-auto my-0" method="POST" action="../../routing/routing.php">
+                        <div class="input-group">
+                            <input type="text" class="form-control border-0 search" name="track" placeholder="Rcherche"> 
+                            <button class="btn search" type="submit" name="searchUser">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+           
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -52,7 +69,7 @@ if (isset($_SESSION['logins'])) {
                     </thead>
                     <tbody>
                         <?php foreach ($pageRecords as $log) { ?> 
-                            <tr <?php if ($log['Criticite'] == 'error') echo 'class="table-danger"'; ?>>
+                            <tr <?php if ($log['Criticite'] == 'error'){ echo 'class="table-danger"';} if (str_contains($log['action'], 'authentifier')) { echo 'class="table-success"';}?>>
                                 <td><?= $log['AdressIP']; ?></td>
                                 <td><?= $log['Criticite']; ?></td>
                                 <td><?= $log['CNE']; ?></td>
@@ -67,7 +84,7 @@ if (isset($_SESSION['logins'])) {
 
             <!-- Pagination -->
             <nav>
-                <ul class="pagination">
+                <ul class="pagination flex-wrap">
                     <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
                         <li class="page-item <?= $i == $current_page ? 'active' : ''; ?>">
                             <a class="page-link"  href="./tracker_users.php?page=<?= $i; ?>"> <?= $i; ?> </a>
