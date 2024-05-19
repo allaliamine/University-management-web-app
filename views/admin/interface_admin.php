@@ -188,7 +188,7 @@ $authentification = $_SESSION['chart'];
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-primary" href="#" style="text-decoration: none;">
+                                            <a class="text-primary" href="../../routing/routing.php?action=tracker" style="text-decoration: none;">
                                                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbspUtilisateurs&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                             </a>
                                         </div>
@@ -211,14 +211,14 @@ $authentification = $_SESSION['chart'];
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-success" href="#" style="text-decoration: none;">
-                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbspDemandes&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                            <a class="text-success" href="./ajouter_prof.php" style="text-decoration: none;">
+                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbspAjouter prof&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-auto">
-                                        <i class="fas fa-file-alt fa-2x"></i>
+                                        <i class="fas fa-user fa-2x"></i>
                                     </div>
                                     
                                 </div>

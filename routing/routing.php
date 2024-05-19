@@ -16,10 +16,10 @@ $excelMimes = array(
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
 );  
 
-
-/**
- * pour Authentification
- */
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * pour Authentification
+     */
 if ( isset($_POST['submit']) ) {
     session_start();
     include '../controller/AuthController.php';
@@ -44,11 +44,11 @@ if ( isset($_POST['submit']) ) {
     }
  
 }
-
-
-/**
- * redirection est recuperation des donnees pour les champs de sidebar(etd, prf, admin)
- */
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * redirection est recuperation des donnees pour les champs de sidebar(etd, prf, admin)
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_GET['action'])){
 
     session_start();
@@ -448,12 +448,12 @@ if(isset($_GET['action'])){
     } 
     
 }
-
-
-/**
- * pour afficher chaque annonce:
- * 
- */
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+    * pour afficher chaque annonce:
+    * 
+    */
+//////////////////////////////////////////////////////////////////////////////////
 if(isset($_GET['idAnnonce'])){
     session_start();
     require "../controller/notificationEtudController.php";
@@ -475,14 +475,14 @@ if(isset($_GET['idAnnonce'])){
     header('location: ../views/etudiant/lireNotification.php');
    
    
-   }
-   
-   
+}
+/////////////////////////////////////////////////////////////////////////////////
    /**
     * pour afficher chaque actualite:
     * 
     */
-   if(isset($_GET['idActualite'])){
+/////////////////////////////////////////////////////////////////////////////////
+if(isset($_GET['idActualite'])){
     session_start();
     require "../controller/notificationEtudController.php";
     $idActualite = $_GET['idActualite'];
@@ -498,12 +498,12 @@ if(isset($_GET['idAnnonce'])){
     header('location: ../views/etudiant/lireActualite.php');
    
    
-   }
-   
-/**
- * pour inserer le compte et etudiant
- */
-
+}
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * pour inserer le compte et etudiant
+     */
+/////////////////////////////////////////////////////////////////////////////////
  if(isset($_POST['ajout-etudiant'])){
 
     require '../vendor/autoload.php';
@@ -558,13 +558,12 @@ if(isset($_GET['idAnnonce'])){
     header('location: ../views/admin/ajout_etudiants.php');
 
 
- }
-
-
-//Pour ajouter les notes
-
-
-
+}
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+    * Pour ajouter les notes
+    */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['importSubmit'])){ 
 
     session_start();
@@ -611,12 +610,11 @@ if(isset($_POST['importSubmit'])){
 
     header('location: ../views/admin/publier_note.php');
 } 
- 
-
-
-
-/** FOR THE PUBLISH ANNOUNCEMENT */
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+    * FOR THE PUBLISH ANNOUNCEMENT 
+    */
+/////////////////////////////////////////////////////////////////////////////////
 if (isset($_POST['publier_annonce'])) {
 
     require_once '../controller/AnnonceController.php';
@@ -672,11 +670,13 @@ if (isset($_POST['publier_annonce'])) {
     
     header('location: ../views/admin/publier_annonce.php');
 } 
+/////////////////////////////////////////////////////////////////////////////////
 
-/**
- * pour avoir les etudiants de niveau (retrancher etd ):
- */
+    /**
+     * pour avoir les etudiants de niveau (retrancher etd ):
+     */
 
+/////////////////////////////////////////////////////////////////////////////////
 if (isset($_GET['niveau']) && isset($_GET['filiere']) && isset($_GET['idniveau'])) {
     session_start();
 
@@ -701,11 +701,11 @@ if (isset($_GET['niveau']) && isset($_GET['filiere']) && isset($_GET['idniveau']
     header('location: ../views/admin/affichListEtud.php');
     
 }
-
-
-/**
- * la barre de recherche (dans retrancher etd ):
- */
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * la barre de recherche (dans retrancher etd ):
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['search'])){
     session_start();
 
@@ -726,10 +726,11 @@ if(isset($_POST['search'])){
 
 
 }
-
-/**
- * activer/desactiver le compte:
- */
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * activer/desactiver le compte:
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST["activer"])){
 
     if(isset($_POST['idEtudiant'])) {
@@ -758,7 +759,10 @@ if(isset($_POST["activer"])){
         header('location: ../views/admin/affichListEtud.php');
     }
 }
-
+    /**
+     * desactiver
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST["desactiver"])){
 
     if(isset($_POST['idEtudiant'])){
@@ -787,11 +791,11 @@ if(isset($_POST["desactiver"])){
         header('location: ../views/admin/affichListEtud.php');
     }
 }
-
-
-
-//Pour la publication de rapport de prof
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Pour la publication de rapport de prof
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if ( isset($_POST['rapportsubmit']) ) {
     session_start();
 
@@ -818,13 +822,11 @@ if ( isset($_POST['rapportsubmit']) ) {
 
     header('location: ../views/prof/rapport.php');
 }
-
-
-
-
-//Publier soumettre le rapport d'etudiant
-
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * etudiant soumis un rapport
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['rapportpublier'])){
     session_start();
 
@@ -869,9 +871,11 @@ if(isset($_POST['rapportpublier'])){
     }
     header('location: ../views/etudiant/postuler_rapport.php');
 }
-
-//Consulter les rapports des etudiants par le prof
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * Consulter les rapports des etudiants par le prof
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['chercher_rapport'])){
     session_start();
     include '../controller/rapportController.php';
@@ -892,12 +896,14 @@ if(isset($_POST['chercher_rapport'])){
     }
     header('location: ../views/prof/consulter_rapportetd.php');
 }
-
-//afficher la liste des etudiants pour faire l'abscence 
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * afficher la liste des etudiants pour faire l'abscence 
+     */ 
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['get_students'])){
-    require_once '../controller/absenceController.php';
-    session_start();
+    // require_once '../controller/absenceController.php';
+    // session_start();
     if(!empty($_POST['niveau']) && !empty($_POST['module'])){
 
         $niveau = $_POST['niveau'];
@@ -905,41 +911,31 @@ if(isset($_POST['get_students'])){
         $idprof = $_SESSION['prof']['IdProf'];
         $seance = $_POST['seance'];
 
-        // echo $seance."<br>";
 
         $absnc = new absenceController();
-        // $isDone = $absnc->isAbsenceAlreadyDone($idprof,$module);
-
-        // if(!$isDone){
 
             $_SESSION['abs_nv'] = $niveau;
             $_SESSION['abs_mdl'] = $module;
             $_SESSION['type_abs'] = $seance;
 
-            // echo $_SESSION['type_abs'];
 
             $etds = $absnc->getAllStudentByNiveau($niveau);
             $_SESSION['etd_niveau'] = $etds;
 
-            // var_dump($etds);
 
             $log->createAction($_SESSION['prof']['CIN'],'info','prof: a acceder pour faire l absence ', $_SESSION['prof']['IdCompte']);
-            
-        // }else{
-            // $log->createAction($_SESSION['prof']['CIN'],'error','prof: exceder l absence de jour  ', $_SESSION['prof']['IdCompte']);
-            // $_SESSION['abs_done_already'] = "l'absence est deja fait pour ce module aujourdui! a Demain";
-        
-        // }
+
     }else{
         $_SESSION['abs_done_already'] = "remplir tous les criteres!!";
         $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut afficher les etudiants sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
     }
     header('location: ../views/prof/faire_absencefn.php');
 }
-
-
-//afficher la liste des etudiants pour la consultation (prof)
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * afficher la liste des etudiants pour la consultation des Absences
+     */ 
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['consulteStudent'])){
     require_once '../controller/absenceController.php';
     session_start();
@@ -966,10 +962,11 @@ if(isset($_POST['consulteStudent'])){
     }
     header('location: ../views/prof/get_studentsfn.php');
 }
-
-
-
-/*pour faire l'absence*/
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * pour faire l'absence
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['faire_absence'])){
     session_start();
 
@@ -1004,12 +1001,12 @@ if(isset($_POST['faire_absence'])){
 
 
 }
-
-/**
- *  Publier cours pour Prof 
- */
-
- if(isset($_POST["publierCours"])){
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     *  Publier cours pour Prof 
+     */
+/////////////////////////////////////////////////////////////////////////////////
+if(isset($_POST["publierCours"])){
     session_start();
     require_once '../controller/CoursController.php';
     
@@ -1044,10 +1041,11 @@ if(isset($_POST['faire_absence'])){
     // }
     header('location: ../views/prof/publier_cours.php');
 }
-
-
-
-/* avoir tous les cours pour les archiver/desarchiver */
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * avoir tous les cours pour les archiver/desarchiver 
+     */ 
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['getCours'])){
 
     if(!empty($_POST['niveau']) && !empty($_POST['module'])){
@@ -1077,10 +1075,11 @@ if(isset($_POST['getCours'])){
     }
     header('location: ../views/prof/archiver_cours.php');
 }
-
-
-
-/* pour archiver / desarchiver un cours */
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * pour archiver / desarchiver un cours 
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_GET['operation'])){
     session_start();
 
@@ -1133,8 +1132,11 @@ if(isset($_GET['operation'])){
             break;
     }
 }
-   
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * for the to do list
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_GET['todolist'])){
     session_start();
 
@@ -1182,9 +1184,10 @@ if(isset($_GET['todolist'])){
             break;
     }
 }
-
-//For adding
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * For adding (to do list)
+    */
 if(isset($_POST['action']) && $_POST['action'] === 'addtodo'){
     session_start();
     require_once '../controller/todolistController.php';
@@ -1203,9 +1206,11 @@ if(isset($_POST['action']) && $_POST['action'] === 'addtodo'){
     header('location: ../views/prof/todolist.php');
     exit();
 }
-
-//For editing
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * For editing (to do list)
+    */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['action']) && $_POST['action'] === 'editTask'){
     session_start();
     require_once '../controller/todolistController.php';
@@ -1224,8 +1229,11 @@ if(isset($_POST['action']) && $_POST['action'] === 'editTask'){
     header('location: ../views/prof/todolist.php');
     exit();
 }
-
-/* changer compte details (Admin) */
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     *changer compte details (Admin) 
+    */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['compteAdmin'])){
     session_start();
 
@@ -1299,8 +1307,11 @@ if(isset($_POST['compteAdmin'])){
     
     header('location: ../views/admin/editer_compte.php');
 }
-
-/* changer compte details (prof)*/
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * changer compte details (prof)
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['compteProf'])){
     session_start();
 
@@ -1375,9 +1386,11 @@ if(isset($_POST['compteProf'])){
     
     header('location: ../views/prof/editer_compte.php');
 }
-
-
-/* changer compte details (etudiant)*/
+/////////////////////////////////////////////////////////////////////////////////
+    /* *
+     * changer compte details (etudiant)
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['compteEtudiant'])){
     session_start();
 
@@ -1452,10 +1465,11 @@ if(isset($_POST['compteEtudiant'])){
     
     header('location: ../views/etudiant/editer_compte.php');
 }
-
-
-
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * to search logs of a user
+     */
+/////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['searchUser'])){
 
     session_start();
@@ -1483,7 +1497,17 @@ if(isset($_POST['searchUser'])){
     }
     header('location: ../views/admin/tracker_users.php');
 }
- 
-
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * to add a prof
+     */
+/////////////////////////////////////////////////////////////////////////////////
+if(isset($_POST['AjouterProf'])){
+    session_start();
+    require_once '../controller/addProfController.php';
+    $prof = new addProfController();
+    $prof->addProf();
+}
+/////////////////////////////////////////////////////////////////////////////////
 
 ?>
