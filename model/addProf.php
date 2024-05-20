@@ -54,6 +54,35 @@ class addProf{
         return $id;
     }
 
+    public function getAllProfs(){
+        global $conn;
+        
+        $req = $conn->prepare('select * from Prof');
+        $req->execute();
+        $res = $req->fetchAll();
+        
+        return $res;
+    }
+
+
+    public function desactiverProf($idprof, $idcompte){
+        global $conn;
+    
+        $req1 = $conn->prepare("UPDATE Compte SET Activite='D' WHERE IdCompte=?");
+        $req2 = $conn->prepare("UPDATE Prof SET Activite='D' WHERE IdProf=?");
+        $req1->execute([$idcompte]);
+        $req2->execute([$idprof]);
+    }
+
+    public function activerProf($idprof, $idcompte){
+
+        global $conn;
+    
+        $req1 = $conn->prepare("UPDATE Compte SET Activite='A' WHERE IdCompte=?");
+        $req2 = $conn->prepare("UPDATE Prof SET Activite='A' WHERE IdProf=?");
+        $req1->execute([$idcompte]);
+        $req2->execute([$idprof]);
+    }
 
 
 

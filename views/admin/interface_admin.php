@@ -3,6 +3,14 @@ session_start();
 require_once '../../securiteadmin.php';
 
 $authentification = $_SESSION['chart'];
+
+if(!isset($_SESSION['allnotification'])){
+
+    header("Location: ../../routing/routing.php?action=actualite&role=0");
+}
+else{
+    $notification = $_SESSION['allnotification'];
+}
 ?>
 
 <html lang="en">
@@ -218,7 +226,7 @@ $authentification = $_SESSION['chart'];
                                     </div>
 
                                     <div class="col-auto">
-                                        <i class="fas fa-user fa-2x"></i>
+                                        <i class="fas fa-user-plus fa-2x"></i>
                                     </div>
                                     
                                 </div>
@@ -235,14 +243,14 @@ $authentification = $_SESSION['chart'];
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-warning" href="#" style="text-decoration: none;">
-                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbspMessageries&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                            <a class="text-warning" href="../../routing/routing.php?action=supprimerProf" style="text-decoration: none;">
+                                                &nbsp&nbsp&nbsp&nbsp&nbspsupprimer Prof&nbsp&nbsp&nbsp&nbsp&nbsp
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-auto">
-                                        <i class="fa-solid fa-comment-dots fa-2x"></i>
+                                    <i class="fa-solid fa-user-minus fa-2x"></i>
                                     </div>
                                     
                                 </div>
@@ -320,52 +328,22 @@ $authentification = $_SESSION['chart'];
                     
                                         </div>
                                         
-                                        <div class="card-body">
+                                        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
 
-                                            <div>
-                                                <p class="atualite-titre"> titre1 </p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-    
-                                            <hr>
+                                            <?php foreach ( $notification as $row) {?>
+                                                
+                                                <div>
+                                                    <p class="text-success text-uppercase fw-bold"> <?php echo $row['Titre'] ?></p>
+                                                    <span class="d-inline-block">
+                                                        <?php echo $row['Descriptif']; ?>
+                                                    </span>
+                                                    <!-- <a href='../../uploads/ //$row['Nom_fichier']'  download> 
+                                                        <p class="text-success text-center ms-5 text-opacity-50">Telecharger ici </p>
+                                                    </a> -->
+                                                </div>
+                                                <hr>
+                                            <?php } ?>
                                             
-                                            <div>
-                                                <p class="atualite-titre"> titre2</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-    
-                                            <hr>
-                                            <div>
-                                                <p class="atualite-titre"> titre3</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-    
-                                            <hr>
-                                            <div>
-                                                <p class="atualite-titre"> titre4</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-
                                         </div><!--card-body fin-->
 
                                     </div><!--card fin -->

@@ -74,6 +74,9 @@ $details = $_SESSION['details'];
                                 <th>Seance de :</th>
                                 <th>Date d'absence</th>
                                 <th>Duree</th>
+                                <th>Etat :</th>
+                                <th>Action : </th>
+                                
                             </tr>
                         </thead>
 
@@ -84,6 +87,17 @@ $details = $_SESSION['details'];
                                 <td><?= $etd['Type']?></td>
                                 <td><?= $etd['Date_abscence']?></td>
                                 <td><?= $etd['Duree']." H"; ?></td>
+                                <td><?= $etd['Etat']?></td>
+
+                                <td>
+                                    <a type="submit" name="Activer" class="btn btn-success" href="../../routing/routing.php?absence=justifier&id=<?= $etd['IdAbscence'] ?>&niveau=<?= $etd['IdNiveau'] ?>"> 
+                                        Justifier
+                                    </a>
+
+                                    <a type="submit" name="Desactiver" class="btn btn-danger" href="../../routing/routing.php?absence=supprimer&id=<?= $etd['IdAbscence'] ?>&niveau=<?= $etd['IdNiveau'] ?>">
+                                        Supprimer
+                                    </a>
+                                </td>
                             </tr>
                             <?php } ?>
                         </tbody>

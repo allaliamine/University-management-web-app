@@ -357,21 +357,25 @@ if(isset($_GET['action'])){
             break;
             
         case 'actualite':
-            // require_once '../controller/notificationEtudController.php';
-            // $notificationEtudController = new notificationEtudController();
-            // $notification = $notificationEtudController->getAllNotification();
+            if($_GET['role'] == 0 ){
+                
+                header('location: ../views/admin/interface_admin.php');
+                exit();
+                break;
 
-            // $numberOfAllNotif = $notificationEtudController->getNotif();
-            // $seenBystudent = $notificationEtudController->getSeenNotifOfStudent($_SESSION['etd']['IdEtudiant']);
-
-            // $_SESSION['countNotif'] = $numberOfAllNotif;    
-            // $_SESSION['countSeenNotif'] = $seenBystudent;    
-
-            // $_SESSION['allnotification'] = $notification;   
-
-            header('location: ../views/etudiant/interface_Etudiant.php') ;           
-            exit();
-            break;      
+            }
+            elseif($_GET['role'] == 1 ){
+        
+                header('location: ../views/prof/interface_prof.php');
+                exit();
+                break;
+            }
+            if($_GET['role'] == 2 ){
+                
+                header('location: ../views/etudiant/interface_Etudiant.php');
+                exit();
+                break;
+            }      
             
         case 'tracker': 
 
@@ -439,6 +443,18 @@ if(isset($_GET['action'])){
                 exit();
                 break;
             } 
+
+        case 'supprimerProf':
+            require_once '../controller/addProfController.php';
+            $prof = new addProfController();
+            
+            $res = $prof->getAllProfs();
+            $_SESSION['getProf'] = $res;
+
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: est allé à "Supprimer Prof" ', $_SESSION['admin']['IdCompte']);
+
+            header('location: ../views/admin/supprimer_prof.php');
+
 
         default:
 
@@ -902,8 +918,8 @@ if(isset($_POST['chercher_rapport'])){
      */ 
 /////////////////////////////////////////////////////////////////////////////////
 if(isset($_POST['get_students'])){
-    // require_once '../controller/absenceController.php';
-    // session_start();
+    require_once '../controller/absenceController.php';
+    session_start();
     if(!empty($_POST['niveau']) && !empty($_POST['module'])){
 
         $niveau = $_POST['niveau'];
@@ -960,7 +976,7 @@ if(isset($_POST['consulteStudent'])){
     }else{
         $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut afficher les etudiants sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
     }
-    header('location: ../views/prof/get_studentsfn.php');
+    // header('location: ../views/prof/get_studentsfn.php');
 }
 /////////////////////////////////////////////////////////////////////////////////
     /**
@@ -1509,5 +1525,90 @@ if(isset($_POST['AjouterProf'])){
     $prof->addProf();
 }
 /////////////////////////////////////////////////////////////////////////////////
+    /**
+     * to desactivate/activate Prof
+     */
+/////////////////////////////////////////////////////////////////////////////////
+if(isset($_GET['Prof'])){
+    session_start();
+    require_once '../controller/addProfController.php';
+    $prof = new addProfController();
+
+    $idprof = (int)$_GET['id'];
+    $idcompte = (int)$_GET['compte'];
+
+    $action = $_GET['Prof'];
+
+    
+    if($action == 'activer'){
+
+        try{
+            $prof->activerProf($idprof, $idcompte);
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: a activer le compte d\'un prof ', $_SESSION['admin']['IdCompte']);
+            $_SESSION['success-actif'] = "Le compte a ete activer/desactiver avec success";
+        }catch(Exception $e){
+            $_SESSION['error-actif'] = "Erreur lors de l'operation";
+        }
+    }
+
+    elseif($action == 'desactiver'){
+        try{
+            $prof->desactiverProf($idprof, $idcompte);
+            $log->createAction($_SESSION['admin']['CIN'],'info','admin: a desactiver le compte d\'un prof ', $_SESSION['admin']['IdCompte']);
+            $_SESSION['success-actif'] = "Le compte a ete activer/desactiver avec success";
+        }catch(Exception $e){
+            $_SESSION['error-actif'] = "Erreur lors de l'operation";
+        }
+    }
+
+    $res = $prof->getAllProfs();
+    $_SESSION['getProf'] = $res;
+
+    header('location: ../views/admin/supprimer_prof.php');
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+    /**
+     * to justify/delete absence
+     */
+/////////////////////////////////////////////////////////////////////////////////
+if(isset($_GET['absence'])){
+    session_start();
+    require_once '../controller/absenceController.php';
+    $absence = new absenceController();
+    
+
+    $action = $_GET['absence'];
+    $idabsence = $_GET['id'];
+
+    $niveau = $_GET['niveau'];
+
+    if($action == 'supprimer'){
+        try{
+            $absence->deleteAbsence($idabsence);
+            $_SESSION['supprimer-success'] = "l'absence a ete supprimer avec success";
+        }catch(Exception $e){
+            $_SESSION['error-absence'] = "erreur lors de l'operation";
+        }
+
+    }
+
+    if($action == 'justifier'){
+        try{
+            $absence->justifyAbsence($idabsence);
+            $_SESSION['justifier-success'] = "l'absence a ete justifier avec success";
+        }catch(Exception $e){
+            $_SESSION['error-absence'] = "erreur lors de l'operation";
+        }
+
+    }
+
+    $etds = $absence->getStudentWithAbsence($niveau);
+    $_SESSION['etd_niveau'] = $etds;
+
+
+    header('location: ../views/prof/get_studentsfn.php');
+}
+
 
 ?>

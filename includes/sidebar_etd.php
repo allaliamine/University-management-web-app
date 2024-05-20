@@ -37,7 +37,7 @@ $countSeenNotif = $countSeenNotif[0]["nmbrSeen"];
             <div class="side-bar flex">
 
                 
-               <a href="../../routing/routing.php?action=actualite" >
+               <a href="../../routing/routing.php?action=actualite&role=2" >
                    <span class="material-symbols-outlined">grid_view</span>
                    <h3>Dashboard</h3>
                </a>

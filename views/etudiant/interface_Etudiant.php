@@ -6,8 +6,7 @@ $authentification = $_SESSION['chart'];
 
 
 if(!isset($_SESSION['allnotification'])){
-
-    header("Location: ../../routing/routing.php?action=actualite");
+    header('location: ../../routing/routing.php?action=actualite&role=2');
 }
 else{
     $etd=$_SESSION['etd'];
@@ -19,7 +18,6 @@ else{
    
    $countNotif = $countNotif[0]["nmbrAnnonce"];
    $countSeenNotif = $countSeenNotif[0]["nmbrSeen"];
-   
 }
 ?>
 
@@ -268,7 +266,6 @@ else{
 
                             </div>
                         </div>
-
 
 
 

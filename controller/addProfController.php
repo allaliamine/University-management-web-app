@@ -47,6 +47,19 @@ class addProfController{
     }
 
 
+    public function getAllProfs(){
+        $res = $this->addProf->getAllProfs();
+
+        return $res;
+    }
+
+    public function desactiverProf($idprof, $idcompte){
+        $this->addProf->desactiverProf($idprof,$idcompte); 
+    }
+
+    public function activerProf($idprof, $idcompte){
+        $this->addProf->activerProf($idprof,$idcompte); 
+    }
     
 
     public function addProf(){

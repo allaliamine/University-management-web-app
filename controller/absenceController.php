@@ -30,8 +30,9 @@ class absenceController{
     public function insertAbsence($prof,$etudiant,$type,$module){
         $duree = 2;
         $date = date("Y-m-d");
+        $etat = "NJ";
 
-        $this->profModel->insertAbsence($duree,$date,$type,$prof,$etudiant,$module);
+        $this->profModel->insertAbsence($duree,$date,$type,$etat,$prof,$etudiant,$module);
     }
 
 
@@ -61,6 +62,15 @@ class absenceController{
         $res = $this->profModel->getAbsenceOfStudent($module , $etudiant);
 
         return $res;
+    }
+
+
+    public function justifyAbsence($idabsence){
+        $this->profModel->justifyAbsence($idabsence);
+    }
+
+    public function deleteAbsence($idabsence){
+        $this->profModel->deleteAbsence($idabsence);
     }
 
 }

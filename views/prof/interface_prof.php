@@ -5,6 +5,14 @@ require_once '../../securiteprof.php';
 
 
 $authentification = $_SESSION['chart'];
+
+if(!isset($_SESSION['allnotification'])){
+
+    header("Location: ../../routing/routing.php?action=actualite&role=1");
+}
+else{
+    $notification = $_SESSION['allnotification'];
+}
 ?>
 
 <html lang="en">
@@ -324,53 +332,24 @@ $authentification = $_SESSION['chart'];
                     
                                         </div>
                                         
-                                        <div class="card-body">
+                                        <div class="card-body" style="max-height: 400px; overflow-y: auto;">
 
-                                            <div>
-                                                <p class="atualite-titre"> titre1 </p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-    
-                                            <hr>
+                                            <?php foreach ( $notification as $row) {?>
+                                                
+                                                <div>
+                                                    <p class="text-success text-uppercase fw-bold"> <?php echo $row['Titre'] ?></p>
+                                                    <span class="d-inline-block">
+                                                        <?php echo $row['Descriptif']; ?>
+                                                    </span>
+                                                    <a href='../../uploads/<?= $row['Nom_fichier']?>'  download> 
+                                                        <p class="text-success text-center ms-5 text-opacity-50">Telecharger ici </p>
+                                                    </a>
+                                                </div>
+                                                <hr>
+                                            <?php } ?>
                                             
-                                            <div>
-                                                <p class="atualite-titre"> titre2</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-    
-                                            <hr>
-                                            <div>
-                                                <p class="atualite-titre"> titre3</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-    
-                                            <hr>
-                                            <div>
-                                                <p class="atualite-titre"> titre4</p>
-                                                <span class="d-inline-block text-truncate" style="max-width: 150px;">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae nisi quos blanditiis aliquid suscipit totam praesentium, neque, voluptatem iure magnam officia provident exercitationem iste amet alias, necessitatibus itaque! Exercitationem, tempore?
-                                                </span>
-                                                <a href="#lien"> 
-                                                    <p class="text-success text-center ms-5">lire la suite...>> </p>
-                                                </a>
-                                            </div>
-
                                         </div><!--card-body fin-->
+
 
                                     </div><!--card fin -->
                     
