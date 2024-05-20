@@ -136,14 +136,14 @@ else{
                         </li>
                         <!--end of search media queries-->
 
-                        <li class="nav-item mx-1 dropdown" style="list-style: none;" >
+                        <!-- <li class="nav-item mx-1 dropdown" style="list-style: none;" >
                             <a  class="nav-link" data-toggle="dropdown" data-bs-toggle="dropdown">
                                 <i class="fa-solid fa-inbox"></i>
                                 <span class="translate-middle badge rounded-pill bg-danger">
                                     +99
                                 </span>
                             </a>
-                        </li>
+                        </li> -->
 
                         
                         <div class="topbar-divider"></div>
@@ -247,8 +247,8 @@ else{
 
                                     <div class="col m-2">
                                         <div>
-                                            <a class="text-warning" href="#" style="text-decoration: none;">
-                                                Emploi de Temps
+                                            <a class="text-warning" href="../../routing/routing.php?action=todolist" style="text-decoration: none;">
+                                                To-Do List
                                             </a>
                                         </div>
                                     </div>

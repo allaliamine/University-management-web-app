@@ -940,13 +940,14 @@ if(isset($_POST['get_students'])){
 
 
             $log->createAction($_SESSION['prof']['CIN'],'info','prof: a acceder pour faire l absence ', $_SESSION['prof']['IdCompte']);
+            header('location: ../views/prof/faire_absencefn.php');
 
     }else{
         $_SESSION['empty-fileds'] = "remplir tous les criteres!!";
         $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut afficher les etudiants sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
         header('location: ../views/prof/faire_absence.php');
     }
-    header('location: ../views/prof/faire_absencefn.php');
+    
 }
 /////////////////////////////////////////////////////////////////////////////////
     /**
