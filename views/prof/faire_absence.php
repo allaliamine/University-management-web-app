@@ -62,13 +62,13 @@ $module = $_SESSION['prf_mdls'] ;
             </form>
             
             <!-- si absence est deja fait -->
-            <?php if(isset($_SESSION['abs_done_already'])) {?>
+            <?php if(isset($_SESSION['empty-field'])) {?>
                 <div class="alert alert-danger d-flex align-items-center" role="alert">
                     <div>
-                        <?php echo $_SESSION['abs_done_already'];?>
+                        <?php echo $_SESSION['empty-field'];?>
                     </div>
                 </div>
-                <?php unset($_SESSION['abs_done_already']); ?>
+                <?php unset($_SESSION['empty-field']); ?>
             <?php } ?>
 
 

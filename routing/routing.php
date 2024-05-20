@@ -39,7 +39,7 @@ if ( isset($_POST['submit']) ) {
 
         $authController->login($login, $password);
 
-    } catch (Exception $e) {
+    } catch (Throwable $e) {
         echo "Error: " . $e->getMessage();
     }
  
@@ -763,7 +763,7 @@ if(isset($_POST["activer"])){
         $res = $deleteStudentController->activateAccount($idetud);
             $_SESSION['success-actif']='Ce compte est desactive/active avec success';
             $log->createAction($_SESSION['admin']['CIN'],'info','admin: a activer un compte', $_SESSION['admin']['IdCompte']);
-        }catch(PDOException){
+        }catch(Throwable $e){
             $_SESSION['error-actif']='un erreur se produit , veuillez repeter l\'operation lterieuremnt';
             $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors activation un compte', $_SESSION['admin']['IdCompte']);
         }
@@ -795,7 +795,7 @@ if(isset($_POST["desactiver"])){
             $deleteStudentController->desactivateAccount($idetud);
             $_SESSION['success-actif']='Ce compte est desactive/active  avec success';
             $log->createAction($_SESSION['admin']['CIN'],'info','admin: a desactiver un compte', $_SESSION['admin']['IdCompte']);
-        }catch(PDOException){
+        }catch(Throwable $e){
             $_SESSION['error-actif']='un erreur se produit , veuillez repeter l\'operation lterieuremnt';
             $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors de desactivation un compte', $_SESSION['admin']['IdCompte']);
         }
@@ -920,7 +920,7 @@ if(isset($_POST['chercher_rapport'])){
 if(isset($_POST['get_students'])){
     require_once '../controller/absenceController.php';
     session_start();
-    if(!empty($_POST['niveau']) && !empty($_POST['module'])){
+    if(isset($_POST['niveau']) && isset($_POST['module']) && isset($_POST['seance'])){
 
         $niveau = $_POST['niveau'];
         $module = $_POST['module'];
@@ -942,8 +942,9 @@ if(isset($_POST['get_students'])){
             $log->createAction($_SESSION['prof']['CIN'],'info','prof: a acceder pour faire l absence ', $_SESSION['prof']['IdCompte']);
 
     }else{
-        $_SESSION['abs_done_already'] = "remplir tous les criteres!!";
+        $_SESSION['empty-fileds'] = "remplir tous les criteres!!";
         $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut afficher les etudiants sans specifier les criteres ', $_SESSION['prof']['IdCompte']);
+        header('location: ../views/prof/faire_absence.php');
     }
     header('location: ../views/prof/faire_absencefn.php');
 }
@@ -1006,7 +1007,7 @@ if(isset($_POST['faire_absence'])){
             $_SESSION['abs_success'] = "les absence on ete bien ajouter";
 
         }
-        catch(PDOException $e){
+        catch(Throwable $e){
             $log->createAction($_SESSION['prof']['CIN'],'error','prof: error lors de l absence" ', $_SESSION['prof']['IdCompte']);
             $_SESSION['abs_error'] = "une erreur est survenu!! re-faire l'absence stp";
         }
@@ -1113,7 +1114,7 @@ if(isset($_GET['operation'])){
                 $archive->archiverCours($idcour);
                 $_SESSION['archive_success'] = "l'element a ete archiver/desarchiver avec succes";
                 $log->createAction($_SESSION['prof']['CIN'],'info','prof: a archiver un cour ', $_SESSION['prof']['IdCompte']);
-            }catch(PDOException){
+            }catch(Throwable $e){
                 $log->createAction($_SESSION['prof']['CIN'],'error','prof: error lors de l archivage', $_SESSION['prof']['IdCompte']);
                 $_SESSION['archive_error'] = "Ops erreur lors de l'operation";
             }
@@ -1134,7 +1135,7 @@ if(isset($_GET['operation'])){
                 $archive->desarchiverCours($idcour);
                 $_SESSION['archive_success'] = "l'element a ete archiver/desarchiver avec succes";
                 $log->createAction($_SESSION['prof']['CIN'],'info','prof: a desarchiver un cour ', $_SESSION['prof']['IdCompte']);
-            }catch(PDOException){
+            }catch(Throwable $e){
                 $log->createAction($_SESSION['prof']['CIN'],'error','prof: error lors de desarchivage ', $_SESSION['prof']['IdCompte']);
                 $_SESSION['archive_error'] = "Ops erreur lors de l'operation";
             }
@@ -1169,7 +1170,7 @@ if(isset($_GET['todolist'])){
         case 'terminer':
             try{
                 $todolistController->terminer($id);
-            }catch(PDOException){
+            }catch(Throwable $e){
                 $_SESSION['todolist_error'] = "Oops erreur lors de l'operation";
             }
 
@@ -1186,7 +1187,7 @@ if(isset($_GET['todolist'])){
         case 'supprimer':
             try{
                 $todolistController->delete($id);
-            }catch(PDOException){
+            }catch(Throwable $e){
                 $_SESSION['todolist_error'] = "Oops erreur lors de l'operation";
             }
 
@@ -1212,7 +1213,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'addtodo'){
     $task = $_POST['task'];
     try{
         $todolistController->add($task, $id_prof);
-    }catch(PDOException){
+    }catch(Throwable $e){
         $_SESSION['todolist_error'] = "Oops erreur lors de l'operation";
     }
 
@@ -1236,7 +1237,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'editTask'){
 
     try{
         $todolistController->edit($id, $task);
-    }catch(PDOException){
+    }catch(Throwable $e){
     }
 
     $todo = $todolistController->fetch_todo($_SESSION['prof']['IdProf']);
@@ -1504,7 +1505,7 @@ if(isset($_POST['searchUser'])){
         // var_dump($_SESSION['journal_of_user']);
         $log->createAction($_SESSION['admin']['CIN'],'info','admin: a chercher les logs d\'un utilisateur ', $_SESSION['admin']['IdCompte']);
 
-        }catch(Exception $e){
+        }catch(Throwable $e){
             $_SESSION['journal-error'] = "erreur lors de la recherche";
         }
 
@@ -1546,7 +1547,7 @@ if(isset($_GET['Prof'])){
             $prof->activerProf($idprof, $idcompte);
             $log->createAction($_SESSION['admin']['CIN'],'info','admin: a activer le compte d\'un prof ', $_SESSION['admin']['IdCompte']);
             $_SESSION['success-actif'] = "Le compte a ete activer/desactiver avec success";
-        }catch(Exception $e){
+        }catch(Throwable $e){
             $_SESSION['error-actif'] = "Erreur lors de l'operation";
         }
     }
@@ -1556,7 +1557,7 @@ if(isset($_GET['Prof'])){
             $prof->desactiverProf($idprof, $idcompte);
             $log->createAction($_SESSION['admin']['CIN'],'info','admin: a desactiver le compte d\'un prof ', $_SESSION['admin']['IdCompte']);
             $_SESSION['success-actif'] = "Le compte a ete activer/desactiver avec success";
-        }catch(Exception $e){
+        }catch(Throwable $e){
             $_SESSION['error-actif'] = "Erreur lors de l'operation";
         }
     }
@@ -1587,7 +1588,8 @@ if(isset($_GET['absence'])){
         try{
             $absence->deleteAbsence($idabsence);
             $_SESSION['supprimer-success'] = "l'absence a ete supprimer avec success";
-        }catch(Exception $e){
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: a supprimer un absence ', $_SESSION['prof']['IdCompte']);
+        }catch(Throwable $e){
             $_SESSION['error-absence'] = "erreur lors de l'operation";
         }
 
@@ -1597,7 +1599,8 @@ if(isset($_GET['absence'])){
         try{
             $absence->justifyAbsence($idabsence);
             $_SESSION['justifier-success'] = "l'absence a ete justifier avec success";
-        }catch(Exception $e){
+            $log->createAction($_SESSION['prof']['CIN'],'info','prof: a justifier un absence ', $_SESSION['prof']['IdCompte']);
+        }catch(Throwable $e){
             $_SESSION['error-absence'] = "erreur lors de l'operation";
         }
 

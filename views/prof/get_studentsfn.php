@@ -53,6 +53,34 @@ $details = $_SESSION['details'];
                 </table>
             </div>
 
+            <?php if(isset($_SESSION['supprimer-success'])) {?>
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['supprimer-success'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['supprimer-success']); ?>
+            <?php } ?>
+
+            <?php if(isset($_SESSION['justifier-success'])) {?>
+                <div class="alert alert-success d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['justifier-success'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['justifier-success']); ?>
+            <?php } ?>
+            
+            <?php if(isset($_SESSION['error-absence'])) {?>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['error-absence'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['error-absence']); ?>
+            <?php } ?>
+
+
             <?php if(isset($_SESSION['details_message_shown'])) {?>
 
                 <div class="alert alert-danger d-flex align-items-center" role="alert">
