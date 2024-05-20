@@ -1,30 +1,21 @@
 <?php
 session_start();
 require_once '../../includes/sidebar_admin.php';
-require_once '../../securiteadmin.php';
 
+ $logins = isset($_SESSION['journal_of_user'])? $_SESSION['journal_of_user']: $_SESSION['logins'];
+ $recodsPerPage = 30;
+ $totalRecords = count($logins);
+ $totalPages = ceil($totalRecords / $recodsPerPage);
 
-// var_dump($_SESSION['journal_of_user']);
+ //numero de page
+ $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-// Check if 'logins' session variable is set
-// if (isset($_SESSION['logins'])) {
+ //index de recuperation des donnes de $logins selon num de page
+ $start_index = ($current_page - 1) * $recodsPerPage;
+ 
+ //extraction des donnes pour affichage apres
+ $pageRecords = array_slice($logins, $start_index, $recodsPerPage);
 
-
-    $logins = isset($_SESSION['journal_of_user'])? $_SESSION['journal_of_user']: $_SESSION['logins'];
-    $recodsPerPage = 30;
-    $totalRecords = count($logins);
-    $totalPages = ceil($totalRecords / $recodsPerPage);
-
-    //numero de page
-    $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
-    //index de recuperation des donnes de $logins selon num de page
-    $start_index = ($current_page - 1) * $recodsPerPage;
-
-    
-    //extraction des donnes pour affichage apres
-    $pageRecords = array_slice($logins, $start_index, $recodsPerPage);
-// }
 ?>
 
 <!DOCTYPE html>
@@ -39,23 +30,19 @@ require_once '../../securiteadmin.php';
     <div class="card col-xl-8 offset-3 mt-5 overflow-scroll">
         <div class="card-header">Formulaire d'Activite des utilisateurs</div>
         <div class="card-body">      
-
-           
-
-                <div class="search-bar-div">
-
-                    <form class="navbar-search me-auto my-0" method="POST" action="../../routing/routing.php">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-0 search" name="track" placeholder="Rcherche"> 
-                            <button class="btn search" type="submit" name="searchUser">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-
-                </div>
+            <div class="search-bar-div">
+                <form class="navbar-search me-auto my-0" method="POST" action="../../routing/routing.php">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-0 search" name="track" placeholder="Rcherche"> 
+                        <button class="btn search" type="submit" name="searchUser">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
            
             <div class="table-responsive">
+
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -80,6 +67,7 @@ require_once '../../securiteadmin.php';
                         <?php } ?>
                     </tbody>
                 </table>
+                
             </div>
 
             <!-- Pagination -->

@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once '../../securite.php';
 require_once '../../config/conn.php';
 include '../../includes/sidebar_etd.php';
 

@@ -2,7 +2,6 @@
 session_start();
 include '../../includes/sidebar_prof.php';
 
-
 ?>
 
 <!DOCTYPE html>

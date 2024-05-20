@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../securiteadmin.php';
+
 include '../../includes/sidebar_admin.php';
 
 ?>

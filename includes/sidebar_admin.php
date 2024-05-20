@@ -1,3 +1,8 @@
+<?php
+
+require_once '../../securiteadmin.php';
+
+?>
 
 <html lang="en">
 <head>

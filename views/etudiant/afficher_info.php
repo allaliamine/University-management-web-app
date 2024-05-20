@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-
 require_once '../../includes/sidebar_etd.php';
 $etd = $_SESSION['etd'];
 

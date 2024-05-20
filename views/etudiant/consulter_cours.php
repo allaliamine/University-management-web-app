@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../securiteetd.php';
+
 include '../../includes/sidebar_etd.php';
 
 $lvl_mdls = $_SESSION['lvl_mdls'];

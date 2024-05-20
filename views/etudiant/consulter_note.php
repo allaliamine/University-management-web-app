@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $notes=$_SESSION['notes'];
 require_once '../../securiteetd.php';

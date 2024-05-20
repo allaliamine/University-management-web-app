@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../securiteetd.php';
+
 include '../../includes/sidebar_etd.php';
 
 $etu_cour = $_SESSION['etu_cours'];

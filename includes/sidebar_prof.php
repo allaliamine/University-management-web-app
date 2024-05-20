@@ -1,4 +1,8 @@
+<?php
 
+require_once '../../securiteprof.php';
+
+?>
 <html lang="en">
 <head>
     <title>Prof-Interface</title>

@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 require_once '../../includes/sidebar_prof.php';
 $prof = $_SESSION['prof'];
 

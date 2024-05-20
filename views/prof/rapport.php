@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../securiteprof.php';
+
 include '../../includes/sidebar_prof.php';
 
 $levels = $_SESSION['levels'];

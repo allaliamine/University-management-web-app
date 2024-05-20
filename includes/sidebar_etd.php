@@ -1,6 +1,6 @@
 <?php
 
-
+require_once '../../securiteetd.php';
 $countNotif = $_SESSION['countNotif'];    
 $countSeenNotif = $_SESSION['countSeenNotif']; 
 
