@@ -1,6 +1,7 @@
 <?php
 
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 require_once '../controller/logController.php';
 
@@ -520,14 +521,16 @@ if(isset($_GET['idActualite'])){
      */
 /////////////////////////////////////////////////////////////////////////////////
  if(isset($_POST['ajout-etudiant'])){
+    session_start();
 
     require '../vendor/autoload.php';
     require_once '../controller/addStudentController.php';
-    session_start();
 
-    if(!empty($_FILES['file_etudiant']['name']) && in_array($_FILES['file']['type'], $excelMimes)){
+    $excelMimes = array('text/xls', 'text/xlsx', 'application/excel', 'application/vnd.msexcel', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');  
 
-        $file_tmp = $_FILES['file_etudiant']['tmp_name'];
+    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $excelMimes)){
+
+        $file_tmp = $_FILES['file']['tmp_name'];
         $filiere = $_POST['filiere'];
         $niveau = $_POST['niveau'];
 
@@ -537,7 +540,13 @@ if(isset($_GET['idActualite'])){
         $worksheet = $spreadsheet->getActiveSheet();
         $worksheet_arr = $worksheet->toArray();
 
-        foreach ($worksheet_arr as $row) {
+
+        //Validation des donnees
+        $isValid=true;
+        $errors = []; 
+        $validData=[];
+
+        foreach ($worksheet_arr as $rowIndex => $row) {
 
             $nom = $row[0];
             $prenom = $row[1];
@@ -553,25 +562,75 @@ if(isset($_GET['idActualite'])){
             $idadmin = 1;
            $addStudent = new addStudentController();
 
-            $checkStudent = $addStudent->CheckStudentByCne($cne);
 
-            if(!$checkStudent){
-
-                $addStudent->addAccount($login,$mdp);
-
-                $idcompte = $addStudent->getAccountID($login, $mdp);
-                
-                $addStudent->insertStudent($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $idcompte, $idrole ,$login, $mdp, $idadmin, $niveau,$filiere);
-                $_SESSION['ajouterEtudiant'] = "les Etudiant on ete ajouter avec succes \n les comptes des etudiants on ete creer avec succes";
-                $log->createAction($_SESSION['admin']['CIN'],'info','admin: a ajouter des etudiant ', $_SESSION['admin']['IdCompte']);
+           // Validation des cases vides
+            if (empty($nom) || empty($prenom) || empty($cin) || empty($cne) || empty($sexe) || empty($date) || empty($email) || empty($tel)) {
+                $isValid = false;
+                $errors[] = "Une case vide se trouve dans la casee : " . ($rowIndex + 1) . ".";
+                continue;
             }
+
+            $checkStudent = $addStudent->CheckStudentByCne($cne);
+            if(!$checkStudent){
+                $isValid = false;
+                $errors[] = "Invalid CNE fans la case : " . ($rowIndex + 1) . ".";
+                continue;
+            }
+
+            $validData[] = [
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'cin' => $cin,
+                'cne' => $cne,
+                'sexe' => $sexe,
+                'date' => $date,
+                'email' => $email,
+                'tel' => $tel,
+                'login' => $login,
+                'mdp' => $mdp,
+                'idrole' => $idrole,
+                'idadmin' => $idadmin,
+                'niveau' => $niveau,
+                'filiere' => $filiere
+            ];
         }
+
+        if (!$isValid) {
+            $_SESSION['etat_upload_erreur'] = "Une erreur est survenue lors de l'execution du fichier a cause de " . implode(', ', $errors);
+            echo $_SESSION['etat_upload_erreur'];
+            header('location: ../views/admin/ajout_etudiants.php');
+            exit();
+        }
+
+        foreach ($validData as $data) {
+            $nom = $data['nom'];
+            $prenom = $data['prenom'];
+            $cin = $data['cin'];
+            $cne = $data['cne'];
+            $sexe = $data['sexe'];
+            $date = $data['date'];
+            $email = $data['email'];
+            $tel = $data['tel'];
+            $login = $data['login'];
+            $mdp = $data['mdp'];
+            $idrole = $data['idrole'];
+            $idadmin = $data['idadmin'];
+            $niveau = $data['niveau'];
+            $filiere = $data['filiere'];
+        
+            $addStudent->addAccount($login,$mdp);
+
+            $idcompte = $addStudent->getAccountID($login, $mdp);
+            
+            $addStudent->insertStudent($nom, $prenom, $cin, $cne, $sexe, $date, $email, $tel, $idcompte, $idrole ,$login, $mdp, $idadmin, $niveau,$filiere);
+        }
+        $_SESSION['ajouterEtudiant'] = "les Etudiant on ete ajouter avec succes \n les comptes des etudiants on ete creer avec succes";
+        $log->createAction($_SESSION['admin']['CIN'],'info','admin: a ajouter des etudiant ', $_SESSION['admin']['IdCompte']);
+        
+        
     }else{
         $log->createAction($_SESSION['admin']['CIN'],'error','admin: a tenter ajouter etudiant avec un fichier non excel ', $_SESSION['admin']['IdCompte']);
     }
-
-    header('location: ../views/admin/ajout_etudiants.php');
-
 
 }
 /////////////////////////////////////////////////////////////////////////////////
@@ -579,7 +638,7 @@ if(isset($_GET['idActualite'])){
     * Pour ajouter les notes
     */
 /////////////////////////////////////////////////////////////////////////////////
-if(isset($_POST['importSubmit'])){ 
+if (isset($_POST['importSubmit'])) {
 
     session_start();
 
@@ -601,30 +660,79 @@ if(isset($_POST['importSubmit'])){
             
             // Remove header row 
             unset($worksheet_arr[0]); 
-            foreach($worksheet_arr as $row){ 
+
+            //Validation des donnees
+            $isValid=true;
+            $errors = []; 
+            $validData=[];
+
+            foreach ($worksheet_arr as $rowIndex => $row) { 
                 $CNE = $row[0]; 
                 $Valeur = $row[1];
-                $id=$etd->get_id_etd($CNE);
 
-                $id_module=$_POST['module'];
+                // Validation des cases vides
+                if (empty($CNE) || empty($Valeur)) {
+                    $isValid = false;
+                    $errors[] = "Une case vide se trouve dans la casee : " . ($rowIndex + 2) . ".";
+                    continue;
+                }
 
+                // Validation des fausses CNE 
+                $id = $etd->get_id_etd($CNE);
+                if (!$id) {
+                    $isValid = false;
+                    $errors[] = "Invalid CNE '$CNE' dans la ligne " . ($rowIndex + 2) . ".";
+                    continue;
+                }
 
-                $conn->query("INSERT INTO note(Valeur, idModule, idAdmin, idEtudiant) VALUES ('".$Valeur."','".$id_module."', '1', '".$id."')"); 
-            } 
-            $_SESSION['etat_note_succes']='Les notes ont ete ajoutes avec succes';
-            $log->createAction($_SESSION['admin']['CIN'],'info','admin: a publier des notes ', $_SESSION['admin']['IdCompte']);
-            
-        }else{  
-            $log->createAction($_SESSION['admin']['CIN'],'error','admin: error lors de publication des notes ', $_SESSION['admin']['IdCompte']);
-            $_SESSION['etat_note_erreur']='Un erreur est survenue contactez Mr Cherradi';
+                // Validation des notes
+                if (!is_numeric($Valeur) || $Valeur < 0 || $Valeur > 20) {
+                    $isValid = false;
+                    $errors[] = "Invalid note '$Valeur' dans la ligne " . ($rowIndex + 2) . ". La note doit etre entre 0 et 20";
+                    continue;
+                }
+
+                $validData[] = [
+                    'CNE' => $CNE,
+                    'Valeur' => $Valeur,
+                    'idEtudiant' => $id
+                ];
+            }
+
+            if (!$isValid) {
+                $_SESSION['etat_note_erreur'] = "Une erreur est survenue lors de l'execution du fichier a cause de " . implode(', ', $errors);
+                header('location: ../views/admin/publier_note.php');
+                exit();
+            }
+
+            foreach ($validData as $data) {
+                $CNE = $data['CNE'];
+                $Valeur = $data['Valeur'];
+                $idEtudiant = $data['idEtudiant'];
+                $idModule = $_POST['module'];
+                $idAdmin = $_SESSION['admin']['IdAdmin'];
+
+                $etd->upload_note(
+                    (float)$Valeur, 
+                    (int)$idModule, 
+                    (int)$idAdmin, 
+                    (int)$idEtudiant
+                );
+            }
+
+            $_SESSION['etat_note_succes'] = 'Les notes ont été ajoutées avec succès';
+            $log->createAction($_SESSION['admin']['CIN'], 'info', 'admin: a publié des notes ', $_SESSION['admin']['IdCompte']);
+        } else {  
+            $log->createAction($_SESSION['admin']['CIN'], 'error', 'admin: erreur lors de la publication des notes ', $_SESSION['admin']['IdCompte']);
+            $_SESSION['etat_note_erreur'] = 'Une erreur est survenue, contactez Mr Cherradi.';
         } 
-    }else{ 
-        $_SESSION['etat_note_fail']='Fichier unvalide, format insuportable';
-        $log->createAction($_SESSION['admin']['CIN'],'error','admin: tenter de mettre un fichier non excel', $_SESSION['admin']['IdCompte']);
-    } 
+    } else { 
+        $_SESSION['etat_note_fail'] = 'Fichier invalide, format insupportable';
+        $log->createAction($_SESSION['admin']['CIN'], 'error', 'admin: tenté de mettre un fichier non Excel', $_SESSION['admin']['IdCompte']);
+    }
 
     header('location: ../views/admin/publier_note.php');
-} 
+}
 /////////////////////////////////////////////////////////////////////////////////
     /**
     * FOR THE PUBLISH ANNOUNCEMENT 

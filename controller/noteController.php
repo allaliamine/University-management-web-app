@@ -47,6 +47,13 @@ class noteController{
         $result=$this->note_model->get_id_module($module);
         return $result;
     }
+
+    function check_cne_exist(string $CNE){
+        $result=$this->note_model->check_cne_exist($CNE);
+        return !empty($result);
+    }
+
+
 }
 
 
