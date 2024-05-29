@@ -22,7 +22,7 @@ class deleteStudent{
 
         global $conn;
 
-        $sql= $conn->prepare("SELECT Etudiant.IdEtudiant, Etudiant.CIN ,Etudiant.Nom, Etudiant.Prenom , Etudiant.Activite
+        $sql= $conn->prepare("SELECT IdEtudiant, CIN ,Nom, Prenom , Activite
         FROM Etudiant where IdNiveau =? ");
         $sql->execute([$idniveau]);
         $res = $sql->fetchAll();

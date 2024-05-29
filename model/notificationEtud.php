@@ -41,7 +41,7 @@ class notificationEtud{
     public function getAllNotification(){
        
         global $conn;
-        $req = $conn->prepare('SELECT * from annonce order by date Desc');
+        $req = $conn->prepare('SELECT * from Annonce order by date Desc');
         $req->execute();
         $res = $req->fetchAll();
         return $res;
@@ -60,7 +60,7 @@ class notificationEtud{
 
     public function isActualitePublic($idAnnonce){
         global $conn;
-        $req = $conn->prepare('SELECT IdNiveau as cible from annonce_niveau where IdAnnonce= ?');
+        $req = $conn->prepare('SELECT IdNiveau as cible from Annonce_niveau where IdAnnonce= ?');
         $req->execute(array($idAnnonce));
         $res = $req->fetch();
         return $res;
@@ -70,7 +70,7 @@ class notificationEtud{
         global $conn;
     
        
-        $checkQuery = $conn->prepare('SELECT COUNT(*) AS count FROM consultation_annonce WHERE IdAnnonce = ? AND IdEtudiant = ?');
+        $checkQuery = $conn->prepare('SELECT COUNT(*) AS count FROM Consultation_annonce WHERE IdAnnonce = ? AND IdEtudiant = ?');
         $checkQuery->execute([$idAnnonce, $idEtudiant]);
         $result = $checkQuery->fetch(PDO::FETCH_ASSOC);
     

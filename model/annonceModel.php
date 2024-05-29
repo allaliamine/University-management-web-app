@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Config/conn.php';
+require_once '../config/conn.php';
 
 
 class annonceModel 
