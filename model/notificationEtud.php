@@ -50,7 +50,7 @@ class notificationEtud{
     }
     public function showDetailActualite($idAnnonce){
         global $conn;
-        $req = $conn->prepare('SELECT date,Titre,annonce.IdAnnonce,filiere.Nom as nomFiliere, Niveau.Nom as NomNiveau from filiere,niveau,annonce,annonce_niveau
+        $req = $conn->prepare('SELECT Nom_fichier,date,Titre,annonce.IdAnnonce,filiere.Nom as nomFiliere, Niveau.Nom as NomNiveau from filiere,niveau,annonce,annonce_niveau
          where annonce.IdAnnonce= annonce_niveau.IdAnnonce and annonce_niveau.IdNiveau=niveau.IdNiveau
          and niveau.IdFiliere= filiere.IdFiliere and Annonce.IdAnnonce= ?');
          $req->execute(array($idAnnonce));

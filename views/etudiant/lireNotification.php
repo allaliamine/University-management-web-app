@@ -26,6 +26,9 @@ if(isset($_SESSION['notificationDetail'])) {
         <div class="card-body">
 
             <div> Une nouvelle actualite est publie sur le tableau d'actualite: </div>
+                <br>
+                
+                <p><?= $res['Descriptif']?></p>
                         
                 <?php $path="../../uploads/".$res['Nom_fichier']; ?>
                 
