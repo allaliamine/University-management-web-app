@@ -48,7 +48,7 @@ $levels = $_SESSION['levels'];
 
                 <div class="form-group mb-4">
                     <label class="form-label" >Choisir un fichier de l'importation:</label>
-                    <input type="file" accept=".xlsx, .xls" name="file_etudiant" class="form-control" required>
+                    <input type="file" accept=".xlsx, .xls" name="file" class="form-control" required>
                 </div>
 
                 
@@ -62,6 +62,15 @@ $levels = $_SESSION['levels'];
                     </div>
                 </div>
                 <?php unset($_SESSION['ajouterEtudiant']); ?>
+            <?php } ?>
+
+            <?php if(isset($_SESSION['etat_upload_erreur'])) {?>
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <div>
+                        <?php echo $_SESSION['etat_upload_erreur'];?>
+                    </div>
+                </div>
+                <?php unset($_SESSION['etat_upload_erreur']); ?>
             <?php } ?>
 
         </div>

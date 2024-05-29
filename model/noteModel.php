@@ -77,6 +77,14 @@ class noteModel{
         return $id;
     }
 
+    function check_cne_exist(string $CNE){
+        global $conn;
+        $query="SELECT * FROM Etudiant WHERE CNE=?;";
+        $stmt=$conn->prepare($query);
+        $stmt->execute([$CNE]);
+        $result=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result :null;
+    }
     
 }
 
