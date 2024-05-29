@@ -10,7 +10,7 @@ class addStudent{
 
         global $conn;
         
-        $req = $conn->prepare('select * from Etudiant where Cne=?');
+        $req = $conn->prepare('select * from Etudiant where CNE=?');
         $params = array($cne);
         $req->execute($params);
         $res = $req->fetch();
