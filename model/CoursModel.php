@@ -1,11 +1,11 @@
 <?php
-require_once '../Config/conn.php';
+require_once '../config/conn.php';
 
 class CoursModel {
    
 function InsertCours($file_name ,$type ,$etat, $IdProf, $IdNiveau, $IdModule){
     global $conn ;  
-    $query = "INSERT INTO cours (Nom , Type , etat , IdProf , IdNiveau, IdModule) VALUES (?,?,?,?,?,?) ";
+    $query = "INSERT INTO Cours (Nom , Type , etat , IdProf , IdNiveau, IdModule) VALUES (?,?,?,?,?,?) ";
     $stm = $conn->prepare($query);
     $stm->execute([$file_name , $type, $etat, $IdProf, $IdNiveau, $IdModule]);
 
@@ -90,8 +90,7 @@ function getCoursForStudent($idmodule){
 function getModulesByniveau($idniveau){
     global $conn;
 
-
-    $req = $conn->prepare('SELECT Module.*, Prof.Nom AS Nom_Professeur, Prof.Prenom AS Prenom_Professeur FROM Module INNER JOIN Prof ON Module.IdProf = Prof.IdProf WHERE Module.IdNiveau = ?');
+    $req = $conn->prepare('SELECT Module.IdModule, Module.Intitule, Prof.Nom AS Nom_Professeur, Prof.Prenom AS Prenom_Professeur FROM Module INNER JOIN Prof ON Module.IdProf = Prof.IdProf WHERE Module.IdNiveau = ?');
     $params = array($idniveau);
     $req->execute($params);
 

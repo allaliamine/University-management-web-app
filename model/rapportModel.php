@@ -7,7 +7,7 @@ class rapportModel {
     function fetch_niveau(){
         
         global $conn; 
-        $query="SELECT * FROM niveau ;";
+        $query="SELECT * FROM Niveau ;";
         $stmt=$conn->prepare($query);
         $stmt->execute();
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -18,7 +18,7 @@ class rapportModel {
     function fetch_module($prof){
 
         global $conn;
-        $query="SELECT * FROM module WHERE IdProf=?;";
+        $query="SELECT * FROM Module WHERE IdProf=?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$prof['IdProf']]);
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -29,14 +29,14 @@ class rapportModel {
     function upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite){
         
         global $conn;
-        $query="INSERT INTO rapport (Descriptive,IdProf,IdNiveau,IdModule,Deadline) VALUES (?,?,?,?,?);";
+        $query="INSERT INTO Rapport (Descriptive,IdProf,IdNiveau,IdModule,Deadline) VALUES (?,?,?,?,?);";
         $stmt=$conn->prepare($query);
         $stmt->execute([$Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite]);
     }
 
     function fetch_idrapport($module,$id_prof){
         global $conn;
-        $query="SELECT * FROM rapport WHERE IdProf=? AND IdModule=?;";
+        $query="SELECT * FROM Rapport WHERE IdProf=? AND IdModule=?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$id_prof,$module]);
         $result=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,8 +48,8 @@ class rapportModel {
     function fetch_students($id_rapport){
         global $conn;
         $query = "SELECT r.*, s.*
-                  FROM rapportetd r 
-                  INNER JOIN etudiant s ON r.IdEtudiant = s.IdEtudiant 
+                  FROM Rapportetd r 
+                  INNER JOIN Etudiant s ON r.IdEtudiant = s.IdEtudiant 
                   WHERE r.IdRapport = ?";
         $stmt = $conn->prepare($query);
         $stmt->execute([$id_rapport]);

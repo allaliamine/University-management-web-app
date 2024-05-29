@@ -6,10 +6,10 @@ class consulternoteModel {
 
     function fetch_note($idetudiant){
         global $conn; 
-        $query="SELECT module.Intitule, note.Valeur
-        FROM note
-        JOIN module ON note.idModule = module.IdModule
-        WHERE note.idEtudiant = ?;";
+        $query="SELECT Module.Intitule, Note.Valeur
+        FROM Note
+        JOIN Module ON Note.idModule = Module.IdModule
+        WHERE Note.idEtudiant = ?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$idetudiant]);
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);

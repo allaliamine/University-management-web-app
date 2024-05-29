@@ -35,7 +35,7 @@ $lvl_mdls = $_SESSION['lvl_mdls'];
                             <?php foreach ($lvl_mdls as $mdl){ ?> 
                             <tr>
                                 <td><?= $mdl['IdModule']?></td>
-                                <td><a href="../../routing/routing.php?action=getAllCours&etape=2&id=<?=$mdl['IdModule']?>"> <?= $mdl['Intitule']; ?> </a></td>
+                                <td><a href="../../routing/routing.php?action=getAllCours&etape=2&id=<?= $mdl['IdModule'] ?>"> <?= $mdl['Intitule']; ?> </a></td>
                                 <td><?php echo "Pr.".$mdl['Nom_Professeur']." ".$mdl['Prenom_Professeur']; ?></td>
                             </tr>
                             <?php } ?>

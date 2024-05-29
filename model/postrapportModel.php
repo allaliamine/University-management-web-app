@@ -9,9 +9,9 @@ class postrapportModel {
         $currentDate = date("Y-m-d");
         $niveauetd = $_SESSION['etd'];
         $query = "SELECT r.*, p.Nom, m.Intitule 
-                  FROM rapport r 
-                  JOIN prof p ON r.IdProf = p.IdProf
-                  JOIN module m ON r.IdModule = m.IdModule 
+                  FROM Rapport r 
+                  JOIN Prof p ON r.IdProf = p.IdProf
+                  JOIN Module m ON r.IdModule = m.IdModule 
                   WHERE r.IdNiveau = ? AND r.Deadline >= ?";
         $stmt = $conn->prepare($query);
         $stmt->execute([$niveauetd['IdNiveau'], $currentDate]);
@@ -24,7 +24,7 @@ class postrapportModel {
     function fetch_nommodule(int $id){
 
         global $conn;
-        $query="SELECT * FROM module WHERE IdModule=?;";
+        $query="SELECT * FROM Module WHERE IdModule=?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$id]);
         $result=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -36,7 +36,7 @@ class postrapportModel {
     function fetch_nomprofesseur(int $id){
 
         global $conn;
-        $query="SELECT * FROM prof WHERE IdProf=?;";
+        $query="SELECT * FROM Prof WHERE IdProf=?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$id]);
         $result=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -47,14 +47,14 @@ class postrapportModel {
     function upload_rapportetd($rapport_id,$filename,$path,$idEtudiant){
         
         global $conn;
-        $query="INSERT INTO rapportetd (IdEtudiant,IdRapport,pdf_nom,pdf_path) VALUES (?,?,?,?);";
+        $query="INSERT INTO Rapportetd (IdEtudiant,IdRapport,pdf_nom,pdf_path) VALUES (?,?,?,?);";
         $stmt=$conn->prepare($query);
         $stmt->execute([$idEtudiant,$rapport_id,$filename,$path]);
     }
 
     function studentHasSubmittedFile($rapport_id,$idEtudiant){
         global $conn;
-        $query = "SELECT COUNT(*) AS count FROM rapportetd WHERE IdEtudiant = ? AND IdRapport = ?";
+        $query = "SELECT COUNT(*) AS count FROM Rapportetd WHERE IdEtudiant = ? AND IdRapport = ?";
         $stmt = $conn->prepare($query);
         $stmt->execute([$idEtudiant, $rapport_id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
