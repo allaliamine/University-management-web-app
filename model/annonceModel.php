@@ -10,7 +10,7 @@ function getAnnonceID($nom){
 
     global $conn;
 
-    $query = "SELECT * FROM annonce WHERE Nom_fichier = ?";
+    $query = "SELECT * FROM Annonce WHERE Nom_fichier = ?";
     $stm=$conn->prepare($query);
     $stm ->execute([$nom]);
     $result=$stm->fetch(PDO::FETCH_ASSOC);
@@ -23,7 +23,7 @@ function InsertAnnonce($titre,$descriptif,$Nom_fichier,$date){
      
     global $conn;
 
-    $query = "INSERT INTO annonce (Titre, Descriptif, Nom_fichier ,date, IdAdmin ) VALUES (?,?,?,?,?);";
+    $query = "INSERT INTO Annonce (Titre, Descriptif, Nom_fichier ,date, IdAdmin ) VALUES (?,?,?,?,?);";
     $stm = $conn ->prepare($query);
     $stm ->execute([$titre,$descriptif,$Nom_fichier,$date,1]);
 
@@ -32,7 +32,7 @@ function InsertAnnonce($titre,$descriptif,$Nom_fichier,$date){
 function InsertAnnonceNiveau($id ,$niveau){
     global $conn;
 
-    $query= "INSERT INTO annonce_niveau(IdAnnonce, IdNiveau) VALUES (?,?);";
+    $query= "INSERT INTO Annonce_niveau(IdAnnonce, IdNiveau) VALUES (?,?);";
     $stm= $conn->prepare($query);
     $stm ->execute([$id,$niveau]);
 }

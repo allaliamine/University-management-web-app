@@ -8,7 +8,7 @@ class noteModel{
     function fetch_filier(){
     
         global $conn;
-        $query="SELECT * FROM filiere;";
+        $query="SELECT * FROM Filiere;";
         $stmt=$conn->prepare($query);
         $stmt->execute();
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -18,7 +18,7 @@ class noteModel{
     function fetch_niveau(){
         
         global $conn; 
-        $query="SELECT * FROM niveau ;";
+        $query="SELECT * FROM Niveau ;";
         $stmt=$conn->prepare($query);
         $stmt->execute();
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -28,7 +28,7 @@ class noteModel{
     function fetch_module(){
         
         global $conn;
-        $query="SELECT * FROM module ;";
+        $query="SELECT * FROM Module ;";
         $stmt=$conn->prepare($query);
         $stmt->execute();
         $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -38,7 +38,7 @@ class noteModel{
     function id_niveau(string $nom){
         
         global $conn;
-        $query="SELECT * FROM niveau WHERE Nom=?;";
+        $query="SELECT * FROM Niveau WHERE Nom=?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$nom]);
         $result=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -50,7 +50,7 @@ class noteModel{
     function upload_note(float $Valeur, int $idModule, int $idAdmin, int $idEtudiant){
         
         global $conn;
-        $query="INSERT INTO note (Valeur,idModule,idAdmin,idEtudiant) VALUES (?,?,?,?);";
+        $query="INSERT INTO Note (Valeur,idModule,idAdmin,idEtudiant) VALUES (?,?,?,?);";
         $stmt=$conn->prepare($query);
         $stmt->execute([$Valeur,$idModule,$idAdmin,$idEtudiant]);
     }
@@ -58,7 +58,7 @@ class noteModel{
     function get_id_etd(string $CNE){
          
         global $conn;
-        $query="SELECT * FROM etudiant WHERE CNE=?;";
+        $query="SELECT * FROM Etudiant WHERE CNE=?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$CNE]);
         $result=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -69,7 +69,7 @@ class noteModel{
     function get_id_module(string $module){
          
         global $conn;
-        $query="SELECT * FROM module WHERE Intitule=?;";
+        $query="SELECT * FROM Module WHERE Intitule=?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$module]);
         $result=$stmt->fetch(PDO::FETCH_ASSOC);

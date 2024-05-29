@@ -146,8 +146,7 @@ if(isset($_GET['action'])){
             $_SESSION['levels'] = $levels;
             $_SESSION['modules'] = $modules;
 
-            echo $levels;
-            echo $modules;
+            
 
             $log->createAction($_SESSION['prof']['CIN'],'info','prof: est allé à "Rapport" ', $_SESSION['prof']['IdCompte']);
 
@@ -241,7 +240,7 @@ if(isset($_GET['action'])){
             require_once '../controller/consulternoteController.php';
             $etdnoteController=new consulternoteController();
             $idetudiant=$_SESSION['etd']['IdEtudiant'];
-            echo $idetudiant;
+            
             $notes=$etdnoteController->fetch_note($idetudiant);
             $_SESSION['notes']=$notes;
             $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé à "Note" ', $_SESSION['etd']['IdCompte']);
@@ -276,7 +275,7 @@ if(isset($_GET['action'])){
             var_dump($_SESSION['abs_mdl']);
             $module =  $_SESSION['abs_mdl'];
 
-            echo $module;
+            
 
             $etd = new absenceController();
 
@@ -334,7 +333,7 @@ if(isset($_GET['action'])){
             }elseif($_GET['etape'] == 2){
 
                 $idmodule = $_GET['id'];
-                echo $idmodule;
+                
                 $etu_cours = $coursController->getCoursForStudent($idmodule);
                 $_SESSION['etu_cours'] = $etu_cours;
                 $log->createAction($_SESSION['etd']['CNE'],'info','etd: est allé consulter les cours de module ', $_SESSION['etd']['IdCompte']);
@@ -645,16 +644,16 @@ if (isset($_POST['publier_annonce'])) {
         $descriptif = $_POST['descriptif'];
 
         if (move_uploaded_file($file_tmp, $destination)){
-            // echo "i got here <br>";
+            
                 
             if(!empty($_POST['check_list'])){
-                // echo "again";
+                
                 $annonce = new AnnonceController();
                 $annonce->insertAnnonce($titre, $descriptif, $file_name);
-                // echo "again";
+                
                 foreach($_POST['check_list'] as $value){
                     $value = (int) $value;
-                    // echo $value."<br>";
+                    
                     $annonce->insertAnnonceNiveau($file_name, $value);
                     $_SESSION['annonce_valide']="annonce a ete publier ";
                     
@@ -666,13 +665,12 @@ if (isset($_POST['publier_annonce'])) {
             //     $all = $_POST['toutes_filieres'];
             //     $all = (int) $all;
             //     // var_dump($all);
-            //     // echo "<br>";
-            //     // echo "ini wlh <br>";
+            //    
             //     $annonce = new AnnonceController();
             //     $annonce->insertAnnonce($titre, $descriptif,$file_name);
-            //     echo "test insert1<br>";
+
             //     $annonce->insertAnnonceNiveau($file_name, $all);
-            //     echo "test insert2<br>";
+            
             // }
     
         }else{
@@ -1131,7 +1129,7 @@ if(isset($_GET['operation'])){
 
         case 'desarchiver':
 
-            echo "desar";
+            
             try{
                 $archive->desarchiverCours($idcour);
                 $_SESSION['archive_success'] = "l'element a ete archiver/desarchiver avec succes";
@@ -1497,7 +1495,7 @@ if(isset($_POST['searchUser'])){
 
     if(!empty($_POST['track'])){
         $user = $_POST['track'];
-        // echo $user;
+        
 
         try{
         $journalOfUser = $logs->getLogsBycne($user);
