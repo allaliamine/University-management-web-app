@@ -571,9 +571,9 @@ if(isset($_GET['idActualite'])){
             }
 
             $checkStudent = $addStudent->CheckStudentByCne($cne);
-            if(!$checkStudent){
+            if($checkStudent){
                 $isValid = false;
-                $errors[] = "Invalid CNE fans la case : " . ($rowIndex + 1) . ".";
+                $errors[] = "Invalid CNE dans la case : " . ($rowIndex + 1) . ".";
                 continue;
             }
 
@@ -631,7 +631,7 @@ if(isset($_GET['idActualite'])){
     }else{
         $log->createAction($_SESSION['admin']['CIN'],'error','admin: a tenter ajouter etudiant avec un fichier non excel ', $_SESSION['admin']['IdCompte']);
     }
-
+    header('location: ../views/admin/ajout_etudiants.php');
 }
 /////////////////////////////////////////////////////////////////////////////////
     /**
