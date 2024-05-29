@@ -41,7 +41,7 @@ $rapports=$_SESSION['rapports'];
                         <div class="card">
                             <div class="card-body text-center">
                             <h5>Rapport: </h5>
-                            <?php $path=$rapport['pdf_path'];
+                            <?php $path="../".$rapport['pdf_path'];
                             ?>
                             <a href="<?= $path; ?>" download>Download Here</a>
                             </div>
