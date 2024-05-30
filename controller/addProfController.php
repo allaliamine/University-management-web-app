@@ -91,10 +91,10 @@ class addProfController{
                     $idcompte = $prof->getAccountID($login, $mdp);
                     $idcompte = (int)$idcompte;
 
-
-                    if($prof->insertProf($nom,$prenom,$cin,$email,$tel,$idcompte,$login,$mdp)){
+                    try{
+                        $prof->insertProf($nom,$prenom,$cin,$email,$tel,$idcompte,$login,$mdp);
                         $_SESSION['insert-success'] = "le prof a ete ajouter avec succes \n le comptes de prof a ete creer avec succes";
-                    }else{
+                    }catch (Throwable $e){
                         $_SESSION['insert-error'] = "erreur lors de l'insertion";
                     }
                     // $log->createAction($_SESSION['admin']['CIN'],'info','admin: a ajouter des etudiant ', $_SESSION['admin']['IdCompte']);

@@ -41,7 +41,7 @@ if ( isset($_POST['submit']) ) {
         $authController->login($login, $password);
 
     } catch (Throwable $e) {
-        echo "Error: " . $e->getMessage();
+        header("location: ../public/index.php");
     }
  
 }
@@ -372,7 +372,14 @@ if(isset($_GET['action'])){
             }
             if($_GET['role'] == 2 ){
                 
-                header('location: ../views/etudiant/interface_Etudiant.php');
+                require_once "../controller/calendrierController.php";
+               
+                $idNiveau =$_SESSION['etd']['IdNiveau'];
+                $calendrierController= new calendrierController();
+                $event= $calendrierController->fetchEventNiveau($idNiveau);
+                $_SESSION['event']= $event;
+                
+                header('location: ../views/etudiant/interface_Etudiant.php') ;           
                 exit();
                 break;
             }      
@@ -597,7 +604,6 @@ if(isset($_GET['idActualite'])){
 
         if (!$isValid) {
             $_SESSION['etat_upload_erreur'] = "Une erreur est survenue lors de l'execution du fichier a cause de " . implode(', ', $errors);
-            echo $_SESSION['etat_upload_erreur'];
             header('location: ../views/admin/ajout_etudiants.php');
             exit();
         }
@@ -922,6 +928,7 @@ if ( isset($_POST['rapportsubmit']) ) {
     session_start();
 
     include '../controller/rapportController.php';
+    include '../controller/calendrierController.php';
     if(!empty($_POST['textarea']) && !empty($_POST['niveau'] && !empty($_POST['module']) && !empty($_POST['date']))){
 
         $Descriptive = $_POST['textarea'];
@@ -929,14 +936,16 @@ if ( isset($_POST['rapportsubmit']) ) {
         $IdNiveau =  $_POST['niveau'];
         $idModule=$_POST['module'];
         $Datelimite=$_POST['date'];
-
+        
+ 
         $rapportController = new rapportController();
         $rapportController->upload_rapportprof($Descriptive,$idProf,$IdNiveau,$idModule,$Datelimite);
 
         $log->createAction($_SESSION['prof']['CIN'],'info','prof: a publier un Rapport ', $_SESSION['prof']['IdCompte']);
         $_SESSION['etat_rapport_succes']="Votre anonce de rapport est publie avec succes";
-       
-        
+       // add to table of event:
+        $calendrierController = new calendrierController();
+        $calendrierController->insertDelaisRapport($Descriptive,$Datelimite,$Datelimite,$IdNiveau);
     }else{
         $_SESSION['etat_rapport_error'] = "svp remplir tous les champs !!";
         $log->createAction($_SESSION['prof']['CIN'],'error','prof: veut publier un rapport sans specifier les criteres', $_SESSION['prof']['IdCompte']);

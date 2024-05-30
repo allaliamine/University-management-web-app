@@ -2,14 +2,16 @@
 session_start();
 require_once '../../securiteetd.php';
 $authentification = $_SESSION['chart'];
+$etd=$_SESSION['etd'];
 
+if(!isset($_SESSION['allnotification']) || !isset($_SESSION['event']) ){
+ 
 
-
-if(!isset($_SESSION['allnotification'])){
-    header('location: ../../routing/routing.php?action=actualite&role=2');
+    header("Location: ../../routing/routing.php?action=actualite&role=2");
+  
 }
 else{
-    $etd=$_SESSION['etd'];
+   
     $notification= $_SESSION['allnotification'];
 
     $countNotif = $_SESSION['countNotif'];    
@@ -18,7 +20,7 @@ else{
    
    $countNotif = $countNotif[0]["nmbrAnnonce"];
    $countSeenNotif = $countSeenNotif[0]["nmbrSeen"];
-}
+    $event=$_SESSION['event'];
 ?>
 
 <html lang="en">
@@ -32,6 +34,11 @@ else{
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <link rel="stylesheet" href="style_etudiant.css">
+  <!-- a partir d'ici -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script> 
   <!-- <script src="../../static/js/chart.js"></script> -->
 </head>
 
@@ -269,6 +276,7 @@ else{
 
 
 
+
                         <div class="card shadow col-xl-2.5 mb-4 border-danger">
                             <div class="card-body">
                                 <div class="row align-items-center ">
@@ -363,10 +371,39 @@ else{
                                 </div><!--col of row inside news-->	
 
                             </div>
+
+                            <div class="row">
+
+                                <div class="col-xl-12">
+
+                                    <div class="card shadow mb-4">
+                                        
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0">Calendrier</h6>
+                                        </div>
+                                        
+                                        <div class="card-body">
+
+                                            <div class="container">
+                                                <div id="calendar"></div>
+                                            </div>
+
+                                            <br>
+
+                                            <div class="modal fade" id="myModal" role="dialog">
+
+                                            <div class="modal-dialog">
+                                                                
+                                        </div><!--card-body fin-->
+
+                                    </div><!--card fin -->
+
+                                </div>
+
+                            </div>
+
                         </div>   
                         
-                        
-
                     </div><!--end of the (statics + news )-->
     
                 </div><!--end of main content (ubder navbar)-->
@@ -381,6 +418,7 @@ else{
         
     </div><!--end of the wrapper (all the page)-->
 
+    <!-- chart script -->
     <script>
 
        document.addEventListener('DOMContentLoaded', () => {
@@ -432,6 +470,53 @@ else{
 
     </script>
 
+
+    <!-- calendar script -->
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                    selectable: true,
+                    selectHelper: true,
+                    dayClick: function(date, jsEvent, view) {
+                        $('#calendar').fullCalendar('gotoDate', date);
+                    },
+                    header:
+                    {
+                    left: 'month, agendaWeek, agendaDay, list',
+                    center: 'title',
+                    right: 'prev, today, next',
+                    },
+                    buttonText:
+                    {
+                    today: 'Today',
+                    month: 'Month',
+                    week: 'Week',
+                    day: 'Day',
+                    list: 'List'
+                    },
+                    events: [
+                        <?php  foreach($event as $row) {?>{
+                    title: '<?php echo "le delais du rapport: " ,$row['Titre'] ?>',
+                    start: '<?php echo $row['DateStart']  ?>',
+                    end: '<?php echo $row['DateStart'] ?>',
+                    color: '#ffcdd2',
+                    textColor: 'black'
+                    },
+                    <?php } ?>
+                    ],
+                    dayRender: function(date, cell)
+                    {
+                    var today = $.fullCalendar.moment();
+                    if(date.get('date')==today.get('date'))
+                    {
+                        cell.css("background","#478382");
+                        
+                    }
+                    }
+            });
+        });
+    </script>
     
 </body>
 </html>
+<?php } ?>

@@ -13,6 +13,7 @@ $admin = $_SESSION['admin'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Information de Compte</title>
     <link rel="stylesheet" href="./style_admin.css">
+    <link rel="icon" href="../../static/image/2.png">
 </head>
 <body>
         <div class="card col-xl-8 offset-3 mt-5">
