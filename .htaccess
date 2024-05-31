@@ -1,1 +1,12 @@
 Options -Indexes
+
+# Prevent access to specific directories
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    RewriteRule ^model/ - [F]
+    RewriteRule ^controller/ - [F]
+    RewriteRule ^vendor/ - [F]
+
+
+</IfModule>
