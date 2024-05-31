@@ -39,17 +39,17 @@ class rapportModel {
         $query="SELECT * FROM Rapport WHERE IdProf=? AND IdModule=?;";
         $stmt=$conn->prepare($query);
         $stmt->execute([$id_prof,$module]);
-        $result=$stmt->fetch(PDO::FETCH_ASSOC);
-        $id=$result['IdRapport'];
-        return $id;
+        $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
 
     function fetch_students($id_rapport){
         global $conn;
-        $query = "SELECT r.*, s.*
+        $query = "SELECT r.*, s.*,rp.*
                   FROM Rapportetd r 
-                  INNER JOIN Etudiant s ON r.IdEtudiant = s.IdEtudiant 
+                  INNER JOIN Etudiant s ON r.IdEtudiant = s.IdEtudiant
+                  INNER JOIN Rapport rp ON rp.IdRapport = r.IdRapport 
                   WHERE r.IdRapport = ?";
         $stmt = $conn->prepare($query);
         $stmt->execute([$id_rapport]);

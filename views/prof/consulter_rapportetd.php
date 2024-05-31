@@ -18,36 +18,44 @@ $rapports=$_SESSION['rapports'];
         <div class="card-header">Les rapports des etudiants sont les suivants : </div>
         <div class="card-body">
             <?php foreach ($rapports as $rapport) { ?>
-                <div class="row mb-3">
-                    <div class="card-group">
-                        <div class="card">
-                            <div class="card-body text-center">
-                            <h5>Rapport ID:</h5>
-                            <h6 class="card-text"><?= $rapport['IdRapport']; ?></h6>
+                <?php foreach ($rapport as $rp) { ?>
+                    <div class="row mb-3">
+                        <div class="card-group">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                <h5>Rapport ID:</h5>
+                                <h6 class="card-text"><?= $rp['IdRapport']; ?></h6>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body text-center">
-                            <h5>Nom: </h5>
-                            <p class="card-text"><?= $rapport['Nom']; ?></p>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                <h5>Descriptive :</h5>
+                                <h6 class="card-text"><?= $rp['Descriptive']; ?></h6>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body text-center">
-                            <h5>Prenom: </h5>
-                            <p class="card-text"><?= $rapport['Prenom']; ?></p>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                <h5>Nom: </h5>
+                                <p class="card-text"><?= $rp['Nom']; ?></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body text-center">
-                            <h5>Rapport: </h5>
-                            <?php $path="../".$rapport['pdf_path'];
-                            ?>
-                            <a href="<?= $path; ?>" download>Download Here</a>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                <h5>Prenom: </h5>
+                                <p class="card-text"><?= $rp['Prenom']; ?></p>
+                                </div>
                             </div>
-                        </div>
-                        </div>
-                </div>
+                            <div class="card">
+                                <div class="card-body text-center">
+                                <h5>Rapport: </h5>
+                                <?php $path="../".$rp['pdf_path'];
+                                ?>
+                                <a href="<?= $path; ?>" download>Download Here</a>
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+                <?php } ?>
             <?php } ?>
         </div>
     </div>

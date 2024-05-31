@@ -85,6 +85,15 @@ class noteModel{
         $result=$stmt->fetch(PDO::FETCH_ASSOC);
         return $result ? $result :null;
     }
+
+    function id_module_exist($id){
+        global $conn;
+        $query="SELECT * FROM Note WHERE IdModule=?";
+        $stmt=$conn->prepare($query);
+        $stmt->execute([$id]);
+        $result=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
     
 }
 
