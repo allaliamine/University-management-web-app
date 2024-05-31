@@ -14,6 +14,7 @@ session_start();
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="./style_log.css">
+    <link rel="icon" href="../static/image/2.png">
     <title>login | Edu-net</title>
 </head>
 <body>
