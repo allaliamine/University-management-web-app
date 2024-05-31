@@ -711,6 +711,13 @@ if (isset($_POST['importSubmit'])) {
                 exit();
             }
 
+            $rs=$etd->id_module_exist($_POST['module']);
+            if($rs==False){
+                $_SESSION['etat_note_erreur'] = "Vous avez deja uploader les notes de ce module" ;
+                header('location: ../views/admin/publier_note.php');
+                exit();
+            }
+
             foreach ($validData as $data) {
                 $CNE = $data['CNE'];
                 $Valeur = $data['Valeur'];
@@ -1018,8 +1025,13 @@ if(isset($_POST['chercher_rapport'])){
         $rapportController = new rapportController();
 
         $id_rapport = $rapportController->fetch_idrapport($module,$id_prof);
-        $rapports = $rapportController->fetch_students($id_rapport);
-        $_SESSION['rapports']=$rapports;
+        $everything=array();
+        foreach ($id_rapport as $rp){
+            $rapports = $rapportController->fetch_students($rp['IdRapport']);
+            $everything[]=$rapports;
+        }
+    
+        $_SESSION['rapports']=$everything;
         $log->createAction($_SESSION['prof']['CIN'],'info','prof: a consulter les Rapports des etudiants ', $_SESSION['prof']['IdCompte']);
 
     }else{

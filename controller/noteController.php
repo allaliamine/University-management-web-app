@@ -53,6 +53,11 @@ class noteController{
         return !empty($result);
     }
 
+    function id_module_exist(int $id){
+        $result=$this->note_model->id_module_exist($id);
+        return empty($result);
+    }
+
 
 }
 
