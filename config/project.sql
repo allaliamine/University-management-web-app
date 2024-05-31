@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : jeu. 30 mai 2024 à 23:05
+-- Généré le : ven. 31 mai 2024 à 14:58
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -43,21 +43,6 @@ CREATE TABLE `Abscence` (
 --
 
 INSERT INTO `Abscence` (`IdAbscence`, `Duree`, `Date_abscence`, `Type`, `Etat`, `IdProf`, `idEtudiant`, `idModule`) VALUES
-(24, 2, '2024-05-09', NULL, 'J', 9, 21, 9),
-(25, 2, '2024-05-09', NULL, 'NJ', 9, 22, 9),
-(28, 2, '2024-05-10', NULL, 'NJ', 9, 2, 71),
-(30, 2, '2024-05-11', NULL, 'NJ', 9, 2, 71),
-(35, 2, '2024-05-12', NULL, 'NJ', 9, 2, 71),
-(36, 2, '2024-05-12', NULL, 'NJ', 9, 3, 71),
-(37, 2, '2024-05-13', NULL, 'NJ', 9, 1, 71),
-(38, 2, '2024-05-13', NULL, 'NJ', 9, 2, 71),
-(39, 2, '2024-05-13', NULL, 'NJ', 9, 3, 71),
-(40, 2, '2024-05-13', NULL, 'NJ', 9, 4, 71),
-(41, 2, '2024-05-13', NULL, 'NJ', 9, 5, 71),
-(44, 2, '2024-05-14', NULL, 'NJ', 9, 1, 71),
-(46, 2, '2024-05-14', NULL, 'NJ', 9, 3, 71),
-(47, 2, '2024-05-14', NULL, 'NJ', 9, 4, 71),
-(48, 2, '2024-05-14', NULL, 'NJ', 9, 5, 71),
 (53, 2, '2024-05-16', 'Cours', 'NJ', 9, 50, 71),
 (54, 2, '2024-05-16', 'Cours', 'J', 9, 51, 71),
 (55, 2, '2024-05-18', 'Cours', 'NJ', 9, 6, 20),
@@ -69,7 +54,9 @@ INSERT INTO `Abscence` (`IdAbscence`, `Duree`, `Date_abscence`, `Type`, `Etat`, 
 (61, 2, '2024-05-20', 'Cours', 'NJ', 9, 25, 9),
 (62, 2, '2024-05-20', 'TD', 'NJ', 9, 1, 71),
 (63, 2, '2024-05-20', 'TD', 'NJ', 9, 50, 71),
-(64, 2, '2024-05-20', 'TD', 'NJ', 9, 51, 71);
+(64, 2, '2024-05-20', 'TD', 'NJ', 9, 51, 71),
+(65, 2, '2024-05-31', 'TP', 'NJ', 9, 50, 71),
+(66, 2, '2024-05-31', 'TP', 'NJ', 9, 51, 71);
 
 -- --------------------------------------------------------
 
@@ -118,12 +105,10 @@ CREATE TABLE `Annonce` (
 --
 
 INSERT INTO `Annonce` (`IdAnnonce`, `Titre`, `Descriptif`, `Nom_fichier`, `date`, `IdAdmin`) VALUES
-(20, 'bayan', 'tawdih', '13052024120701742871105178.pdf', '2024-05-14', 1),
-(24, 'Mind Map ', 'Mind map pour francais', 'Mind map.pdf', '2024-05-14', 1),
-(25, 'cih', 'digitale', 'digitalisation_CIH (1).pdf', '2024-05-14', 1),
-(26, 'java', 'chap1 of java for beginners', 'chap1_java.pdf', '2024-05-15', 1),
-(27, 'cours de WEB', 'seance de rattrapage', 'ratt_tdia.pdf', '2024-05-18', 1),
-(28, 'annonce ', 'Important a lire ', 'theorie de langage est compilation.pdf', '2024-05-20', 1);
+(29, 'Examen final', 'avis de l\'examen final de tdia', 'exam_tdia.pdf', '2024-05-31', 1),
+(30, 'avis', 'avis concernant l\'inscription a l\'internat', 'internat.pdf', '2024-05-31', 1),
+(31, 'seance de ratt', 'rattrapage pour les gi1 du module theorie de language', 'ratt_gi1.pdf', '2024-05-31', 1),
+(32, 'avis pour les IDs', 'visite a Atos casablanca', 'IDs_annonce.pdf', '2024-05-31', 1);
 
 -- --------------------------------------------------------
 
@@ -141,13 +126,18 @@ CREATE TABLE `annonce_niveau` (
 --
 
 INSERT INTO `annonce_niveau` (`IdAnnonce`, `IdNiveau`) VALUES
-(20, 1),
-(20, 2),
-(24, 7),
-(25, 7),
-(26, 7),
-(27, 7),
-(28, 7);
+(29, 7),
+(30, 1),
+(30, 2),
+(30, 3),
+(30, 4),
+(30, 5),
+(30, 6),
+(30, 7),
+(31, 1),
+(32, 2),
+(32, 4),
+(32, 6);
 
 -- --------------------------------------------------------
 
@@ -253,25 +243,6 @@ CREATE TABLE `Consultation_annonce` (
   `IdEtudiant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `Consultation_annonce`
---
-
-INSERT INTO `Consultation_annonce` (`IdAnnonce`, `IdEtudiant`) VALUES
-(20, 1),
-(20, 8),
-(20, 11),
-(24, 1),
-(24, 5),
-(24, 11),
-(25, 1),
-(25, 5),
-(25, 11),
-(26, 1),
-(27, 1),
-(28, 1),
-(28, 8);
-
 -- --------------------------------------------------------
 
 --
@@ -304,13 +275,9 @@ CREATE TABLE `Cours` (
 --
 
 INSERT INTO `Cours` (`IdCours`, `Nom`, `Type`, `etat`, `IdProf`, `IdNiveau`, `IdModule`) VALUES
-(1, 'digitalisation_CIH.pdf', 'Cours', 'desarchiver', 9, 7, 71),
-(2, 'TP-web.pdf', 'TD', 'archiver', 9, 7, 71),
-(3, 'cours_jee.pdf', 'Cours', 'desarchiver', 9, 6, 61),
-(4, 'API servlet.pdf', 'TP', 'archiver', 9, 7, 71),
-(5, 'digitalisation_CIH (1).pdf', 'TD', 'archiver', 9, 7, 71),
-(6, 'digitalisation_CIH (1).pdf', 'TP', 'archiver', 9, 7, 71),
-(7, 'Mind map.pdf', 'TD', 'desarchiver', 9, 5, 50);
+(8, 'chap1_insudtrie.pdf', 'Cours', 'desarchiver', 9, 7, 71),
+(9, 'chap2_insudtrie.pdf', 'Cours', 'desarchiver', 9, 7, 71),
+(10, 'TD1_insudtrie.pdf', 'TD', 'desarchiver', 9, 7, 71);
 
 -- --------------------------------------------------------
 
@@ -1310,8 +1277,8 @@ INSERT INTO `Journalisation` (`IdJournalisation`, `CNE`, `AdressIP`, `Date`, `He
 (928, 'CD792463', '127.0.0.1', '2024-05-19', '15:18:42', 'info', 'admin: est allé à \"ajouter etudiant\" ', 1, 1),
 (929, 'CD792463', '127.0.0.1', '2024-05-19', '15:18:44', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
 (930, 'CD792463', '127.0.0.1', '2024-05-19', '15:26:36', 'info', 'admin authentifier au compte', 1, 1),
-(933, 'CD792463', '127.0.0.1', '2024-05-19', '15:37:42', 'info', 'admin: a chercher les logs d\'un utilisateur ', 1, 1),
-(934, 'CD792463', '127.0.0.1', '2024-05-19', '15:38:52', 'info', 'admin: a chercher les logs d\'un utilisateur ', 1, 1),
+(933, 'CD792463', '127.0.0.1', '2024-05-19', '15:37:42', 'info', 'admin: a chercher les logs d\un utilisateur ', 1, 1),
+(934, 'CD792463', '127.0.0.1', '2024-05-19', '15:38:52', 'info', 'admin: a chercher les logs d\un utilisateur ', 1, 1),
 (935, 'CD792463', '127.0.0.1', '2024-05-19', '15:52:09', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
 (936, 'S130003719', '127.0.0.1', '2024-05-19', '15:52:49', 'info', 'etudiant authentifier au compte', 1, 15),
 (937, NULL, '127.0.0.1', '2024-05-19', '15:52:52', 'info', 'admin: est allé à \"publier annonce\" ', 1, NULL),
@@ -1526,7 +1493,7 @@ INSERT INTO `Journalisation` (`IdJournalisation`, `CNE`, `AdressIP`, `Date`, `He
 (1145, 'CD792463', '127.0.0.1', '2024-05-20', '17:52:19', 'info', 'admin: est allé à \"retrancher etudiant\" ', 1, 1),
 (1146, 'CD792463', '127.0.0.1', '2024-05-20', '17:52:25', 'info', 'admin: a chercher des etudiant pour retrancher etudiant ', 1, 1),
 (1147, 'CD792463', '127.0.0.1', '2024-05-20', '17:52:31', 'info', 'admin: est allé à \"Supprimer Prof\" ', 1, 1),
-(1148, 'CD792463', '127.0.0.1', '2024-05-20', '17:53:05', 'info', 'admin: a chercher les logs d\'un utilisateur ', 1, 1),
+(1148, 'CD792463', '127.0.0.1', '2024-05-20', '17:53:05', 'info', 'admin: a chercher les logs d\un utilisateur ', 1, 1),
 (1149, 'CD792463', '127.0.0.1', '2024-05-20', '17:53:22', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
 (1150, 'CD792463', '127.0.0.1', '2024-05-20', '17:53:33', 'info', 'admin: est allé à \"publier note\" ', 1, 1),
 (1151, 'CD792463', '127.0.0.1', '2024-05-20', '17:53:50', 'info', 'admin authentifier au compte', 1, 1),
@@ -1771,7 +1738,160 @@ INSERT INTO `Journalisation` (`IdJournalisation`, `CNE`, `AdressIP`, `Date`, `He
 (1390, 'R230700709', '127.0.0.1', '2024-05-30', '12:59:47', 'info', 'etudiant authentifier au compte', 1, 19),
 (1391, 'R230700709', '127.0.0.1', '2024-05-30', '12:59:53', 'info', 'etd: a consulter une Actualite', 1, 19),
 (1392, 'R230700709', '127.0.0.1', '2024-05-30', '13:00:09', 'info', 'etd: est allé a \"notification\"', 1, 19),
-(1393, 'R230700709', '127.0.0.1', '2024-05-30', '13:00:11', 'info', 'etd: a consulter une notification', 1, 19);
+(1393, 'R230700709', '127.0.0.1', '2024-05-30', '13:00:11', 'info', 'etd: a consulter une notification', 1, 19),
+(1394, NULL, '127.0.0.1', '2024-05-30', '22:17:57', 'info', 'prof: est allé à \"Rapport\" ', 1, NULL),
+(1395, 'S130003719', '127.0.0.1', '2024-05-30', '22:18:45', 'info', 'etudiant authentifier au compte', 1, 15);
+INSERT INTO `Journalisation` (`IdJournalisation`, `CNE`, `AdressIP`, `Date`, `Heure`, `Criticite`, `action`, `IdAdmin`, `IdCompte`) VALUES
+(1396, 'S130003719', '127.0.0.1', '2024-05-30', '22:20:08', 'info', 'etd: est allé à \"Note\" ', 1, 15),
+(1397, 'S130003719', '127.0.0.1', '2024-05-30', '22:20:09', 'info', 'etd: est allé à \"Cours\" ', 1, 15),
+(1398, 'S130003719', '127.0.0.1', '2024-05-30', '22:20:10', 'info', 'etd: est allé à \"Note\" ', 1, 15),
+(1399, 'D239801', '127.0.0.1', '2024-05-30', '22:20:43', 'info', 'prof authentifier au compte', 1, 10),
+(1400, 'D239801', '127.0.0.1', '2024-05-30', '22:20:47', 'info', 'prof: est allé à \"Compte\" ', 1, 10),
+(1401, 'D239801', '127.0.0.1', '2024-05-30', '22:20:50', 'info', 'prof: est allé à \'Cours\' ', 1, 10),
+(1402, 'D239801', '127.0.0.1', '2024-05-30', '22:20:50', 'info', 'prof: est allé à \"Etudiants pour consulter les absences\" ', 1, 10),
+(1403, 'D239801', '127.0.0.1', '2024-05-30', '22:20:51', 'info', 'prof: est allé à \"Gestion des Absences\" ', 1, 10),
+(1404, 'D239801', '127.0.0.1', '2024-05-30', '22:20:52', 'info', 'prof: est allé à \"Rapport\" ', 1, 10),
+(1405, 'D239801', '127.0.0.1', '2024-05-30', '22:20:53', 'info', 'prof: est allé à \"to do list\" ', 1, 10),
+(1406, 'S130003719', '127.0.0.1', '2024-05-31', '11:58:09', 'info', 'etudiant authentifier au compte', 1, 15),
+(1407, 'S130003719', '127.0.0.1', '2024-05-31', '11:58:13', 'info', 'etd: est allé a \"notification\"', 1, 15),
+(1408, 'S130003719', '127.0.0.1', '2024-05-31', '11:58:14', 'info', 'etd: a consulter une notification', 1, 15),
+(1409, 'S130003719', '127.0.0.1', '2024-05-31', '11:58:43', 'info', 'etd: a consulter une notification', 1, 15),
+(1410, 'S130003719', '127.0.0.1', '2024-05-31', '11:58:46', 'info', 'etd: a consulter une notification', 1, 15),
+(1411, 'CD792463', '127.0.0.1', '2024-05-31', '12:05:58', 'info', 'admin authentifier au compte', 1, 1),
+(1412, 'CD792463', '127.0.0.1', '2024-05-31', '12:06:26', 'info', 'admin: a chercher les logs d\'un utilisateur ', 1, 1),
+(1413, 'CD792463', '127.0.0.1', '2024-05-31', '12:06:33', 'info', 'admin: a chercher les logs d\'un utilisateur ', 1, 1),
+(1414, 'CD792463', '127.0.0.1', '2024-05-31', '12:06:39', 'info', 'admin: est allé à \"retrancher etudiant\" ', 1, 1),
+(1415, 'CD792463', '127.0.0.1', '2024-05-31', '12:06:54', 'info', 'admin: est allé à \"Compte\" ', 1, 1),
+(1416, 'CD792463', '127.0.0.1', '2024-05-31', '12:06:57', 'info', 'admin: est allé à \"editer compte\" ', 1, 1),
+(1417, 'CD792463', '127.0.0.1', '2024-05-31', '12:07:00', 'info', 'admin: est allé à \"publier note\" ', 1, 1),
+(1418, 'CD792463', '127.0.0.1', '2024-05-31', '12:29:47', 'info', 'admin authentifier au compte', 1, 1),
+(1419, 'S130003719', '127.0.0.1', '2024-05-31', '12:29:53', 'info', 'etudiant authentifier au compte', 1, 15),
+(1420, 'D239801', '127.0.0.1', '2024-05-31', '12:30:00', 'info', 'prof authentifier au compte', 1, 10),
+(1421, 'D239801', '127.0.0.1', '2024-05-31', '12:30:05', 'info', 'prof: est allé à \"Gestion des Absences\" ', 1, 10),
+(1422, 'D239801', '127.0.0.1', '2024-05-31', '12:30:10', 'info', 'prof: est allé à \"Gestion des Absences\" ', 1, 10),
+(1423, 'D239801', '127.0.0.1', '2024-05-31', '12:30:15', 'info', 'prof: est allé à \"Etudiants pour consulter les absences\" ', 1, 10),
+(1424, 'D239801', '127.0.0.1', '2024-05-31', '12:30:18', 'info', 'prof: a acceder pour consulter l absence ', 1, 10),
+(1425, 'D239801', '127.0.0.1', '2024-05-31', '12:30:20', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1426, 'D239801', '127.0.0.1', '2024-05-31', '12:30:21', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1427, 'D239801', '127.0.0.1', '2024-05-31', '12:30:22', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1428, 'D239801', '127.0.0.1', '2024-05-31', '12:30:23', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1429, 'D239801', '127.0.0.1', '2024-05-31', '12:30:25', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1430, 'D239801', '127.0.0.1', '2024-05-31', '12:30:26', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1431, 'D239801', '127.0.0.1', '2024-05-31', '12:30:28', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1432, 'D239801', '127.0.0.1', '2024-05-31', '12:30:29', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1433, 'D239801', '127.0.0.1', '2024-05-31', '12:30:30', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1434, 'D239801', '127.0.0.1', '2024-05-31', '12:30:30', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1435, 'D239801', '127.0.0.1', '2024-05-31', '12:30:31', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1436, 'D239801', '127.0.0.1', '2024-05-31', '12:30:31', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1437, 'D239801', '127.0.0.1', '2024-05-31', '12:30:34', 'info', 'prof: est allé à \'Cours\' ', 1, 10),
+(1438, 'S130003719', '127.0.0.1', '2024-05-31', '12:33:05', 'info', 'etudiant authentifier au compte', 1, 15),
+(1439, 'S130003719', '127.0.0.1', '2024-05-31', '12:33:31', 'info', 'etd: est allé a \"notification\"', 1, 15),
+(1440, 'S130003719', '127.0.0.1', '2024-05-31', '12:33:36', 'info', 'etd: est allé à \"Note\" ', 1, 15),
+(1441, 'CD792463', '127.0.0.1', '2024-05-31', '12:33:42', 'info', 'admin authentifier au compte', 1, 1),
+(1442, 'CD792463', '127.0.0.1', '2024-05-31', '12:33:48', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
+(1443, 'CD792463', '127.0.0.1', '2024-05-31', '12:35:22', 'info', 'admin: a publier une annonce ', 1, 1),
+(1444, 'CD792463', '127.0.0.1', '2024-05-31', '12:35:29', 'info', 'admin authentifier au compte', 1, 1),
+(1445, 'CD792463', '127.0.0.1', '2024-05-31', '12:35:33', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
+(1446, 'CD792463', '127.0.0.1', '2024-05-31', '12:36:13', 'info', 'admin: a publier une annonce ', 1, 1),
+(1447, 'CD792463', '127.0.0.1', '2024-05-31', '12:36:37', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
+(1448, 'CD792463', '127.0.0.1', '2024-05-31', '12:37:26', 'info', 'admin: a publier une annonce ', 1, 1),
+(1449, 'CD792463', '127.0.0.1', '2024-05-31', '12:38:32', 'info', 'admin authentifier au compte', 1, 1),
+(1450, 'S130003719', '127.0.0.1', '2024-05-31', '12:38:38', 'info', 'etudiant authentifier au compte', 1, 15),
+(1451, 'CD792463', '127.0.0.1', '2024-05-31', '12:50:57', 'info', 'admin authentifier au compte', 1, 1),
+(1452, 'CD792463', '127.0.0.1', '2024-05-31', '12:51:12', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
+(1453, 'CD792463', '127.0.0.1', '2024-05-31', '12:55:42', 'info', 'admin: a publier une annonce ', 1, 1),
+(1454, 'CD792463', '127.0.0.1', '2024-05-31', '12:55:52', 'info', 'admin: est allé à \"publier note\" ', 1, 1),
+(1455, 'CD792463', '127.0.0.1', '2024-05-31', '13:04:59', 'info', 'admin: a publié des notes ', 1, 1),
+(1456, 'S130003719', '127.0.0.1', '2024-05-31', '13:05:05', 'info', 'etudiant authentifier au compte', 1, 15),
+(1457, 'S130003719', '127.0.0.1', '2024-05-31', '13:05:07', 'info', 'etd: est allé à \"Note\" ', 1, 15),
+(1458, 'CD792463', '127.0.0.1', '2024-05-31', '13:06:46', 'info', 'admin authentifier au compte', 1, 1),
+(1459, 'CD792463', '127.0.0.1', '2024-05-31', '13:06:48', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
+(1460, 'CD792463', '127.0.0.1', '2024-05-31', '13:06:48', 'info', 'admin: est allé à \"publier note\" ', 1, 1),
+(1461, 'CD792463', '127.0.0.1', '2024-05-31', '13:07:14', 'info', 'admin: a publié des notes ', 1, 1),
+(1462, 'S130003719', '127.0.0.1', '2024-05-31', '13:07:30', 'info', 'etudiant authentifier au compte', 1, 15),
+(1463, 'S130003719', '127.0.0.1', '2024-05-31', '13:07:32', 'info', 'etd: est allé à \"Rapport\" ', 1, 15),
+(1464, 'S130003719', '127.0.0.1', '2024-05-31', '13:07:33', 'info', 'etd: est allé à \"Note\" ', 1, 15),
+(1465, NULL, '127.0.0.1', '2024-05-31', '13:08:27', 'error', 'mote de passe ou login incorrect lors de authentification', 1, NULL),
+(1466, 'CD792463', '127.0.0.1', '2024-05-31', '13:08:33', 'info', 'admin authentifier au compte', 1, 1),
+(1467, 'CD792463', '127.0.0.1', '2024-05-31', '13:08:34', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
+(1468, 'CD792463', '127.0.0.1', '2024-05-31', '13:08:37', 'info', 'admin: est allé à \"publier note\" ', 1, 1),
+(1469, 'CD792463', '127.0.0.1', '2024-05-31', '13:08:52', 'info', 'admin: a publié des notes ', 1, 1),
+(1470, 'S130003719', '127.0.0.1', '2024-05-31', '13:09:00', 'info', 'etudiant authentifier au compte', 1, 15),
+(1471, 'S130003719', '127.0.0.1', '2024-05-31', '13:09:02', 'info', 'etd: est allé à \"Note\" ', 1, 15),
+(1472, 'CD792463', '127.0.0.1', '2024-05-31', '13:09:16', 'info', 'admin authentifier au compte', 1, 1),
+(1473, 'CD792463', '127.0.0.1', '2024-05-31', '13:09:17', 'info', 'admin: est allé à \"publier annonce\" ', 1, 1),
+(1474, 'CD792463', '127.0.0.1', '2024-05-31', '13:09:19', 'info', 'admin: est allé à \"publier note\" ', 1, 1),
+(1475, 'D239801', '127.0.0.1', '2024-05-31', '13:16:30', 'info', 'prof authentifier au compte', 1, 10),
+(1476, 'D239801', '127.0.0.1', '2024-05-31', '13:22:48', 'info', 'prof: est allé à \"to do list\" ', 1, 10),
+(1477, 'D239801', '127.0.0.1', '2024-05-31', '13:23:11', 'info', 'prof: est allé à \"Rapport\" ', 1, 10),
+(1478, 'D239801', '127.0.0.1', '2024-05-31', '13:23:15', 'info', 'prof: est allé à \"Gestion des Absences\" ', 1, 10),
+(1479, 'D239801', '127.0.0.1', '2024-05-31', '13:23:19', 'info', 'prof: a acceder pour faire l absence ', 1, 10),
+(1480, 'D239801', '127.0.0.1', '2024-05-31', '13:23:23', 'info', 'prof: a fait l absence ', 1, 10),
+(1481, 'D239801', '127.0.0.1', '2024-05-31', '13:23:23', 'info', 'prof: a fait l absence ', 1, 10),
+(1482, 'D239801', '127.0.0.1', '2024-05-31', '13:23:25', 'info', 'prof: est allé à \"Etudiants pour consulter les absences\" ', 1, 10),
+(1483, 'D239801', '127.0.0.1', '2024-05-31', '13:23:29', 'info', 'prof: a acceder pour consulter l absence ', 1, 10),
+(1484, 'D239801', '127.0.0.1', '2024-05-31', '13:23:30', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1485, 'D239801', '127.0.0.1', '2024-05-31', '13:23:32', 'info', 'prof: a vu les details d\'absence d\'un etudiant', 1, 10),
+(1486, 'D239801', '127.0.0.1', '2024-05-31', '13:23:37', 'info', 'prof: est allé à \"gestion des cours\" ', 1, 10),
+(1487, 'D239801', '127.0.0.1', '2024-05-31', '13:23:40', 'info', 'prof: a afficher la liste des cours pour la gestion ', 1, 10),
+(1488, 'D239801', '127.0.0.1', '2024-05-31', '13:23:44', 'info', 'prof: a archiver un cour ', 1, 10),
+(1489, 'D239801', '127.0.0.1', '2024-05-31', '13:23:49', 'info', 'prof: est allé à \'Cours\' ', 1, 10),
+(1490, 'D239801', '127.0.0.1', '2024-05-31', '13:23:56', 'info', 'prof: est allé à \"Gestion des Absences\" ', 1, 10),
+(1491, 'D239801', '127.0.0.1', '2024-05-31', '13:23:57', 'info', 'prof: est allé à \"Etudiants pour consulter les absences\" ', 1, 10),
+(1492, 'D239801', '127.0.0.1', '2024-05-31', '13:23:58', 'info', 'prof: est allé à \'Cours\' ', 1, 10),
+(1493, 'D239801', '127.0.0.1', '2024-05-31', '13:23:59', 'info', 'prof: est allé à \'Cours\' ', 1, 10),
+(1494, 'D239801', '127.0.0.1', '2024-05-31', '13:24:01', 'info', 'prof: est allé à \"Gestion des Absences\" ', 1, 10),
+(1495, 'D239801', '127.0.0.1', '2024-05-31', '13:24:03', 'info', 'prof: est allé à \"Etudiants pour consulter les absences\" ', 1, 10),
+(1496, 'D239801', '127.0.0.1', '2024-05-31', '13:24:03', 'info', 'prof: est allé à \"Gestion des Absences\" ', 1, 10),
+(1497, 'D239801', '127.0.0.1', '2024-05-31', '13:24:04', 'info', 'prof: est allé à \"Rapport\" ', 1, 10),
+(1498, 'D239801', '127.0.0.1', '2024-05-31', '13:24:04', 'info', 'prof: est allé à \"to do list\" ', 1, 10),
+(1499, 'D239801', '127.0.0.1', '2024-05-31', '13:24:05', 'info', 'prof: est allé à \'Cours\' ', 1, 10),
+(1500, 'D239801', '127.0.0.1', '2024-05-31', '13:24:10', 'info', 'prof: est allé à \"gestion des cours\" ', 1, 10),
+(1501, 'D239801', '127.0.0.1', '2024-05-31', '13:24:15', 'info', 'prof: a afficher la liste des cours pour la gestion ', 1, 10),
+(1502, 'D239801', '127.0.0.1', '2024-05-31', '13:24:16', 'info', 'prof: a desarchiver un cour ', 1, 10),
+(1503, 'D239801', '127.0.0.1', '2024-05-31', '13:24:17', 'info', 'prof: a desarchiver un cour ', 1, 10),
+(1504, 'D239801', '127.0.0.1', '2024-05-31', '13:24:18', 'info', 'prof: a desarchiver un cour ', 1, 10),
+(1505, 'D239801', '127.0.0.1', '2024-05-31', '13:24:18', 'info', 'prof: a desarchiver un cour ', 1, 10),
+(1506, 'D239801', '127.0.0.1', '2024-05-31', '13:24:19', 'info', 'prof: a desarchiver un cour ', 1, 10),
+(1507, 'S130003719', '127.0.0.1', '2024-05-31', '13:24:28', 'info', 'etudiant authentifier au compte', 1, 15),
+(1508, 'S130003719', '127.0.0.1', '2024-05-31', '13:24:31', 'info', 'etd: est allé à \"Cours\" ', 1, 15),
+(1509, 'S130003719', '127.0.0.1', '2024-05-31', '13:24:32', 'info', 'etd: est allé consulter les cours de module ', 1, 15),
+(1510, 'S130003719', '127.0.0.1', '2024-05-31', '13:24:33', 'info', 'etd: est allé consulter les cours de module ', 1, 15),
+(1511, 'S130003719', '127.0.0.1', '2024-05-31', '13:24:59', 'info', 'etd: est allé à \"Cours\" ', 1, 15),
+(1512, 'S130003719', '127.0.0.1', '2024-05-31', '13:25:01', 'info', 'etd: est allé consulter les cours de module ', 1, 15),
+(1513, 'D239801', '127.0.0.1', '2024-05-31', '13:25:08', 'info', 'prof authentifier au compte', 1, 10),
+(1514, 'D239801', '127.0.0.1', '2024-05-31', '13:25:47', 'info', 'prof: est allé à \'Cours\' ', 1, 10),
+(1515, 'D239801', '127.0.0.1', '2024-05-31', '13:26:19', 'info', 'prof: a publier un cour ', 1, 10),
+(1516, 'D239801', '127.0.0.1', '2024-05-31', '13:26:45', 'info', 'prof: a publier un cour ', 1, 10),
+(1517, 'D239801', '127.0.0.1', '2024-05-31', '13:27:09', 'info', 'prof: a publier un cour ', 1, 10),
+(1518, 'D239801', '127.0.0.1', '2024-05-31', '13:27:10', 'info', 'prof: est allé à \"gestion des cours\" ', 1, 10),
+(1519, 'D239801', '127.0.0.1', '2024-05-31', '13:27:13', 'info', 'prof: a afficher la liste des cours pour la gestion ', 1, 10),
+(1520, 'D239801', '127.0.0.1', '2024-05-31', '13:27:20', 'info', 'prof: est allé à \"Etudiants pour consulter les absences\" ', 1, 10),
+(1521, 'F24351093', '127.0.0.1', '2024-05-31', '13:27:27', 'info', 'etudiant authentifier au compte', 1, 22),
+(1522, 'F24351093', '127.0.0.1', '2024-05-31', '13:27:30', 'info', 'etd: est allé à \"Cours\" ', 1, 22),
+(1523, 'F24351093', '127.0.0.1', '2024-05-31', '13:27:32', 'info', 'etd: est allé à \"Cours\" ', 1, 22),
+(1524, 'F24351093', '127.0.0.1', '2024-05-31', '13:27:33', 'info', 'etd: est allé à \"Note\" ', 1, 22),
+(1525, 'F24351093', '127.0.0.1', '2024-05-31', '13:27:34', 'info', 'etd: est allé à \"Cours\" ', 1, 22),
+(1526, 'F24351093', '127.0.0.1', '2024-05-31', '13:27:43', 'info', 'etd: est allé consulter les cours de module ', 1, 22),
+(1527, 'F24351093', '127.0.0.1', '2024-05-31', '13:27:47', 'info', 'etd: est allé à \"Rapport\" ', 1, 22),
+(1528, 'S130003719', '127.0.0.1', '2024-05-31', '13:28:03', 'info', 'etudiant authentifier au compte', 1, 15),
+(1529, 'S130003719', '127.0.0.1', '2024-05-31', '13:28:22', 'info', 'etd: est allé à \"Compte\" ', 1, 15),
+(1530, 'S130003719', '127.0.0.1', '2024-05-31', '13:28:26', 'info', 'etd: est allé a \"notification\"', 1, 15),
+(1531, 'S130003719', '127.0.0.1', '2024-05-31', '13:28:27', 'info', 'etd: est allé à \"Cours\" ', 1, 15),
+(1532, 'S130003719', '127.0.0.1', '2024-05-31', '13:28:28', 'info', 'etd: est allé à \"Rapport\" ', 1, 15),
+(1533, 'S130003719', '127.0.0.1', '2024-05-31', '13:28:29', 'info', 'etd: est allé a \"notification\"', 1, 15),
+(1534, 'S130003719', '127.0.0.1', '2024-05-31', '13:29:49', 'info', 'etd: est allé à \"Cours\" ', 1, 15),
+(1535, 'S130003719', '127.0.0.1', '2024-05-31', '13:29:52', 'info', 'etd: est allé consulter les cours de module ', 1, 15),
+(1536, 'S130003719', '127.0.0.1', '2024-05-31', '13:30:15', 'info', 'etd: est allé à \"Rapport\" ', 1, 15),
+(1537, 'S130003719', '127.0.0.1', '2024-05-31', '13:30:37', 'info', 'etd: a submiter un rapport ', 1, 15),
+(1538, 'S130003719', '127.0.0.1', '2024-05-31', '13:30:44', 'error', 'etd: tenter de submiter un rapport deux fois ', 1, 15),
+(1539, 'D239801', '127.0.0.1', '2024-05-31', '13:30:54', 'info', 'prof authentifier au compte', 1, 10),
+(1540, 'D239801', '127.0.0.1', '2024-05-31', '13:30:58', 'info', 'prof: est allé à \"Consulter Rapport\" ', 1, 10),
+(1541, 'D239801', '127.0.0.1', '2024-05-31', '13:31:01', 'info', 'prof: a consulter les Rapports des etudiants ', 1, 10),
+(1542, 'D239801', '127.0.0.1', '2024-05-31', '13:31:07', 'info', 'prof: est allé à \"Consulter Rapport\" ', 1, 10),
+(1543, 'D239801', '127.0.0.1', '2024-05-31', '13:31:11', 'info', 'prof: a consulter les Rapports des etudiants ', 1, 10),
+(1544, 'D239801', '127.0.0.1', '2024-05-31', '13:34:59', 'info', 'prof: est allé à \"Consulter Rapport\" ', 1, 10),
+(1545, 'D239801', '127.0.0.1', '2024-05-31', '13:35:02', 'info', 'prof: a consulter les Rapports des etudiants ', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -1904,6 +2024,19 @@ CREATE TABLE `Note` (
   `idEtudiant` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `Note`
+--
+
+INSERT INTO `Note` (`IdNote`, `Valeur`, `idModule`, `idAdmin`, `idEtudiant`) VALUES
+(21, 0, 70, 1, 1),
+(22, 18, 70, 1, 5),
+(23, 15, 63, 1, 1),
+(24, 18, 63, 1, 5),
+(25, 11.5, 63, 1, 50),
+(26, 10, 63, 1, 5),
+(27, 13, 63, 1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -1938,9 +2071,7 @@ INSERT INTO `Prof` (`IdProf`, `Nom`, `Prenom`, `CIN`, `Email`, `Tel`, `Activite`
 (7, 'dadi', 'wardani', 'T125474', 'w.dadi@gmail.com', 653870912, 'A', 8, 1, 'w.dadi@uae.prof.ac.ma', 'dadi123'),
 (8, 'moradi', 'fouzia', 'F129803', 'f.moradi@gmail.com', 719102367, 'A', 9, 1, 'f.moradi@uae.prof.ac.ma', 'moradi123'),
 (9, 'salmani', 'abdelhafid', 'D239801', 'asalmani@gmail.com', 671452987, 'A', 10, 1, 'asalmani@uae.prof.ac.ma', 'salmani123'),
-(10, 'moussaid', 'ahmed', 'R334174', 'ahmoussaid@gmail.com', 643612254, 'A', 11, 1, 'ahmoussaid@uae.prof.ac.ma', 'moussaid123'),
-(13, 'hamdon', 'hamid', 'C123456', 'hamid@prf.com', 688888888, 'A', 72, 1, 'hamdonhamid@uae.prof.ac.ma', 'hamdon123'),
-(14, 'jilali', 'ahmad', 'R347892', 'jilali@gmail.com', 688995544, 'A', 73, 1, 'jilaliahmad@uae.prof.ac.ma', 'jilali123');
+(10, 'moussaid', 'ahmed', 'R334174', 'ahmoussaid@gmail.com', 643612254, 'A', 11, 1, 'ahmoussaid@uae.prof.ac.ma', 'moussaid123');
 
 -- --------------------------------------------------------
 
@@ -1965,7 +2096,6 @@ INSERT INTO `rapport` (`IdRapport`, `Descriptive`, `IdProf`, `IdNiveau`, `IdModu
 (4, 'new rapport', 9, 7, 71, '2024-05-13'),
 (6, 'rapport test', 9, 7, 71, '2024-05-31'),
 (7, 'new repport', 9, 7, 71, '2024-05-24'),
-(12, 'rapport pour l\'industri numerique (discuter dans la classe)', 9, 7, 71, '2024-06-06'),
 (13, 'test rapport2', 9, 7, 71, '2024-06-06'),
 (14, 'rapport sur KNN', 9, 2, 20, '2024-06-05');
 
@@ -1987,9 +2117,7 @@ CREATE TABLE `rapportetd` (
 --
 
 INSERT INTO `rapportetd` (`IdEtudiant`, `IdRapport`, `pdf_nom`, `pdf_path`) VALUES
-(1, 2, 'digitalisation_CIH.pdf', '../uploads/rapport/digitalisation_CIH.pdf'),
-(1, 4, 'TRAVAUX PRATIQUES-QCM.pdf', '../uploads/rapport/TRAVAUX PRATIQUES-QCM.pdf'),
-(1, 6, 'ratt_tdia (1).pdf', '../uploads/rapport/ratt_tdia (1).pdf');
+(1, 6, 'allali_amine_rapport1.pdf', '../uploads/rapport/allali_amine_rapport1.pdf');
 
 -- --------------------------------------------------------
 
@@ -2010,14 +2138,7 @@ CREATE TABLE `todolist` (
 --
 
 INSERT INTO `todolist` (`id`, `task`, `date_created`, `act`, `idprof`) VALUES
-(1, 'Eat', '2024-05-12 23:50:26', 'Termine', 3),
-(2, 'fly me to the moon', '2024-05-13 10:42:30', 'Termine', 3),
-(4, 'hola como estas', '2024-05-13 10:23:00', 'Non Termine', 3),
-(7, 'allali va partir', '2024-05-13 11:41:22', 'Termine', 3),
-(8, 'fghj', '2024-05-13 17:55:41', 'Termine', 9),
-(10, 'lkhalki sf thwa', '2024-05-14 13:59:50', 'Termine', 9),
-(11, 'cours TDIA1', '2024-05-15 19:47:59', 'Non Termine', 9),
-(12, 'python', '2024-05-18 17:52:24', 'Termine', 9);
+(13, 'seance de ratt a 16:00', '2024-05-31 13:23:06', 'Non Termine', 9);
 
 --
 -- Index pour les tables déchargées
@@ -2171,7 +2292,7 @@ ALTER TABLE `todolist`
 -- AUTO_INCREMENT pour la table `Abscence`
 --
 ALTER TABLE `Abscence`
-  MODIFY `IdAbscence` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `IdAbscence` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT pour la table `Admin`
@@ -2183,7 +2304,7 @@ ALTER TABLE `Admin`
 -- AUTO_INCREMENT pour la table `Annonce`
 --
 ALTER TABLE `Annonce`
-  MODIFY `IdAnnonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `IdAnnonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pour la table `calendrierevent`
@@ -2201,7 +2322,7 @@ ALTER TABLE `Compte`
 -- AUTO_INCREMENT pour la table `Cours`
 --
 ALTER TABLE `Cours`
-  MODIFY `IdCours` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `IdCours` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `Etudiant`
@@ -2219,7 +2340,7 @@ ALTER TABLE `Filiere`
 -- AUTO_INCREMENT pour la table `Journalisation`
 --
 ALTER TABLE `Journalisation`
-  MODIFY `IdJournalisation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1394;
+  MODIFY `IdJournalisation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1546;
 
 --
 -- AUTO_INCREMENT pour la table `Module`
@@ -2237,7 +2358,7 @@ ALTER TABLE `Niveau`
 -- AUTO_INCREMENT pour la table `Note`
 --
 ALTER TABLE `Note`
-  MODIFY `IdNote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `IdNote` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT pour la table `Prof`
@@ -2255,7 +2376,7 @@ ALTER TABLE `rapport`
 -- AUTO_INCREMENT pour la table `todolist`
 --
 ALTER TABLE `todolist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Contraintes pour les tables déchargées
