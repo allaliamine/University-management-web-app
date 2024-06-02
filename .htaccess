@@ -1,6 +1,6 @@
 Options -Indexes
 
-# Prevent access to specific directories
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     

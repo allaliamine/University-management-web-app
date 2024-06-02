@@ -28,6 +28,8 @@ if ( isset($_POST['submit']) ) {
     $login = $_POST['login'];
     $password =  $_POST['password'];
 
+    // $password =  hash('sha256', $password);
+
     try {
         $authController = new AuthController();
         $res = $log->getAllAuthentifications();
@@ -623,8 +625,10 @@ if(isset($_GET['idActualite'])){
             $idadmin = $data['idadmin'];
             $niveau = $data['niveau'];
             $filiere = $data['filiere'];
+            
         
             $addStudent->addAccount($login,$mdp);
+        // $mdp =  hash('sha256', $mdp);
 
             $idcompte = $addStudent->getAccountID($login, $mdp);
             
@@ -1428,10 +1432,12 @@ if(isset($_POST['compteAdmin'])){
         $mdp = $_POST['mdp'];
         $mdp2 = $_POST['mdp2'];
         $AncienneMdp =  $_POST['mdp-1'];
+    // $AncienneMdp =  hash('sha256', $AncienneMdp);
         
         if (!empty($mdp) && !empty($mdp2) && !empty($AncienneMdp)) {
             if($AncienneMdp == $_SESSION['admin']['Mdp']){
                 if($mdp == $mdp2){
+                    // $mdp =  hash('sha256', $mdp);
                     $compte->changeAdminpassword($mdp, $idAdmin);
                     $compte->changeComptePassword($mdp, $idCompte);
                     $log->createAction($_SESSION['admin']['CIN'],'info','admin: a changer mot de passe ', $_SESSION['admin']['IdCompte']);
@@ -1507,10 +1513,12 @@ if(isset($_POST['compteProf'])){
         $mdp = $_POST['mdp'];
         $mdp2 = $_POST['mdp2'];
         $AncienneMdp =  $_POST['mdp-1'];
+        // $AncienneMdp =  hash('sha256', $AncienneMdp);
         
         if (!empty($mdp) && !empty($mdp2) && !empty($AncienneMdp)) {
             if($AncienneMdp == $_SESSION['prof']['Mdp']){
                 if($mdp == $mdp2){
+                    // $mdp =  hash('sha256', $mdp);
                     $compte->changeProfpassword($mdp, $idProf);
                     $compte->changeComptePassword($mdp, $idCompte);
                     $log->createAction($_SESSION['prof']['CIN'],'info','prof: a changer mot de passe', $_SESSION['prof']['IdCompte']);
@@ -1586,10 +1594,12 @@ if(isset($_POST['compteEtudiant'])){
         $mdp = $_POST['mdp'];
         $mdp2 = $_POST['mdp2'];
         $AncienneMdp =  $_POST['mdp-1'];
+        // $AncienneMdp =  hash('sha256', $AncienneMdp);
         
         if (!empty($mdp) && !empty($mdp2) && !empty($AncienneMdp)) {
             if($AncienneMdp == $_SESSION['etd']['Mdp']){
                 if($mdp == $mdp2){
+                    // $mdp =  hash('sha256', $mdp);
                     $compte->changeEtudiantpassword($mdp, $idEtud);
                     $compte->changeComptePassword($mdp, $idCompte);
                     $log->createAction($_SESSION['etd']['CNE'],'info','etd: a changer mot de passe', $_SESSION['etd']['IdCompte']);

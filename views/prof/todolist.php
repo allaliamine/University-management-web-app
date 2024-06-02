@@ -92,7 +92,7 @@ $todo=$_SESSION['todo'];
                             const newTask = editInput.value;
                             const taskId = row.querySelector('td:first-child').textContent;
 
-                            // Send an AJAX request to update the task in the database
+                            // AJAX request to update the task
                             const formData = new FormData();
                             formData.append('action', 'editTask');
                             formData.append('id', taskId);
@@ -117,7 +117,7 @@ $todo=$_SESSION['todo'];
                             })
                             .catch(error => {
                                 console.error('There was an error!', error);
-                                // Handle errors
+                                //for errors
                             });
                         }
                     });

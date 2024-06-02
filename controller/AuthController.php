@@ -28,6 +28,10 @@ class AuthController{
                         $prof = $this->userModel->getProfByIdCompte($idcompte);
                         $_SESSION['prof'] = $prof;
                         $log->createAction($prof['CIN'],'info','prof authentifier au compte',$prof['IdCompte']);
+                        // if(isset($_SESSION['etd']) || isset($_SESSION['admin'])){
+                        //     session_unset($_SESSION['admin']);
+                        //     session_unset($_SESSION['etd']);
+                        // }
 
                         header('Location: ../views/prof/interface_prof.php');
                         break;
@@ -35,12 +39,21 @@ class AuthController{
                         $etd = $this->userModel->getStudentByIdCompte($idcompte);
                         $_SESSION['etd'] = $etd;
                         $log->createAction($etd['CNE'],'info','etudiant authentifier au compte',$etd['IdCompte']);
+                        // if(isset($_SESSION['prof']) || isset($_SESSION['admin'])){
+                        //     session_unset($_SESSION['admin']);
+                        //     session_unset($_SESSION['prof']);
+                        // }
+
                         header('Location: ../views/etudiant/interface_Etudiant.php');
                         break;
                     default:
                         $admin = $this->userModel->getAdminByIdCompte($idcompte);
                         $_SESSION['admin'] = $admin;
                         $log->createAction($admin['CIN'],'info','admin authentifier au compte',$admin['IdCompte']);
+                        // if(isset($_SESSION['etd']) || isset($_SESSION['prof'])){
+                        //     session_unset($_SESSION['prof']);
+                        //     session_unset($_SESSION['etd']);
+                        // }
                         header('Location: ../views/admin/interface_admin.php');
                 }
                 exit();
