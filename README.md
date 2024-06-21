@@ -96,7 +96,7 @@ The application follows the MVC design pattern:
 
 ## Demo Video
 
-Watch our demo video to see the Edu-ner application in action:
+Watch our demo video to see the Edu-net application in action:
 
 [https://github.com/allaliamine/web_Project/blob/main/edunet.mp4]
 
