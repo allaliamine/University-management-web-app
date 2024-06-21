@@ -109,7 +109,7 @@ The Edu-net project demonstrates the potential of leveraging web technologies to
 ## Contacts
 
 For any inquiries or feedback, please contact:
-- <a href="" target="_blank"></a><br>
-- <a href="" target="_blank"></a><br>
+- <a href="https://www.linkedin.com/in/m-amin-allali/" target="_blank"> Allali Mohamed Amin </a><br>
+- <a href="https://www.linkedin.com/in/insaf-badri-588299248/" target="_blank"> Insaf Badri </a><br>
 - <a href="" target="_blank"></a><br>
 - <a href="" target="_blank"></a><br>
