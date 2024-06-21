@@ -96,9 +96,9 @@ The application follows the MVC design pattern:
 
 ## Demo Video
 
-Watch our demo video to see the E-Patent application in action:
+Watch our demo video to see the Edu-ner application in action:
 
-<!-- https://github.com/nexossama/Patent-Analysis/assets/112390782/817115ee-27e3-49f2-999d-ca2e183ab4cb -->
+[https://github.com/allaliamine/web_Project/blob/main/edunet.mp4]
 
 
 
