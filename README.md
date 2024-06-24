@@ -62,7 +62,7 @@ the user tracking provides several information such as:
 
 the Professor space provides several features such as : 
 
-- **Publishing Courses/TD/TP:** For scalable and flexible data storage.
+- **Publishing Courses/TD/TP:** Professors can publish courses for students to download
 - **Archiving/Desarchiving Courses:** Professors can archive or restore course materials.
 - **Managing Absences:** Record student absences and consult absence details (date, hour, type of session).
 - **Publishing Assignments:** Post assignments for students to complete.
