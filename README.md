@@ -116,4 +116,4 @@ For any inquiries or feedback, please contact:
 
 
 ## Note 
-the website is hosted, u can access it using [https://ensahedunet.000webhostapp.com](https://ensahedunet.000webhostapp.com/)
+the website is hosted, you can access it using [https://ensahedunet.000webhostapp.com](https://ensahedunet.000webhostapp.com/)
