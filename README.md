@@ -113,3 +113,7 @@ For any inquiries or feedback, please contact:
 - <a href="https://www.linkedin.com/in/insaf-badri-588299248/" target="_blank"> Badri Insaf</a><br>
 - <a href="https://www.linkedin.com/in/nada-ellehlaissi-352524293/" target="_blank"> Ellehlaissi Nada </a><br>
 - <a href="" target="_blank"></a> Maach Zineb <br>
+
+
+## Note 
+the website is hosted, u can access it using [https://ensahedunet.000webhostapp.com](https://ensahedunet.000webhostapp.com/)
