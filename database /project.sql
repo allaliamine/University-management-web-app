@@ -89,7 +89,7 @@ CREATE TABLE `Admin` (
 --
 
 INSERT INTO `Admin` (`IdAdmin`, `Nom`, `Prenom`, `CIN`, `Email`, `Tel`, `Activite`, `IdCompte`, `Idrole`, `Login`, `Mdp`) VALUES
-(1, 'El-Hlaissi', 'Nada', 'CD792463', 'Nadaelhlaissi@uae.adm.ac.ma', 622322281, 'A', 1, 0, 'Nadaelhlaissi@uae.adm.ac.ma', 'nada123');
+(1, 'El-Hlaissi', 'Nada', 'CD792463', 'Nadaelhlaissi@uae.adm.ac.ma', 622322281, 'A', 1, 0, 'Nadaelhlaissi@uae.adm.ac.ma', 'XXXXXX');
 
 -- --------------------------------------------------------
 
@@ -189,7 +189,7 @@ CREATE TABLE `Compte` (
 --
 
 INSERT INTO `Compte` (`IdCompte`, `Idrole`, `Login`, `Mdp`, `Activite`) VALUES
-(1, 0, 'Nadaelhlaissi@uae.adm.ac.ma', 'nada123', 'A'),
+(1, 0, 'Nadaelhlaissi@uae.adm.ac.ma', 'XXXX', 'A'),
 (2, 1, 'yabouelhanoune@uae.prof.ac.ma', 'elhanoune123', 'A'),
 (3, 1, 'm.addam@uae.prof.ac.ma', 'addam123', 'A'),
 (4, 1, 'abahri@uae.prof.ac.ma', 'bahri123', 'A'),
